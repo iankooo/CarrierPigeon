@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.utils.permissions.PermissionsDialogButtonsListener
 
-/**
- * Base class for fragments
- */
 open class BaseFragment(@LayoutRes layoutId: Int) :
     Fragment(layoutId),
     PermissionsDialogButtonsListener {

@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.createProfile.CreateProfileFragment">
+    android:background="@color/light_gray">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/welcome_label"
+        style="@style/SubTitleLabel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_view_profiles"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_40"
+        android:paddingBottom="@dimen/space_40"
+        android:text="@string/create_profile"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_progress_bar_dummy"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/save_profile_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_white_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/footer_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/footer_textview">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:padding="@dimen/space_7"
+            android:src="@drawable/ic_save"
+            android:visibility="visible" />
+
+        <TextView
+            style="@style/SubTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/space_7"
+            android:text="@string/save_profile"
+            android:textColor="@color/light_blue" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/footer_textview"
+        style="@style/SubTitleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_view_profiles"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_25"
+        android:paddingBottom="@dimen/space_25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
