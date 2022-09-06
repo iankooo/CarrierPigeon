@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <TextView
+        android:id="@+id/welcome_label"
+        style="@style/SubTitleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_view_profiles"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_40"
+        android:paddingBottom="@dimen/space_40"
+        android:text="@string/welcome_comma_first_name_of_user"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/menu_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_label">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/simple_view"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SubTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_6"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/pigeons"
+                android:textColor="@color/dark_gray" />
+
+            <ImageView
+                android:id="@+id/pigeons_underline_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_blue_underline" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:id="@+id/simple_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="@dimen/space_40" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/simple_view"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SubTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_6"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/families"
+                android:textColor="@color/gray" />
+
+            <ImageView
+                android:id="@+id/families_underline_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_blue_underline"
+                android:visibility="invisible" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/menu_textview"
+        style="@style/SubTitleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_view_menu_profiles"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_70"
+        android:paddingBottom="@dimen/space_70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="@dimen/space_53"
+        android:layout_height="@dimen/space_53"
+        android:layout_marginEnd="@dimen/space_20"
+        android:background="@drawable/bg_round_white_ripple"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_add"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_progress_bar_dummy"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pigeons_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/space_8"
+        android:layout_marginTop="@dimen/space_8"
+        app:layout_constraintBottom_toTopOf="@id/footer_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_textview" />
+
+    <ImageView
+        android:id="@+id/three_clouds_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha=".1"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_three_clouds"
+        app:layout_constraintBottom_toTopOf="@id/pigeon_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/pigeon_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_32"
+        android:alpha=".1"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_pigeon"
+        app:layout_constraintBottom_toTopOf="@id/footer_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_white_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:translationZ="@dimen/space_10"
+        app:layout_constraintBottom_toBottomOf="@id/footer_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/footer_textview">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:padding="@dimen/space_7"
+            android:src="@drawable/ic_pigeons"
+            android:visibility="visible" />
+
+        <TextView
+            style="@style/SubTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/space_7"
+            android:text="@string/pigeons_flights"
+            android:textColor="@color/light_blue" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/footer_textview"
+        style="@style/SubTitleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_view_profiles"
+        android:gravity="center"
+        android:paddingTop="@dimen/space_25"
+        android:paddingBottom="@dimen/space_25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

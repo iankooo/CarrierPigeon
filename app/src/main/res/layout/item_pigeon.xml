@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_pigeon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_5"
+    android:background="@drawable/rounded_blue_corners"
+    app:cardCornerRadius="@dimen/space_21"
+    app:layout_constraintCircleRadius="@dimen/space_16">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_29"
+        android:layout_marginTop="@dimen/space_20"
+        android:background="@drawable/selector_gender_pigeon_btn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_10"
+        android:paddingVertical="@dimen/space_5"
+        app:layout_constraintRight_toLeftOf="@id/rl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/pigeon_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_5"
+            android:contentDescription="@null"
+            android:src="@drawable/selector_sign_gender_pigeon_btn" />
+
+        <!--        style="@style/PigeonColor"-->
+        <TextView
+            android:id="@+id/pigeon_country"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_5"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            tools:text="RO" />
+
+        <!--        style="@style/PigeonColor"-->
+        <TextView
+            android:id="@+id/pigeon_id"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            tools:text="19-372240" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    style="@style/PigeonNickname"-->
+    <TextView
+        android:id="@+id/pigeon_nickname"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_32"
+        android:layout_marginTop="@dimen/space_5"
+        android:maxEms="6"
+        app:layout_constraintRight_toLeftOf="@id/rl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llc"
+        tools:text="HOPE" />
+    <!--    style="@style/PigeonColor"-->
+    <TextView
+        android:id="@+id/pigeon_color"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_32"
+        android:layout_marginTop="@dimen/space_5"
+        android:maxEms="5"
+        app:layout_constraintRight_toLeftOf="@id/rl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pigeon_nickname"
+        tools:text="GUT" />
+    <!--    style="@style/PigeonDetails"-->
+    <TextView
+        android:id="@+id/pigeon_details"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_32"
+        android:layout_marginTop="@dimen/space_5"
+        android:layout_marginBottom="@dimen/space_20"
+        android:maxEms="8"
+        android:paddingBottom="@dimen/space_20"
+        app:layout_constraintRight_toLeftOf="@id/rl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pigeon_color"
+        tools:text="Details about the pigeons" />
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/space_20"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image"
+            android:layout_width="@dimen/space_150"
+            android:layout_height="@dimen/space_150"
+            app:cardCornerRadius="@dimen/space_25">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_class_image_placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/space_40"
+            android:layout_height="@dimen/space_40"
+            android:layout_alignTop="@id/image"
+            android:layout_alignEnd="@id/image"
+            android:layout_marginTop="@dimen/space_15"
+            android:layout_marginEnd="@dimen/space_15"
+            app:cardCornerRadius="@dimen/space_20">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_eye_image_placeholder"
+                android:translationZ="@dimen/space_5" />
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

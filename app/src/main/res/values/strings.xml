@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">CarrierPigeon</string>
+    <string name="add_new_pigeon">Add new pigeon</string>
+    <string name="series">Series</string>
+    <string name="nickname">Nickname</string>
+    <string name="color">Color</string>
+    <string name="details_about_the_pigeon">Details about the pigeon</string>
+    <string name="save_pigeon">Save pigeon</string>
+    <string name="welcome_comma_first_name_of_user">Welcome, %s</string>
+    <string name="pigeons">Pigeons</string>
+    <string name="families">Families</string>
+    <string name="pigeons_flights">Pigeons flights</string>
+
+    <!-- Permissions dialogs -->
+    <string name="permission_rationale_dialog_title">Permissions Needed</string>
+    <string name="permission_rationale_dialog_message">We need permissions to camera and microphone in order to use the app.</string>
+    <string name="permission_rationale_dialog_positive_button_text">Allow</string>
+    <string name="permission_rationale_dialog_negative_button_text">No thanks</string>
+    <string name="settings_dialog_title">Permission Needed</string>
+    <string name="settings_dialog_message">Give permission manually inside the app\'s settings</string>
+    <string name="settings_dialog_positive_button_text">Go to settings</string>
+    <string name="settings_dialog_negative_button_text">No thanks</string>
+    <string name="series_cannot_be_empty">Series cannot be empty!</string>
+    <string name="nickname_cannot_be_empty">Nickname cannot be empty!</string>
+    <string name="color_cannot_be_empty">Color cannot be empty!</string>
+    <string name="are_you_sure_you_want_to_delete_it">Are you sure you want to delete it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
