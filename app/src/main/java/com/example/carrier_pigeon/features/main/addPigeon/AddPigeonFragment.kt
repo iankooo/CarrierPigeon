@@ -82,7 +82,7 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.pigeonGender.setOnClickListener {
             binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
-            binding.llc.isActivated = !binding.llc.isActivated
+            binding.mainRl.isActivated = !binding.mainRl.isActivated
         }
 
         binding.savePigeonBtn.setOnClickListener {

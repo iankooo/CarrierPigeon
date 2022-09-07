@@ -40,7 +40,17 @@
 
     <style name="PigeonColor">
         <item name="fontFamily">@font/rooney_sans_bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontWeight">800</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="lineHeight">@dimen/space_20</item>
+    </style>
+
+    <style name="PigeonSeries">
+        <item name="fontFamily">@font/rooney_sans_bold</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="fontWeight">800</item>

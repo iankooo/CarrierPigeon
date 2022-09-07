@@ -59,18 +59,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_label">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/llc"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/main_rl"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_29"
+            android:layout_marginStart="@dimen/space_20"
             android:layout_marginTop="@dimen/space_20"
+            android:layout_marginEnd="@dimen/space_5"
             android:background="@drawable/selector_gender_pigeon_btn"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/space_10"
-            android:paddingVertical="@dimen/space_5"
-            app:layout_constraintRight_toLeftOf="@id/rl"
+            android:paddingHorizontal="@dimen/space_5"
+            android:paddingVertical="@dimen/space_8"
+            app:layout_constraintEnd_toStartOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -79,47 +80,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
+                android:paddingVertical="@dimen/space_4"
                 android:src="@drawable/selector_sign_gender_pigeon_btn" />
-
 
             <com.hbb20.CountryCodePicker
                 android:id="@+id/ccp"
                 style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@id/pigeon_gender"
+                android:layout_alignBottom="@id/pigeon_gender"
+                android:layout_toEndOf="@id/pigeon_gender"
+                android:gravity="center"
                 app:ccpDialog_showPhoneCode="false"
+                app:ccp_arrowSize="@dimen/space_15"
                 app:ccp_contentColor="@color/white"
                 app:ccp_defaultNameCode="RO"
+                app:ccp_padding="@dimen/space_1"
                 app:ccp_showFlag="false"
                 app:ccp_showNameCode="true"
-                app:ccp_showPhoneCode="false" />
-
+                app:ccp_showPhoneCode="false"
+                app:ccp_textGravity="CENTER" />
 
             <EditText
                 android:id="@+id/pigeon_series"
-                style="@style/PigeonColor"
-                android:layout_width="wrap_content"
+                style="@style/PigeonSeries"
+                android:layout_width="@dimen/space_100"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@id/pigeon_gender"
+                android:layout_alignBottom="@id/pigeon_gender"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/ccp"
                 android:background="@drawable/rounded_white_button"
                 android:hint="@string/series"
                 android:inputType="text"
                 android:maxEms="4"
+                android:maxLength="18"
                 android:paddingHorizontal="@dimen/space_6"
-                android:paddingVertical="@dimen/space_3"
                 android:textColor="@color/gray"
                 android:textColorHint="@color/gray" />
-
-
-            <TextView
-                android:id="@+id/pigeon_id"
-                style="@style/PigeonColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:clickable="true"
-                android:focusable="true"
-                tools:text="" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
 
 
         <EditText
@@ -127,29 +127,31 @@
             style="@style/PigeonNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginStart="@dimen/space_23"
             android:layout_marginTop="@dimen/space_5"
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/nickname"
             android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
-            android:maxEms="6"
+            android:maxEms="7"
+            android:maxLength="20"
             app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llc" />
+            app:layout_constraintTop_toBottomOf="@id/main_rl" />
 
         <EditText
             android:id="@+id/pigeon_color"
             style="@style/PigeonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginStart="@dimen/space_23"
             android:layout_marginTop="@dimen/space_5"
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/color"
             android:inputType="textVisiblePassword|textCapSentences"
-            android:maxEms="5"
+            android:maxEms="7"
+            android:maxLength="20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pigeon_nickname" />
 
@@ -159,7 +161,7 @@
             style="@style/PigeonDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginStart="@dimen/space_23"
             android:layout_marginTop="@dimen/space_5"
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
@@ -167,6 +169,7 @@
             android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
             android:maxEms="8"
             android:paddingBottom="@dimen/space_20"
+            app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pigeon_color" />
 
@@ -174,7 +177,7 @@
             android:id="@+id/rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_20"
+            android:layout_margin="@dimen/space_15"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingBottom="@dimen/space_20"

@@ -27,7 +27,7 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(dataSet[position]) {
             holder.binding.pigeonGender.isActivated = gender == Config.MALE
-            holder.binding.llc.isActivated = gender == Config.MALE
+            holder.binding.mainRl.isActivated = gender == Config.MALE
             holder.binding.pigeonId.text = id
             holder.binding.pigeonCountry.text = country
             holder.binding.pigeonNickname.text = nickname
