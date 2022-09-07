@@ -33,17 +33,23 @@
 
     <fragment
         android:id="@+id/pigeon_fragment"
-        android:name="com.example.carrier_pigeon.features.main.PigeonFragment"
+        android:name="com.example.carrier_pigeon.features.pigeons.PigeonFragment"
         tools:layout="@layout/fragment_pigeon">
 
         <action
-            android:id="@+id/pigeon_to_add_pigeon"
-            app:destination="@id/add_pigeon_fragment"
+            android:id="@+id/pigeon_to_add__or_edit_pigeon"
+            app:destination="@id/add_or_edit_pigeon_fragment"
             app:popUpTo="@id/pigeon_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/add_pigeon_fragment"
-        android:name="com.example.carrier_pigeon.features.main.addPigeon.AddPigeonFragment"
-        tools:layout="@layout/fragment_add_pigeon" />
+        android:id="@+id/add_or_edit_pigeon_fragment"
+        android:name="com.example.carrier_pigeon.features.pigeons.addPigeon.AddOrEditPigeonFragment"
+        tools:layout="@layout/fragment_add_or_edit_pigeon">
+        <argument
+            android:name="pigeon_selected"
+            android:defaultValue="@null"
+            app:argType="com.example.carrier_pigeon.features.pigeons.data.Pigeon"
+            app:nullable="true" />
+    </fragment>
 </navigation>

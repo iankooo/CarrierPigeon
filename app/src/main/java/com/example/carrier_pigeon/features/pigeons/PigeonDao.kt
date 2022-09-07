@@ -1,8 +1,8 @@
-package com.example.carrier_pigeon.features.main
+package com.example.carrier_pigeon.features.pigeons
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import com.example.carrier_pigeon.features.main.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
 @Dao
 interface PigeonDao {

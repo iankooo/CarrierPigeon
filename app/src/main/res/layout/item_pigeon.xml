@@ -15,7 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_20"
-        android:layout_marginTop="@dimen/space_20"
+        android:layout_marginTop="@dimen/space_15"
         android:layout_marginEnd="@dimen/space_5"
         android:background="@drawable/selector_gender_pigeon_btn"
         android:gravity="center_vertical"
@@ -52,7 +52,7 @@
             tools:text="RO" />
 
         <TextView
-            android:id="@+id/pigeon_id"
+            android:id="@+id/pigeon_series"
             style="@style/PigeonSeries"
             android:layout_width="@dimen/space_100"
             android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
             android:layout_alignEnd="@id/image"
             android:layout_marginTop="@dimen/space_15"
             android:layout_marginEnd="@dimen/space_15"
-            android:backgroundTint="@color/regular_blue"
+            android:backgroundTint="@color/transparent"
             android:theme="@style/Theme.MaterialComponents"
             app:cardCornerRadius="@dimen/space_20">
 

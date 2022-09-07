@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.main
+package com.example.carrier_pigeon.features.pigeons
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config
+import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.databinding.ItemPigeonBinding
-import com.example.carrier_pigeon.features.main.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
 class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
@@ -28,7 +29,7 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
         with(dataSet[position]) {
             holder.binding.pigeonGender.isActivated = gender == Config.MALE
             holder.binding.mainRl.isActivated = gender == Config.MALE
-            holder.binding.pigeonId.text = id
+            holder.binding.pigeonSeries.text = series
             holder.binding.pigeonCountry.text = country
             holder.binding.pigeonNickname.text = nickname
             holder.binding.pigeonColor.text = color
@@ -39,7 +40,7 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
                 holder.binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
             }
             if (pigeonEyeImage.isNullOrEmpty()) {
-                holder.binding.pigeonEyeImage.setBackgroundResource(R.drawable.ic_eye_image_placeholder)
+                holder.binding.pigeonEyeImage.invisible()
             } else {
                 holder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
             }

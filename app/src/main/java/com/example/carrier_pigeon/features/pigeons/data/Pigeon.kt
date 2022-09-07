@@ -1,14 +1,18 @@
-package com.example.carrier_pigeon.features.main.data
+package com.example.carrier_pigeon.features.pigeons.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 import org.jetbrains.annotations.NotNull
 
 @Entity(tableName = "pigeon_table")
+@Parcelize
 data class Pigeon(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NotNull
-    val id: String,
+    var id: Int = 0,
+    val series: String,
     val gender: String,
     val country: String,
     val nickname: String,
@@ -16,4 +20,4 @@ data class Pigeon(
     val details: String,
     val pigeonImage: String?,
     val pigeonEyeImage: String?
-)
+) : Parcelable

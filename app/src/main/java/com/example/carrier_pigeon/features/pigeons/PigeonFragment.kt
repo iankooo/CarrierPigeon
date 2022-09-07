@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.main
+package com.example.carrier_pigeon.features.pigeons
 
 import android.os.Bundle
 import android.view.View
@@ -16,7 +16,7 @@ import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentPigeonBinding
-import com.example.carrier_pigeon.features.main.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -49,7 +49,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
 
     private fun setControls() {
         binding.addButton.setOnClickListener {
-            findNavController().navigate(PigeonFragmentDirections.pigeonToAddPigeon())
+            findNavController().navigate(PigeonFragmentDirections.pigeonToAddOrEditPigeon(null))
         }
     }
 
@@ -77,12 +77,20 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     private fun setupEditHandler() {
         val editSwipeHandler = object : SwipeToEditCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                //                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
-                //                    adapter.notifyEditItem(
-                //                        this@PigeonFragment,
-                //                        viewHolder.adapterPosition,
-                //                        ADD_PLACE_ACTIVITY_REQUEST_CODE
-                //                    )
+                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
+                findNavController().navigate(
+                    PigeonFragmentDirections.pigeonToAddOrEditPigeon(
+                        adapter.getPigeonFromPosition(
+                            viewHolder.adapterPosition
+                        )
+                    )
+                )
+//                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
+//                adapter.notifyEditItem(
+//                    this@PigeonFragment,
+//                    viewHolder.adapterPosition,
+//                    ADD_PLACE_ACTIVITY_REQUEST_CODE
+//                )
             }
         }
         val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)

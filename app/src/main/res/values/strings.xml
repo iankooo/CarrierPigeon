@@ -38,4 +38,6 @@
     <string name="first_name_cannot_be_empty">First name cannot be empty!</string>
     <string name="last_name_cannot_be_empty">Last name cannot be empty!</string>
     <string name="home_address_cannot_be_empty">Home address cannot be empty!</string>
+    <string name="edit_pigeon">Edit pigeon</string>
+    <string name="save_changes">Save changes</string>
 </resources>

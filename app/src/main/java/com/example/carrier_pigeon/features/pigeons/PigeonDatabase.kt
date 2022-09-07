@@ -1,10 +1,10 @@
-package com.example.carrier_pigeon.features.main
+package com.example.carrier_pigeon.features.pigeons
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.carrier_pigeon.features.main.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
 @Database(entities = [Pigeon::class], version = 1)
 abstract class PigeonDatabase : RoomDatabase() {

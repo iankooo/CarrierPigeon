@@ -84,7 +84,7 @@
                 android:src="@drawable/selector_sign_gender_pigeon_btn" />
 
             <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
+                android:id="@+id/pigeon_country"
                 style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:layout_alignTop="@id/pigeon_gender"
                 android:layout_alignBottom="@id/pigeon_gender"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/ccp"
+                android:layout_toEndOf="@id/pigeon_country"
                 android:background="@drawable/rounded_white_button"
                 android:hint="@string/series"
                 android:inputType="text"
@@ -132,9 +132,9 @@
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/nickname"
-            android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
+            android:inputType="textVisiblePassword|textCapSentences"
             android:maxEms="7"
-            android:maxLength="20"
+            android:maxLength="17"
             app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_rl" />

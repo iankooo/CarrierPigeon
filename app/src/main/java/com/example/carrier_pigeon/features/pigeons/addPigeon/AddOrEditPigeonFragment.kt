@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.main.addPigeon
+package com.example.carrier_pigeon.features.pigeons.addPigeon
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -17,12 +17,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
+import com.example.carrier_pigeon.app.Config
 import com.example.carrier_pigeon.app.common.BaseFragment
 import com.example.carrier_pigeon.app.utils.permissions.isPermissionGranted
 import com.example.carrier_pigeon.app.utils.shortToast
 import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
-import com.example.carrier_pigeon.databinding.FragmentAddPigeonBinding
-import com.example.carrier_pigeon.features.main.data.Pigeon
+import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,12 +31,13 @@ import java.io.*
 import java.util.*
 
 @AndroidEntryPoint
-class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
-    private val viewModel by viewModels<AddPigeonViewModel>()
-    private val binding by viewBinding(FragmentAddPigeonBinding::bind)
+class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeon) {
+    private val viewModel by viewModels<AddOrEditPigeonViewModel>()
+    private val binding by viewBinding(FragmentAddOrEditPigeonBinding::bind)
     private var savePigeonImageToInternalStorage: Uri? = null
     private var savePigeonEyeImageToInternalStorage: Uri? = null
     private var isEyeImageViewClicked = false
+    private var pigeon: Pigeon? = null
     private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -77,21 +79,56 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
         private const val GALLERY = 1
         private const val CAMERA = 2
         private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
+        private const val PIGEON_SELECTED = "pigeon_selected"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pigeon = arguments?.getParcelable(PIGEON_SELECTED)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (pigeon != null) {
+            binding.welcomeLabel.setText(R.string.edit_pigeon)
+            binding.savePigeonBtn.setText(R.string.save_changes)
+
+            with(pigeon) {
+                binding.pigeonGender.isActivated = this!!.gender == Config.MALE
+                binding.mainRl.isActivated = gender == Config.MALE
+                binding.pigeonCountry.setDefaultCountryUsingNameCode(country)
+                binding.pigeonSeries.setText(series)
+                binding.pigeonNickname.setText(nickname)
+                binding.pigeonColor.setText(color)
+                binding.pigeonDetails.setText(details)
+                if (!pigeonImage.isNullOrEmpty()) {
+                    savePigeonImageToInternalStorage = Uri.parse(pigeonImage)
+                    binding.addPigeonImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    binding.addPigeonImageView.setImageURI(Uri.parse(pigeonImage))
+                }
+                if (!pigeonEyeImage.isNullOrEmpty()) {
+                    savePigeonEyeImageToInternalStorage = Uri.parse(pigeonEyeImage)
+                    binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    binding.addPigeonEyeImageView.setImageURI(Uri.parse(pigeonEyeImage))
+                }
+            }
+        } else {
+            binding.welcomeLabel.setText(R.string.add_new_pigeon)
+            binding.savePigeonBtn.setText(R.string.save_pigeon)
+        }
+
         binding.pigeonGender.setOnClickListener {
             binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
             binding.mainRl.isActivated = !binding.mainRl.isActivated
         }
 
         binding.savePigeonBtn.setOnClickListener {
-            addPigeon()
+            savePigeon()
         }
 
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
         binding.addPigeonImageView.setOnClickListener {
             isEyeImageViewClicked = false
             val pictureDialog = AlertDialog.Builder(context)
@@ -119,6 +156,59 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
                 }
             }
             pictureDialog.show()
+        }
+    }
+
+    private fun savePigeon() {
+        val gender: String = if (binding.pigeonGender.isActivated) {
+            Config.MALE
+        } else {
+            Config.FEMALE
+        }
+        val country = binding.pigeonCountry.selectedCountryNameCode.toString()
+        val series = binding.pigeonSeries.text.toString()
+        val nickname = binding.pigeonNickname.text.toString()
+        val color = binding.pigeonColor.text.toString()
+        val details = binding.pigeonDetails.text.toString()
+        val pigeonImage: String? = if (savePigeonImageToInternalStorage == null) {
+            null
+        } else {
+            savePigeonImageToInternalStorage.toString()
+        }
+        val pigeonEyeImage: String? = if (savePigeonEyeImageToInternalStorage == null) {
+            null
+        } else {
+            savePigeonEyeImageToInternalStorage.toString()
+        }
+
+        if (series.isEmpty())
+            shortToast(getString(R.string.series_cannot_be_empty))
+        else if (nickname.isEmpty())
+            shortToast(getString(R.string.nickname_cannot_be_empty))
+        else if (color.isEmpty())
+            shortToast(getString(R.string.color_cannot_be_empty))
+        else {
+            val pigeon = Pigeon(
+                series = series,
+                gender = gender,
+                country = country,
+                nickname = nickname,
+                color = color,
+                details = details,
+                pigeonImage = pigeonImage,
+                pigeonEyeImage = pigeonEyeImage
+            )
+            if (this.pigeon != null) {
+                pigeon.id = this.pigeon!!.id
+                lifecycleScope.launch {
+                    viewModel.editPigeon(pigeon)
+                }
+            } else {
+                lifecycleScope.launch {
+                    viewModel.addPigeon(pigeon)
+                }
+            }
+            findNavController().popBackStack()
         }
     }
 
@@ -272,54 +362,6 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
         }
 
         return Uri.parse(file.absolutePath)
-    }
-
-    private fun addPigeon() {
-        val gender: String = if (binding.pigeonGender.isActivated) {
-            com.example.carrier_pigeon.app.Config.MALE
-        } else {
-            com.example.carrier_pigeon.app.Config.FEMALE
-        }
-        val country = binding.ccp.selectedCountryNameCode.toString()
-        val series = binding.pigeonSeries.text.toString()
-        val nickname = binding.pigeonNickname.text.toString()
-        val color = binding.pigeonColor.text.toString()
-        val details = binding.pigeonDetails.text.toString()
-        val pigeonImage: String? = if (savePigeonImageToInternalStorage == null) {
-            null
-        } else {
-            savePigeonImageToInternalStorage.toString()
-        }
-        val pigeonEyeImage: String? = if (savePigeonEyeImageToInternalStorage == null) {
-            null
-        } else {
-            savePigeonEyeImageToInternalStorage.toString()
-        }
-
-        if (series.isNotEmpty() && country.isNotEmpty() && color.isNotEmpty()) {
-            lifecycleScope.launch {
-                viewModel.addPigeon(
-                    Pigeon(
-                        series,
-                        gender,
-                        country,
-                        nickname,
-                        color,
-                        details,
-                        pigeonImage,
-                        pigeonEyeImage
-                    )
-                )
-                findNavController().popBackStack()
-            }
-        } else {
-            if (series.isEmpty())
-                shortToast(getString(R.string.series_cannot_be_empty))
-            else if (nickname.isEmpty())
-                shortToast(getString(R.string.nickname_cannot_be_empty))
-            else if (color.isEmpty())
-                shortToast(getString(R.string.color_cannot_be_empty))
-        }
     }
 
     override fun onAllowClicked(permissions: Array<String>) {
