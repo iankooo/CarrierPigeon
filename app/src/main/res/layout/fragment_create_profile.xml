@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray">
@@ -32,39 +31,104 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <EditText
+        android:id="@+id/phone_number_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_40"
+        android:background="@drawable/rounded_edit_text"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="@dimen/space_10"
+        android:drawableTint="@color/light_blue"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:nextFocusDown="@id/first_name_et"
+        android:padding="@dimen/space_15"
+        android:textColor="@color/light_blue"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_label" />
+
+    <EditText
+        android:id="@+id/first_name_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_8"
+        android:layout_marginEnd="@dimen/space_4"
+        android:background="@drawable/rounded_edit_text"
+        android:drawableStart="@drawable/ic_name"
+        android:drawablePadding="@dimen/space_10"
+        android:drawableTint="@color/light_blue"
+        android:hint="@string/first_name"
+        android:inputType="textCapSentences|textVisiblePassword"
+        android:nextFocusDown="@id/last_name_et"
+        android:padding="@dimen/space_15"
+        android:textColor="@color/light_blue"
+        android:textColorHint="@color/gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/last_name_et"
+        app:layout_constraintTop_toBottomOf="@id/phone_number_et" />
+
+    <EditText
+        android:id="@+id/last_name_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_4"
+        android:layout_marginTop="@dimen/space_8"
+        android:layout_marginEnd="@dimen/space_10"
+        android:background="@drawable/rounded_edit_text"
+        android:drawableStart="@drawable/ic_name"
+        android:drawablePadding="@dimen/space_10"
+        android:drawableTint="@color/light_blue"
+        android:hint="@string/last_name"
+        android:inputType="textCapSentences|textVisiblePassword"
+        android:nextFocusDown="@id/home_address_et"
+        android:padding="@dimen/space_15"
+        android:textColor="@color/light_blue"
+        android:textColorHint="@color/gray"
+        app:layout_constraintLeft_toRightOf="@id/first_name_et"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phone_number_et" />
+
+    <EditText
+        android:id="@+id/home_address_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_8"
+        android:background="@drawable/rounded_edit_text"
+        android:drawableStart="@drawable/ic_home"
+        android:drawablePadding="@dimen/space_10"
+        android:drawableTint="@color/light_blue"
+        android:hint="@string/home_address"
+        android:inputType="textCapSentences|textVisiblePassword"
+        android:padding="@dimen/space_15"
+        android:textColor="@color/light_blue"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/first_name_et" />
+
+    <Button
         android:id="@+id/save_profile_btn"
+        style="@style/SubTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:background="@drawable/rounded_white_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
+        android:drawableStart="@drawable/ic_save"
+        android:drawablePadding="@dimen/space_10"
+        android:gravity="center"
+        android:padding="@dimen/space_10"
+        android:text="@string/save_profile"
+        android:textColor="@color/light_blue"
         android:translationZ="@dimen/space_10"
         app:layout_constraintBottom_toBottomOf="@id/footer_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/footer_textview">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:padding="@dimen/space_7"
-            android:src="@drawable/ic_save"
-            android:visibility="visible" />
-
-        <TextView
-            style="@style/SubTitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/space_7"
-            android:text="@string/save_profile"
-            android:textColor="@color/light_blue" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        app:layout_constraintTop_toTopOf="@id/footer_textview" />
 
     <TextView
         android:id="@+id/footer_textview"

@@ -18,6 +18,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/light_blue</item>
+        <item name="android:navigationBarColor">@color/light_blue</item>
     </style>
 
     <style name="SubTitleLabel">

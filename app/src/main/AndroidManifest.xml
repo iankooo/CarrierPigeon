@@ -12,6 +12,7 @@
         android:theme="@style/Theme.KidsloopAndroid.NoActionBar">
         <activity
             android:name=".app.CarrierPigeonActivity"
+            android:screenOrientation="userPortrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

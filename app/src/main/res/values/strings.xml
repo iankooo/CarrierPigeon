@@ -30,4 +30,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_profile">Create profile</string>
     <string name="save_profile">Save profile</string>
+    <string name="phone_number">Phone number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="home_address">Home address</string>
+    <string name="phone_number_cannot_be_empty">Phone number cannot be empty!</string>
+    <string name="first_name_cannot_be_empty">First name cannot be empty!</string>
+    <string name="last_name_cannot_be_empty">Last name cannot be empty!</string>
+    <string name="home_address_cannot_be_empty">Home address cannot be empty!</string>
 </resources>
