@@ -13,5 +13,7 @@ data class Pigeon(
     val country: String,
     val nickname: String,
     val color: String,
-    val details: String
+    val details: String,
+    val pigeonImage: String?,
+    val pigeonEyeImage: String?
 )

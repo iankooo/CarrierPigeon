@@ -39,8 +39,7 @@
         <action
             android:id="@+id/pigeon_to_add_pigeon"
             app:destination="@id/add_pigeon_fragment"
-            app:popUpTo="@id/pigeon_fragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/pigeon_fragment" />
     </fragment>
 
     <fragment

@@ -34,10 +34,10 @@
             android:contentDescription="@null"
             android:src="@drawable/selector_sign_gender_pigeon_btn" />
 
-        <!--        style="@style/PigeonColor"-->
+
         <TextView
             android:id="@+id/pigeon_country"
-
+            style="@style/PigeonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_5"
@@ -46,10 +46,10 @@
             android:focusable="true"
             tools:text="RO" />
 
-        <!--        style="@style/PigeonColor"-->
+
         <TextView
             android:id="@+id/pigeon_id"
-
+            style="@style/PigeonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -58,10 +58,10 @@
             tools:text="19-372240" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!--    style="@style/PigeonNickname"-->
+
     <TextView
         android:id="@+id/pigeon_nickname"
-
+        style="@style/PigeonNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_32"
@@ -71,10 +71,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llc"
         tools:text="HOPE" />
-    <!--    style="@style/PigeonColor"-->
+
     <TextView
         android:id="@+id/pigeon_color"
-
+        style="@style/PigeonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_32"
@@ -103,7 +103,7 @@
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_20"
         android:gravity="center_vertical"
         android:orientation="vertical"
@@ -115,9 +115,12 @@
             android:id="@+id/image"
             android:layout_width="@dimen/space_150"
             android:layout_height="@dimen/space_150"
+            android:backgroundTint="@color/white"
+            android:theme="@style/Theme.MaterialComponents"
             app:cardCornerRadius="@dimen/space_25">
 
             <ImageView
+                android:id="@+id/pigeon_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
@@ -132,9 +135,12 @@
             android:layout_alignEnd="@id/image"
             android:layout_marginTop="@dimen/space_15"
             android:layout_marginEnd="@dimen/space_15"
+            android:backgroundTint="@color/regular_blue"
+            android:theme="@style/Theme.MaterialComponents"
             app:cardCornerRadius="@dimen/space_20">
 
             <ImageView
+                android:id="@+id/pigeon_eye_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@null"

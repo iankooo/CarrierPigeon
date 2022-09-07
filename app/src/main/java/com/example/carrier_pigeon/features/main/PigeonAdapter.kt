@@ -1,8 +1,11 @@
 package com.example.carrier_pigeon.features.main
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.carrier_pigeon.R
+import com.example.carrier_pigeon.app.Config
 import com.example.carrier_pigeon.databinding.ItemPigeonBinding
 import com.example.carrier_pigeon.features.main.data.Pigeon
 
@@ -22,13 +25,25 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.pigeonGender.isActivated = dataSet[position].gender == com.example.carrier_pigeon.app.Config.MALE
-        holder.binding.llc.isActivated = dataSet[position].gender == com.example.carrier_pigeon.app.Config.MALE
-        holder.binding.pigeonId.text = dataSet[position].id
-        holder.binding.pigeonCountry.text = dataSet[position].country
-        holder.binding.pigeonNickname.text = dataSet[position].nickname
-        holder.binding.pigeonColor.text = dataSet[position].color
-        holder.binding.pigeonDetails.text = dataSet[position].details
+        with(dataSet[position]) {
+            holder.binding.pigeonGender.isActivated = gender == Config.MALE
+            holder.binding.llc.isActivated = gender == Config.MALE
+            holder.binding.pigeonId.text = id
+            holder.binding.pigeonCountry.text = country
+            holder.binding.pigeonNickname.text = nickname
+            holder.binding.pigeonColor.text = color
+            holder.binding.pigeonDetails.text = details
+            if (pigeonImage.isNullOrEmpty()) {
+                holder.binding.pigeonImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
+            } else {
+                holder.binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
+            }
+            if (pigeonEyeImage.isNullOrEmpty()) {
+                holder.binding.pigeonEyeImage.setBackgroundResource(R.drawable.ic_eye_image_placeholder)
+            } else {
+                holder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
+            }
+        }
     }
 
     override fun getItemCount(): Int = dataSet.size

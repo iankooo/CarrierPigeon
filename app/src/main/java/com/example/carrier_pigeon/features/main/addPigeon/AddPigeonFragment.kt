@@ -26,28 +26,18 @@ import com.example.carrier_pigeon.features.main.data.Pigeon
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStream
+import java.io.*
 import java.util.*
 
 @AndroidEntryPoint
 class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
     private val viewModel by viewModels<AddPigeonViewModel>()
     private val binding by viewBinding(FragmentAddPigeonBinding::bind)
-    private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
-    private var saveImageToInternalStorage: Uri? = null
+    private var savePigeonImageToInternalStorage: Uri? = null
+    private var savePigeonEyeImageToInternalStorage: Uri? = null
     private var isEyeImageViewClicked = false
-
-    companion object {
-        private const val GALLERY = 1
-        private const val CAMERA = 2
-        private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
-    }
-
-    init {
-        this.requestPermissionsLauncher = registerForActivityResult(
+    private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { result ->
             var allAreGranted = true
@@ -82,6 +72,11 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
                 }
             }
         }
+
+    companion object {
+        private const val GALLERY = 1
+        private const val CAMERA = 2
+        private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,7 +85,7 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
             binding.llc.isActivated = !binding.llc.isActivated
         }
 
-        binding.savePigeon.setOnClickListener {
+        binding.savePigeonBtn.setOnClickListener {
             addPigeon()
         }
 
@@ -223,15 +218,17 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
                     try {
                         val selectedImageBitmap =
                             MediaStore.Images.Media.getBitmap(context?.contentResolver, contentURI)
-                        saveImageToInternalStorage = saveImageToInternalStorage(selectedImageBitmap)
                         if (isEyeImageViewClicked) {
-                            binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-//                            Glide.with(this).load(selectedImageBitmap)
-//                                .into(binding.addPigeonEyeImageView)
+                            savePigeonEyeImageToInternalStorage =
+                                saveImageToInternalStorage(selectedImageBitmap)
+                            binding.addPigeonEyeImageView.scaleType =
+                                ImageView.ScaleType.CENTER_CROP
+                            binding.addPigeonEyeImageView.setImageBitmap(selectedImageBitmap)
                         } else {
+                            savePigeonImageToInternalStorage =
+                                saveImageToInternalStorage(selectedImageBitmap)
                             binding.addPigeonImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-//                            Glide.with(this).load(selectedImageBitmap)
-//                                .into(binding.addPigeonImageView)
+                            binding.addPigeonImageView.setImageBitmap(selectedImageBitmap)
                         }
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -239,17 +236,25 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
                 }
             } else if (requestCode == CAMERA) {
                 val thumbnail: Bitmap = data!!.extras!!.get("data") as Bitmap
-                saveImageToInternalStorage = saveImageToInternalStorage(thumbnail)
                 if (isEyeImageViewClicked) {
+                    savePigeonEyeImageToInternalStorage = saveImageToInternalStorage(thumbnail)
                     binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-//                    Picasso.with(context).load(thumbnail).into(binding.addPigeonEyeImageView)
-//                    Picasso.with(context).load("http url or sdcard url").into(imageView)
+                    binding.addPigeonEyeImageView.setImageBitmap(thumbnail)
                 } else {
+                    savePigeonImageToInternalStorage = saveImageToInternalStorage(thumbnail)
                     binding.addPigeonImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-//                    Glide.with(this).load(thumbnail).into(binding.addPigeonImageView)
+                    binding.addPigeonImageView.setImageBitmap(thumbnail)
                 }
             }
         }
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
     }
 
     private fun saveImageToInternalStorage(bitmap: Bitmap): Uri {
@@ -280,9 +285,31 @@ class AddPigeonFragment : BaseFragment(R.layout.fragment_add_pigeon) {
         val nickname = binding.pigeonNickname.text.toString()
         val color = binding.pigeonColor.text.toString()
         val details = binding.pigeonDetails.text.toString()
+        val pigeonImage: String? = if (savePigeonImageToInternalStorage == null) {
+            null
+        } else {
+            savePigeonImageToInternalStorage.toString()
+        }
+        val pigeonEyeImage: String? = if (savePigeonEyeImageToInternalStorage == null) {
+            null
+        } else {
+            savePigeonEyeImageToInternalStorage.toString()
+        }
+
         if (series.isNotEmpty() && country.isNotEmpty() && color.isNotEmpty()) {
             lifecycleScope.launch {
-                viewModel.addPigeon(Pigeon(series, gender, country, nickname, color, details))
+                viewModel.addPigeon(
+                    Pigeon(
+                        series,
+                        gender,
+                        country,
+                        nickname,
+                        color,
+                        details,
+                        pigeonImage,
+                        pigeonEyeImage
+                    )
+                )
                 findNavController().popBackStack()
             }
         } else {

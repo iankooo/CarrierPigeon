@@ -81,9 +81,10 @@
                 android:contentDescription="@null"
                 android:src="@drawable/selector_sign_gender_pigeon_btn" />
 
-            <!--                style="@style/PigeonColor"-->
+
             <com.hbb20.CountryCodePicker
                 android:id="@+id/ccp"
+                style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:ccpDialog_showPhoneCode="false"
@@ -93,9 +94,10 @@
                 app:ccp_showNameCode="true"
                 app:ccp_showPhoneCode="false" />
 
-            <!--                style="@style/PigeonColor"-->
+
             <EditText
                 android:id="@+id/pigeon_series"
+                style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_white_button"
@@ -107,9 +109,10 @@
                 android:textColor="@color/gray"
                 android:textColorHint="@color/gray" />
 
-            <!--            style="@style/PigeonColor"-->
+
             <TextView
                 android:id="@+id/pigeon_id"
+                style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -118,9 +121,10 @@
                 tools:text="" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <!--        style="@style/PigeonNickname"-->
+
         <EditText
             android:id="@+id/pigeon_nickname"
+            style="@style/PigeonNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_32"
@@ -128,15 +132,15 @@
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/nickname"
-            android:inputType="textMultiLine|textVisiblePassword"
+            android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
             android:maxEms="6"
             app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llc" />
 
-        <!--        style="@style/PigeonColor"-->
         <EditText
             android:id="@+id/pigeon_color"
+            style="@style/PigeonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_32"
@@ -144,15 +148,15 @@
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/color"
-            android:inputType="textVisiblePassword"
+            android:inputType="textVisiblePassword|textCapSentences"
             android:maxEms="5"
-            app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pigeon_nickname" />
 
-        <!--        style="@style/PigeonDetails"-->
+
         <EditText
             android:id="@+id/pigeon_details"
+            style="@style/PigeonDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_32"
@@ -160,10 +164,9 @@
             android:background="@color/regular_blue"
             android:backgroundTint="@color/transparent"
             android:hint="@string/details_about_the_pigeon"
-            android:inputType="textMultiLine|textVisiblePassword"
+            android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
             android:maxEms="8"
             android:paddingBottom="@dimen/space_20"
-            app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pigeon_color" />
 
@@ -183,6 +186,7 @@
                 android:layout_width="@dimen/space_150"
                 android:layout_height="@dimen/space_150"
                 android:backgroundTint="@color/white"
+                android:theme="@style/Theme.MaterialComponents"
                 app:cardCornerRadius="@dimen/space_25">
 
                 <ImageView
@@ -202,6 +206,7 @@
                 android:layout_marginTop="@dimen/space_15"
                 android:layout_marginEnd="@dimen/space_15"
                 android:backgroundTint="@color/regular_blue"
+                android:theme="@style/Theme.MaterialComponents"
                 app:cardCornerRadius="@dimen/space_20">
 
                 <ImageView
@@ -216,39 +221,24 @@
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/save_pigeon"
+    <Button
+        android:id="@+id/save_pigeon_btn"
+        style="@style/SubTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:background="@drawable/rounded_white_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
+        android:drawableStart="@drawable/ic_save"
+        android:drawablePadding="@dimen/space_10"
+        android:gravity="center"
+        android:padding="@dimen/space_10"
+        android:text="@string/save_pigeon"
+        android:textAllCaps="false"
+        android:textColor="@color/light_blue"
         android:translationZ="@dimen/space_10"
         app:layout_constraintBottom_toBottomOf="@id/footer_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/footer_textview">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:padding="@dimen/space_7"
-            android:src="@drawable/ic_save"
-            android:visibility="visible" />
-
-        <TextView
-            style="@style/SubTitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/space_7"
-            android:text="@string/save_pigeon"
-            android:textColor="@color/light_blue" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        app:layout_constraintTop_toTopOf="@id/footer_textview" />
 
     <TextView
         android:id="@+id/footer_textview"

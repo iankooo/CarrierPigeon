@@ -172,38 +172,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <Button
+        android:id="@+id/pigeons_flights_btn"
+        style="@style/SubTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:background="@drawable/rounded_white_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
+        android:drawableStart="@drawable/ic_pigeons"
+        android:drawablePadding="@dimen/space_10"
+        android:gravity="center"
+        android:padding="@dimen/space_10"
+        android:text="@string/pigeons_flights"
+        android:textAllCaps="false"
+        android:textColor="@color/light_blue"
         android:translationZ="@dimen/space_10"
         app:layout_constraintBottom_toBottomOf="@id/footer_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/footer_textview">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:padding="@dimen/space_7"
-            android:src="@drawable/ic_pigeons"
-            android:visibility="visible" />
-
-        <TextView
-            style="@style/SubTitleLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/space_7"
-            android:text="@string/pigeons_flights"
-            android:textColor="@color/light_blue" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        app:layout_constraintTop_toTopOf="@id/footer_textview" />
 
     <TextView
         android:id="@+id/footer_textview"
