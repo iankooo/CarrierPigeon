@@ -23,7 +23,7 @@
         android:id="@+id/welcome_label"
         style="@style/SubTitleLabel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/space_108"
         android:background="@drawable/bg_top_view_profiles"
         android:gravity="center"
         android:paddingTop="@dimen/space_40"

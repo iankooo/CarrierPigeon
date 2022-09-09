@@ -42,5 +42,7 @@
     <dimen name="space_170">170dp</dimen>
     <dimen name="space_150">150dp</dimen>
     <dimen name="space_23">23dp</dimen>
+    <dimen name="space_108">108dp</dimen>
+    <dimen name="space_168">168dp</dimen>
 
 </resources>

@@ -32,10 +32,10 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     private val viewModel by viewModels<PigeonViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        getPigeonsListFromLocalDB()
-        setControls()
         binding.welcomeLabel.text =
             getString(R.string.welcome_comma_first_name_of_user, sharedPrefsWrapper.getFirstName())
+        getPigeonsListFromLocalDB()
+        setControls()
     }
 
     private fun getPigeonsListFromLocalDB() {
@@ -51,6 +51,9 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
         binding.addButton.setOnClickListener {
             findNavController().navigate(PigeonFragmentDirections.pigeonToAddOrEditPigeon(null))
         }
+        binding.pigeonsFlightsBtn.setOnClickListener {
+            findNavController().navigate(PigeonFragmentDirections.pigeonToPigeonsFlights())
+        }
     }
 
     private fun setupListOfPigeonsIntoRecyclerView(
@@ -65,7 +68,17 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
             binding.pigeonsRecyclerview.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = pigeonAdapter
+                setHasFixedSize(true)
             }
+            pigeonAdapter.setOnClickListener(object : PigeonAdapter.OnClickListener {
+                override fun onClick(position: Int, pigeon: Pigeon) {
+                    findNavController().navigate(
+                        PigeonFragmentDirections.pigeonToPigeonDetail(
+                            pigeon
+                        )
+                    )
+                }
+            })
             setupEditHandler()
             setupDeleteHandler()
         } else {

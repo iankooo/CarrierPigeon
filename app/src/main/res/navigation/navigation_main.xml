@@ -40,6 +40,14 @@
             android:id="@+id/pigeon_to_add__or_edit_pigeon"
             app:destination="@id/add_or_edit_pigeon_fragment"
             app:popUpTo="@id/pigeon_fragment" />
+        <action
+            android:id="@+id/pigeon_to_pigeon_detail"
+            app:destination="@id/pigeon_detail_fragment"
+            app:popUpTo="@id/pigeon_fragment" />
+        <action
+            android:id="@+id/pigeon_to_pigeons_flights"
+            app:destination="@id/pigeons_flights_fragment"
+            app:popUpTo="@id/pigeon_fragment" />
     </fragment>
 
     <fragment
@@ -52,4 +60,20 @@
             app:argType="com.example.carrier_pigeon.features.pigeons.data.Pigeon"
             app:nullable="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/pigeon_detail_fragment"
+        android:name="com.example.carrier_pigeon.features.pigeons.pigeonDetail.PigeonDetailFragment"
+        tools:layout="@layout/fragment_pigeon_detail">
+        <argument
+            android:name="pigeon_clicked"
+            android:defaultValue="@null"
+            app:argType="com.example.carrier_pigeon.features.pigeons.data.Pigeon"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pigeons_flights_fragment"
+        android:name="com.example.carrier_pigeon.features.pigeonsFlights.PigeonsFlightsFragment"
+        tools:layout="@layout/fragment_pigeons_flights" />
 </navigation>

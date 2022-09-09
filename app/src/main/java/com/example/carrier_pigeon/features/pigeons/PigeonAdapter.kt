@@ -12,6 +12,7 @@ import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
 class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
+    private var onClickListener: OnClickListener? = null
 
     inner class ViewHolder(val binding: ItemPigeonBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -44,6 +45,7 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
             } else {
                 holder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
             }
+            holder.itemView.setOnClickListener { onClickListener!!.onClick(position, this) }
         }
     }
 
@@ -61,5 +63,13 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     fun removeAt(position: Int) {
         dataSet.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, pigeon: Pigeon)
     }
 }

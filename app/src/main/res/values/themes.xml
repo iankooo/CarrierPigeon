@@ -65,4 +65,14 @@
         <item name="android:letterSpacing">-0.02</item>
         <item name="lineHeight">@dimen/space_25</item>
     </style>
+
+    <style name="TableItem">
+        <item name="fontFamily">@font/rooney_sans_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontWeight">800</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="lineHeight">@dimen/space_20</item>
+    </style>
 </resources>
