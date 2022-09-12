@@ -19,5 +19,6 @@ data class Pigeon(
     val color: String,
     val details: String,
     val pigeonImage: String?,
-    val pigeonEyeImage: String?
+    val pigeonEyeImage: String?,
+    val dateOfBirth: String?
 ) : Parcelable

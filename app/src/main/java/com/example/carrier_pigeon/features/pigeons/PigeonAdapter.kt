@@ -9,6 +9,8 @@ import com.example.carrier_pigeon.app.Config
 import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.databinding.ItemPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
@@ -45,6 +47,7 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
             } else {
                 holder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
             }
+            holder.binding.pigeonDateOfBirth.text = dateOfBirth
             holder.itemView.setOnClickListener { onClickListener!!.onClick(position, this) }
         }
     }

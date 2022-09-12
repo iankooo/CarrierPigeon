@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/add_to_flight_button"
+        android:layout_width="@dimen/space_53"
+        android:layout_height="@dimen/space_53"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/space_5"
+        android:background="@drawable/bg_round_white_ripple"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_add"
+        android:elevation="@dimen/space_3"/>
+</LinearLayout>

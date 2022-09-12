@@ -155,6 +155,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pigeon_nickname" />
 
+        <EditText
+            android:id="@+id/pigeon_date_of_birth"
+            style="@style/PigeonColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_23"
+            android:layout_marginTop="@dimen/space_5"
+            android:background="@color/regular_blue"
+            android:backgroundTint="@color/transparent"
+            android:hint="@string/birthday"
+            android:maxEms="7"
+            android:maxLength="20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pigeon_color" />
+
 
         <EditText
             android:id="@+id/pigeon_details"
@@ -171,7 +186,7 @@
             android:paddingBottom="@dimen/space_20"
             app:layout_constraintRight_toLeftOf="@id/rl"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pigeon_color" />
+            app:layout_constraintTop_toBottomOf="@id/pigeon_date_of_birth" />
 
         <RelativeLayout
             android:id="@+id/rl"

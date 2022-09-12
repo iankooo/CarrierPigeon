@@ -95,6 +95,19 @@
         tools:text="GUT" />
 
     <TextView
+        android:id="@+id/pigeon_date_of_birth"
+        style="@style/PigeonColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_23"
+        android:layout_marginTop="@dimen/space_5"
+        android:maxEms="7"
+        android:maxLength="20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pigeon_color"
+        tools:text="Birthday" />
+
+    <TextView
         android:id="@+id/pigeon_details"
         style="@style/PigeonDetails"
         android:layout_width="wrap_content"
@@ -106,7 +119,7 @@
         android:paddingBottom="@dimen/space_20"
         app:layout_constraintRight_toLeftOf="@id/rl"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pigeon_color"
+        app:layout_constraintTop_toBottomOf="@id/pigeon_date_of_birth"
         tools:text="Details about the pigeons" />
 
     <RelativeLayout

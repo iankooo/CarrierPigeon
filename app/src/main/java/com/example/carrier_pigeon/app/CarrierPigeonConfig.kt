@@ -1,6 +1,6 @@
 package com.example.carrier_pigeon.app
 
 object Config {
-    const val MALE = "male"
-    const val FEMALE = "female"
+    const val MALE = "M"
+    const val FEMALE = "F"
 }

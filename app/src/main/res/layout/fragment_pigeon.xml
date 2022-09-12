@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/space_53"
+        android:layout_height="@dimen/space_53"
+        android:layout_marginStart="@dimen/space_20"
+        android:background="@drawable/bg_round_white_ripple"
+        android:contentDescription="@null"
+        android:paddingStart="@dimen/space_5"
+        android:src="@drawable/ic_profile"
+        android:translationZ="@dimen/space_12"
+        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/welcome_label"
         style="@style/SubTitleLabel"
@@ -36,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@id/simple_view"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -69,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/simple_view"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -127,16 +143,16 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading_animation" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_10"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_progress_bar_dummy"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <ImageView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="@dimen/space_10"-->
+    <!--        android:contentDescription="@null"-->
+    <!--        android:src="@drawable/ic_progress_bar_dummy"-->
+    <!--        android:translationZ="@dimen/space_10"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/welcome_label"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pigeons_recyclerview"

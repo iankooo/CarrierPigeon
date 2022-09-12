@@ -2,6 +2,7 @@ package com.example.carrier_pigeon.features.pigeons.addPigeon
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,10 +30,18 @@ import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
 class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeon) {
+    companion object {
+        private const val GALLERY = 1
+        private const val CAMERA = 2
+        private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
+        private const val PIGEON_SELECTED = "pigeon_selected"
+    }
+
     private val viewModel by viewModels<AddOrEditPigeonViewModel>()
     private val binding by viewBinding(FragmentAddOrEditPigeonBinding::bind)
     private var savePigeonImageToInternalStorage: Uri? = null
@@ -75,13 +85,6 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             }
         }
 
-    companion object {
-        private const val GALLERY = 1
-        private const val CAMERA = 2
-        private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
-        private const val PIGEON_SELECTED = "pigeon_selected"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pigeon = arguments?.getParcelable(PIGEON_SELECTED)
@@ -110,6 +113,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                     binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
                     binding.addPigeonEyeImageView.setImageURI(Uri.parse(pigeonEyeImage))
                 }
+                binding.pigeonDateOfBirth.setText(dateOfBirth)
             }
         } else {
             binding.welcomeLabel.setText(R.string.add_new_pigeon)
@@ -128,6 +132,8 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.pigeonDateOfBirth.transformIntoDatePicker(requireContext(), "MMM/dd/yyyy")
 
         binding.addPigeonImageView.setOnClickListener {
             isEyeImageViewClicked = false
@@ -180,6 +186,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         } else {
             savePigeonEyeImageToInternalStorage.toString()
         }
+        val dateOfBirth = binding.pigeonDateOfBirth.text.toString()
 
         if (series.isEmpty())
             shortToast(getString(R.string.series_cannot_be_empty))
@@ -196,7 +203,8 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 color = color,
                 details = details,
                 pigeonImage = pigeonImage,
-                pigeonEyeImage = pigeonEyeImage
+                pigeonEyeImage = pigeonEyeImage,
+                dateOfBirth = dateOfBirth
             )
             if (this.pigeon != null) {
                 pigeon.id = this.pigeon!!.id
@@ -372,5 +380,35 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     override fun onDenyClicked(permissions: Array<String>) {
         super.onDenyClicked(permissions)
         viewModel.havePermissionsBeenPreviouslyDenied = true
+    }
+
+    fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null) {
+        isFocusableInTouchMode = false
+        isClickable = true
+        isFocusable = false
+
+        val myCalendar = Calendar.getInstance()
+        val datePickerOnDataSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                myCalendar.set(Calendar.YEAR, year)
+                myCalendar.set(Calendar.MONTH, monthOfYear)
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                val sdf = SimpleDateFormat(format, Locale.UK)
+                setText(sdf.format(myCalendar.time))
+            }
+
+        setOnClickListener {
+            DatePickerDialog(
+                context, R.style.CustomDatePickerDialogTheme, datePickerOnDataSetListener,
+                myCalendar
+                    .get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).run {
+                datePicker.maxDate = System.currentTimeMillis()
+                maxDate?.time?.also { datePicker.maxDate = it }
+                show()
+            }
+        }
     }
 }
