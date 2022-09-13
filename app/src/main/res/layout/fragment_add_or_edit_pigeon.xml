@@ -190,12 +190,10 @@
 
         <RelativeLayout
             android:id="@+id/rl"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_15"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/space_20"
+            android:paddingBottom="@dimen/space_15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -203,6 +201,8 @@
                 android:id="@+id/image"
                 android:layout_width="@dimen/space_150"
                 android:layout_height="@dimen/space_150"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/white"
                 android:theme="@style/Theme.MaterialComponents"
                 app:cardCornerRadius="@dimen/space_25">
@@ -236,6 +236,41 @@
                     android:src="@drawable/ic_pigeon_eye_placeholder"
                     android:translationZ="@dimen/space_5" />
             </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_below="@id/image"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/PigeonColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pigeon_vaccine" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/first_vaccine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/second_vaccine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:visibility="invisible" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/third_vaccine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:visibility="invisible" />
+            </LinearLayout>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

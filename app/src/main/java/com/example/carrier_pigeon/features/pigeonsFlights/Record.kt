@@ -7,5 +7,7 @@ data class Record(
     var series: String,
     var gender: String,
     var color: String,
-    var vaccine: String
+    var firstVaccine: Int,
+    val secondVaccine: Int,
+    val thirdVaccine: Int
 )

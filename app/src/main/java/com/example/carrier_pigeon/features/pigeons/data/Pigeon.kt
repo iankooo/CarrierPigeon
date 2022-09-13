@@ -20,5 +20,8 @@ data class Pigeon(
     val details: String,
     val pigeonImage: String?,
     val pigeonEyeImage: String?,
-    val dateOfBirth: String?
+    val dateOfBirth: String?,
+    val firstVaccine: Int,
+    val secondVaccine: Int,
+    val thirdVaccine: Int
 ) : Parcelable

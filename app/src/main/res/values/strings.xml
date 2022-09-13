@@ -53,4 +53,8 @@
     <string name="sex">Sex</string>
     <string name="ring_series">Ring series</string>
     <string name="birthday">Birthday</string>
+    <string name="pigeon_age">Age: %s Year %s Month %s Day</string>
+    <string name="pigeon_vaccine">Vaccine:</string>
+    <string name="ring_series_format">%s %s %s</string>
+    <string name="click_to_see_details">&#x2939;Click to see details&#x2938;</string>
 </resources>

@@ -1,20 +1,31 @@
 package com.example.carrier_pigeon.features.pigeons
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config
+import com.example.carrier_pigeon.app.UiThreadPoster
 import com.example.carrier_pigeon.app.utils.invisible
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import java.time.LocalDate
+import java.time.Period
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.concurrent.timerTask
 
-class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
+class PigeonAdapter(
+    private val context: Context?,
+    private val onPigeonClicked: (Pigeon) -> Unit,
+    private val dataSet: ArrayList<Pigeon>,
+    private val uiThreadPoster: UiThreadPoster
+) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
-    private var onClickListener: OnClickListener? = null
 
     inner class ViewHolder(val binding: ItemPigeonBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,27 +39,61 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.setOnClickListener { onPigeonClicked.invoke(dataSet[position]) }
         with(dataSet[position]) {
-            holder.binding.pigeonGender.isActivated = gender == Config.MALE
-            holder.binding.mainRl.isActivated = gender == Config.MALE
-            holder.binding.pigeonSeries.text = series
-            holder.binding.pigeonCountry.text = country
-            holder.binding.pigeonNickname.text = nickname
-            holder.binding.pigeonColor.text = color
-            holder.binding.pigeonDetails.text = details
+            viewHolder.binding.pigeonGender.isActivated = gender == Config.MALE
+            viewHolder.binding.mainRl.isActivated = gender == Config.MALE
+            viewHolder.binding.pigeonSeries.text = series
+            viewHolder.binding.pigeonCountry.text = country
+            viewHolder.binding.pigeonNickname.text = nickname
+            viewHolder.binding.pigeonColor.text = color
+
             if (pigeonImage.isNullOrEmpty()) {
-                holder.binding.pigeonImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
+                viewHolder.binding.pigeonImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
             } else {
-                holder.binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
+                viewHolder.binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
             }
             if (pigeonEyeImage.isNullOrEmpty()) {
-                holder.binding.pigeonEyeImage.invisible()
+                viewHolder.binding.pigeonEyeImage.invisible()
             } else {
-                holder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
+                viewHolder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
             }
-            holder.binding.pigeonDateOfBirth.text = dateOfBirth
-            holder.itemView.setOnClickListener { onClickListener!!.onClick(position, this) }
+            val formatter = DateTimeFormatter.ofPattern("MMM/dd/yyyy")
+            val date = LocalDate.parse(dateOfBirth, formatter)
+            val p = Period.between(date, LocalDate.now())
+            viewHolder.binding.pigeonDateOfBirth.text = context?.getString(
+                R.string.pigeon_age,
+                p.years.toString(),
+                p.months.toString(),
+                p.days.toString()
+            )
+
+            if (firstVaccine == 1) {
+                viewHolder.binding.firstVaccine.visible()
+                viewHolder.binding.vaccineTv.visible()
+            }
+            if (secondVaccine == 1 && viewHolder.binding.firstVaccine.isVisible) {
+                viewHolder.binding.secondVaccine.visible()
+                viewHolder.binding.secondVaccine.visible()
+            }
+            if (thirdVaccine == 1 && viewHolder.binding.secondVaccine.isVisible) {
+                viewHolder.binding.thirdVaccine.visible()
+                viewHolder.binding.thirdVaccine.visible()
+            }
+
+            viewHolder.binding.pigeonDetails.setOnClickListener {
+                viewHolder.binding.pigeonDetails.text = details
+                Timer().schedule(
+                    timerTask {
+                        uiThreadPoster.post {
+                            viewHolder.binding.pigeonDetails.text =
+                                context?.getString(R.string.click_to_see_details)
+                        }
+                    },
+                    6000
+                )
+            }
         }
     }
 
@@ -56,23 +101,8 @@ class PigeonAdapter(private val dataSet: ArrayList<Pigeon>) :
 
     fun getPigeonFromPosition(position: Int) = dataSet[position]
 
-    fun notifyEditItem(activity: PigeonFragment, position: Int, requestCode: Int) {
-//        val intent = Intent(context, AddHappyPlaceActivity::class.java)
-//        intent.putExtra(MainActivity.EXTRA_PLACE_DETAILS, list[position])
-//        activity.startActivityForResult(intent, requestCode)
-//        notifyItemChanged(position)
-    }
-
     fun removeAt(position: Int) {
         dataSet.removeAt(position)
         notifyItemRemoved(position)
-    }
-
-    fun setOnClickListener(onClickListener: OnClickListener) {
-        this.onClickListener = onClickListener
-    }
-
-    interface OnClickListener {
-        fun onClick(position: Int, pigeon: Pigeon)
     }
 }

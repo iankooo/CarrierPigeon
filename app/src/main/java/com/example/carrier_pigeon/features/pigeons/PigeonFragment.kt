@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
+import com.example.carrier_pigeon.app.UiThreadPoster
 import com.example.carrier_pigeon.app.common.BaseFragment
 import com.example.carrier_pigeon.app.utils.gone
 import com.example.carrier_pigeon.app.utils.invisible
@@ -24,6 +25,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
+    @Inject
+    lateinit var uiThreadPoster: UiThreadPoster
 
     @Inject
     lateinit var sharedPrefsWrapper: SharedPrefsWrapper
@@ -42,7 +45,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
         lifecycleScope.launch {
             viewModel.dao.fetchAllPigeons().collect {
                 val list = ArrayList(it)
-                setupListOfPigeonsIntoRecyclerView(list, viewModel.dao)
+                setupListOfPigeonsIntoRecyclerView(list)
             }
         }
     }
@@ -57,11 +60,16 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     }
 
     private fun setupListOfPigeonsIntoRecyclerView(
-        pigeonsList: ArrayList<Pigeon>,
-        pigeonDao: PigeonDao
+        pigeonsList: ArrayList<Pigeon>
     ) {
         if (pigeonsList.isNotEmpty()) {
-            val pigeonAdapter = PigeonAdapter(pigeonsList)
+            val pigeonAdapter =
+                PigeonAdapter(
+                    context?.applicationContext,
+                    { pigeon -> onPigeonClicked(pigeon) },
+                    pigeonsList,
+                    uiThreadPoster
+                )
             dismissLoading()
             binding.threeCloudsImageView.invisible()
             binding.pigeonImageView.invisible()
@@ -70,15 +78,6 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 adapter = pigeonAdapter
                 setHasFixedSize(true)
             }
-            pigeonAdapter.setOnClickListener(object : PigeonAdapter.OnClickListener {
-                override fun onClick(position: Int, pigeon: Pigeon) {
-                    findNavController().navigate(
-                        PigeonFragmentDirections.pigeonToPigeonDetail(
-                            pigeon
-                        )
-                    )
-                }
-            })
             setupEditHandler()
             setupDeleteHandler()
         } else {
@@ -98,12 +97,6 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                         )
                     )
                 )
-//                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
-//                adapter.notifyEditItem(
-//                    this@PigeonFragment,
-//                    viewHolder.adapterPosition,
-//                    ADD_PLACE_ACTIVITY_REQUEST_CODE
-//                )
             }
         }
         val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
@@ -142,5 +135,13 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     private fun dismissLoading() {
         binding.loadingView.pauseAnimation()
         binding.loadingView.gone()
+    }
+
+    private fun onPigeonClicked(pigeon: Pigeon) {
+        findNavController().navigate(
+            PigeonFragmentDirections.pigeonToPigeonDetail(
+                pigeon
+            )
+        )
     }
 }

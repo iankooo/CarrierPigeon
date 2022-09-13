@@ -21,8 +21,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.permissions.isPermissionGranted
 import com.example.carrier_pigeon.app.utils.shortToast
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
 import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
@@ -114,6 +116,13 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                     binding.addPigeonEyeImageView.setImageURI(Uri.parse(pigeonEyeImage))
                 }
                 binding.pigeonDateOfBirth.setText(dateOfBirth)
+                binding.firstVaccine.isChecked = firstVaccine == 1
+                if (firstVaccine == 1)
+                    binding.secondVaccine.visible()
+                binding.secondVaccine.isChecked = secondVaccine == 1
+                if (secondVaccine == 1)
+                    binding.thirdVaccine.visible()
+                binding.thirdVaccine.isChecked = thirdVaccine == 1
             }
         } else {
             binding.welcomeLabel.setText(R.string.add_new_pigeon)
@@ -123,6 +132,28 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         binding.pigeonGender.setOnClickListener {
             binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
             binding.mainRl.isActivated = !binding.mainRl.isActivated
+        }
+
+        binding.firstVaccine.setOnClickListener {
+            if (binding.firstVaccine.isChecked)
+                binding.secondVaccine.visible()
+            else
+                binding.secondVaccine.invisible()
+        }
+
+        binding.secondVaccine.setOnClickListener {
+            if (binding.secondVaccine.isChecked)
+                binding.thirdVaccine.visible()
+            else {
+                binding.secondVaccine.invisible()
+                binding.thirdVaccine.invisible()
+            }
+        }
+        binding.thirdVaccine.setOnClickListener {
+            if (binding.thirdVaccine.isChecked)
+                binding.thirdVaccine.visible()
+            else
+                binding.thirdVaccine.invisible()
         }
 
         binding.savePigeonBtn.setOnClickListener {
@@ -187,6 +218,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             savePigeonEyeImageToInternalStorage.toString()
         }
         val dateOfBirth = binding.pigeonDateOfBirth.text.toString()
+        val firstVaccine: Int = if (binding.firstVaccine.isChecked) 1 else 0
+        val secondVaccine: Int = if (binding.secondVaccine.isChecked) 1 else 0
+        val thirdVaccine: Int = if (binding.thirdVaccine.isChecked) 1 else 0
 
         if (series.isEmpty())
             shortToast(getString(R.string.series_cannot_be_empty))
@@ -204,7 +238,10 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 details = details,
                 pigeonImage = pigeonImage,
                 pigeonEyeImage = pigeonEyeImage,
-                dateOfBirth = dateOfBirth
+                dateOfBirth = dateOfBirth,
+                firstVaccine = firstVaccine,
+                secondVaccine = secondVaccine,
+                thirdVaccine = thirdVaccine
             )
             if (this.pigeon != null) {
                 pigeon.id = this.pigeon!!.id

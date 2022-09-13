@@ -25,7 +25,7 @@ class PigeonsFlightsFragment :
             findNavController().popBackStack()
         }
         val description = arrayListOf(
-            Record("001", "RO", "20", "883275", "F", "GUT", "X X X")
+            Record("001", "RO", "Sept/10/2022", "883275", "F", "GUT", 1, 0, 0)
         )
         val recordAdapter = RecordAdapter(description, context?.applicationContext)
         val footer: ViewGroup =
@@ -59,29 +59,25 @@ class PigeonsFlightsFragment :
                         items[i] = pigeonsList[i].country + " " + pigeonsList[i].series
                     }
                     val selectedPigeons = ArrayList<Record>()
-                    val removedPigeons = ArrayList<Record>()
 
                     builderMultiple.setMultiChoiceItems(
                         items, checkedItems
                     ) { dialog, which, isChecked ->
                         if (isChecked) {
                             selectedPigeons.add(pigeonsList[which])
-                            removedPigeons.remove(pigeonsList[which])
+                            recordAdapter.addRecord(pigeonsList[which])
                         } else {
-                            removedPigeons.add(pigeonsList[which])
                             selectedPigeons.remove(pigeonsList[which])
+                            recordAdapter.removeRecord(pigeonsList[which])
                         }
                     }
 
                     builderMultiple.setPositiveButton(
                         getString(R.string.ok)
                     ) { dialog, which ->
-                        recordAdapter.addRecords(selectedPigeons)
-                        recordAdapter.removeRecords(removedPigeons)
+                        // db
+                        recordAdapter.notifyDataSetChanged()
                     }
-                    builderMultiple.setNegativeButton(
-                        getString(R.string.cancel)
-                    ) { dialog, which -> dialog.dismiss() }
                 } else {
                     builderMultiple.setMessage(getString(R.string.no_pigeons_available))
                 }
@@ -96,11 +92,11 @@ class PigeonsFlightsFragment :
                 Record(
                     id.toString(),
                     country,
-                    " ",
+                    dateOfBirth.toString(),
                     series,
                     gender,
                     color,
-                    ""
+                    firstVaccine, secondVaccine, thirdVaccine
                 )
             }
         }
