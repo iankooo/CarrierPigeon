@@ -1,7 +1,6 @@
 package com.example.carrier_pigeon.features.pigeonsFlights
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,11 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         data as List<Record?>
     ),
     View.OnClickListener {
+
+    companion object {
+        private const val DATE_FORMAT = "MMM/dd/yyyy"
+    }
+
     private val dataSet: ArrayList<Record>
     var mContext: Context
 
@@ -45,7 +49,7 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         with(dataModel) {
             if (this != null) {
                 binding.nr.text = nr
-                val formatter = DateTimeFormatter.ofPattern("MMM/dd/yyyy")
+                val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
                 val date = LocalDate.parse(dateOfBirth, formatter)
                 val shortYear: String = with(date.year.toString()) {
                     if (length > 2) substring(length - 2) else this
@@ -79,17 +83,6 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
     }
 
     fun getAllRecords() = dataSet.map { it.series }
-
-//    fun removeRecords(removedPigeons: ArrayList<Record>?) {
-//        if (!removedPigeons.isNullOrEmpty()) {
-//            for (i in removedPigeons) {
-//                if (dataSet.contains(i)) {
-//                    dataSet.remove(i)
-//                }
-//            }
-//            notifyDataSetChanged()
-//        }
-//    }
 
     fun addRecord(record: Record) {
         dataSet.add(record)
