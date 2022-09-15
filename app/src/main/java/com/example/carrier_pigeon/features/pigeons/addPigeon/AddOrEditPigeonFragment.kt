@@ -2,7 +2,6 @@ package com.example.carrier_pigeon.features.pigeons.addPigeon
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,11 +17,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
-import com.example.carrier_pigeon.app.Config
+import com.example.carrier_pigeon.app.Config.FEMALE
+import com.example.carrier_pigeon.app.Config.MALE
 import com.example.carrier_pigeon.app.common.BaseFragment
 import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.permissions.isPermissionGranted
 import com.example.carrier_pigeon.app.utils.shortToast
+import com.example.carrier_pigeon.app.utils.transformIntoDatePicker
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
 import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
@@ -32,7 +32,6 @@ import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -42,14 +41,17 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         private const val CAMERA = 2
         private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
         private const val PIGEON_SELECTED = "pigeon_selected"
+        private const val DATE_FORMAT = "MMM/dd/yyyy"
     }
 
     private val viewModel by viewModels<AddOrEditPigeonViewModel>()
     private val binding by viewBinding(FragmentAddOrEditPigeonBinding::bind)
+
     private var savePigeonImageToInternalStorage: Uri? = null
     private var savePigeonEyeImageToInternalStorage: Uri? = null
     private var isEyeImageViewClicked = false
     private var pigeon: Pigeon? = null
+
     private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -94,44 +96,71 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (pigeon != null) {
-            binding.welcomeLabel.setText(R.string.edit_pigeon)
-            binding.savePigeonBtn.setText(R.string.save_changes)
-
-            with(pigeon) {
-                binding.pigeonGender.isActivated = this!!.gender == Config.MALE
-                binding.mainRl.isActivated = gender == Config.MALE
-                binding.pigeonCountry.setDefaultCountryUsingNameCode(country)
-                binding.pigeonSeries.setText(series)
-                binding.pigeonNickname.setText(nickname)
-                binding.pigeonColor.setText(color)
-                binding.pigeonDetails.setText(details)
-                if (!pigeonImage.isNullOrEmpty()) {
-                    savePigeonImageToInternalStorage = Uri.parse(pigeonImage)
-                    binding.addPigeonImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                    binding.addPigeonImageView.setImageURI(Uri.parse(pigeonImage))
-                }
-                if (!pigeonEyeImage.isNullOrEmpty()) {
-                    savePigeonEyeImageToInternalStorage = Uri.parse(pigeonEyeImage)
-                    binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                    binding.addPigeonEyeImageView.setImageURI(Uri.parse(pigeonEyeImage))
-                }
-                binding.pigeonDateOfBirth.setText(dateOfBirth)
-                binding.firstVaccine.isChecked = firstVaccine == 1
-                if (firstVaccine == 1)
-                    binding.secondVaccine.visible()
-                binding.secondVaccine.isChecked = secondVaccine == 1
-                if (secondVaccine == 1)
-                    binding.thirdVaccine.visible()
-                binding.thirdVaccine.isChecked = thirdVaccine == 1
-            }
+            setupEditView()
         } else {
-            binding.welcomeLabel.setText(R.string.add_new_pigeon)
-            binding.savePigeonBtn.setText(R.string.save_pigeon)
+            setupAddView()
+        }
+
+        setControls()
+    }
+
+    private fun setupAddView() {
+        binding.welcomeLabel.setText(R.string.add_new_pigeon)
+        binding.savePigeonBtn.setText(R.string.save_pigeon)
+    }
+
+    private fun setupEditView() {
+        binding.welcomeLabel.setText(R.string.edit_pigeon)
+        binding.savePigeonBtn.setText(R.string.save_changes)
+
+        with(pigeon) {
+            binding.pigeonGender.isActivated = this!!.gender == MALE
+            binding.mainRl.isActivated = gender == MALE
+            binding.pigeonCountry.setDefaultCountryUsingNameCode(country)
+            binding.pigeonSeries.setText(series)
+            binding.pigeonNickname.setText(nickname)
+            binding.pigeonColor.setText(color)
+            binding.pigeonDetails.setText(details)
+            if (!pigeonImage.isNullOrEmpty()) {
+                savePigeonImageToInternalStorage = Uri.parse(pigeonImage)
+                binding.addPigeonImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                binding.addPigeonImageView.setImageURI(Uri.parse(pigeonImage))
+            }
+            if (!pigeonEyeImage.isNullOrEmpty()) {
+                savePigeonEyeImageToInternalStorage = Uri.parse(pigeonEyeImage)
+                binding.addPigeonEyeImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                binding.addPigeonEyeImageView.setImageURI(Uri.parse(pigeonEyeImage))
+            }
+            binding.pigeonDateOfBirth.setText(dateOfBirth)
+            binding.firstVaccine.isChecked = firstVaccine == 1
+            if (firstVaccine == 1)
+                binding.secondVaccine.visible()
+            binding.secondVaccine.isChecked = secondVaccine == 1
+            if (secondVaccine == 1)
+                binding.thirdVaccine.visible()
+            binding.thirdVaccine.isChecked = thirdVaccine == 1
+        }
+    }
+
+    private fun setControls() {
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         binding.pigeonGender.setOnClickListener {
             binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
             binding.mainRl.isActivated = !binding.mainRl.isActivated
+        }
+
+        binding.pigeonDateOfBirth.transformIntoDatePicker(requireContext(), DATE_FORMAT)
+
+        binding.addPigeonImageView.setOnClickListener {
+            isEyeImageViewClicked = false
+            setupPictureDialog(getString(R.string.pigeon_photo))
+        }
+        binding.addPigeonEyeImageView.setOnClickListener {
+            isEyeImageViewClicked = true
+            setupPictureDialog(getString(R.string.pigeon_eye_photo))
         }
 
         binding.firstVaccine.setOnClickListener {
@@ -159,49 +188,27 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         binding.savePigeonBtn.setOnClickListener {
             savePigeon()
         }
+    }
 
-        binding.backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.pigeonDateOfBirth.transformIntoDatePicker(requireContext(), "MMM/dd/yyyy")
-
-        binding.addPigeonImageView.setOnClickListener {
-            isEyeImageViewClicked = false
-            val pictureDialog = AlertDialog.Builder(context)
-            pictureDialog.setTitle("Pigeon photo")
-            val pictureDialogItems =
-                arrayOf("Select photo from Gallery", "Capture photo from camera")
-            pictureDialog.setItems(pictureDialogItems) { _, which ->
-                when (which) {
-                    0 -> choosePhotoFromGallery()
-                    1 -> takePhotoFromCamera()
-                }
+    private fun setupPictureDialog(path: String) {
+        val pictureDialog = AlertDialog.Builder(context)
+        pictureDialog.setTitle(path)
+        val pictureDialogItems =
+            arrayOf(
+                getString(R.string.select_photo_from_gallery),
+                getString(R.string.capture_photo_from_camera)
+            )
+        pictureDialog.setItems(pictureDialogItems) { _, which ->
+            when (which) {
+                0 -> choosePhotoFromGallery()
+                1 -> takePhotoFromCamera()
             }
-            pictureDialog.show()
         }
-        binding.addPigeonEyeImageView.setOnClickListener {
-            isEyeImageViewClicked = true
-            val pictureDialog = AlertDialog.Builder(context)
-            pictureDialog.setTitle("Pigeon eye photo")
-            val pictureDialogItems =
-                arrayOf("Select photo from Gallery", "Capture photo from camera")
-            pictureDialog.setItems(pictureDialogItems) { _, which ->
-                when (which) {
-                    0 -> choosePhotoFromGallery()
-                    1 -> takePhotoFromCamera()
-                }
-            }
-            pictureDialog.show()
-        }
+        pictureDialog.show()
     }
 
     private fun savePigeon() {
-        val gender: String = if (binding.pigeonGender.isActivated) {
-            Config.MALE
-        } else {
-            Config.FEMALE
-        }
+        val gender = if (binding.pigeonGender.isActivated) MALE else FEMALE
         val country = binding.pigeonCountry.selectedCountryNameCode.toString()
         val series = binding.pigeonSeries.text.toString()
         val nickname = binding.pigeonNickname.text.toString()
@@ -218,9 +225,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             savePigeonEyeImageToInternalStorage.toString()
         }
         val dateOfBirth = binding.pigeonDateOfBirth.text.toString()
-        val firstVaccine: Int = if (binding.firstVaccine.isChecked) 1 else 0
-        val secondVaccine: Int = if (binding.secondVaccine.isChecked) 1 else 0
-        val thirdVaccine: Int = if (binding.thirdVaccine.isChecked) 1 else 0
+        val firstVaccine = if (binding.firstVaccine.isChecked) 1 else 0
+        val secondVaccine = if (binding.secondVaccine.isChecked) 1 else 0
+        val thirdVaccine = if (binding.thirdVaccine.isChecked) 1 else 0
 
         if (series.isEmpty())
             shortToast(getString(R.string.series_cannot_be_empty))
@@ -259,7 +266,6 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
 
     override fun onResume() {
         super.onResume()
-        // Handle return in the app from settings only when the user has previously denied the permissions
         if (isPermissionGranted(requireContext(), CarrierPigeonPermissions.CAMERA.type) &&
             isPermissionGranted(
                     requireContext(),
@@ -298,11 +304,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                         getString(R.string.permission_rationale_dialog_message)
                     )
                 } else
-                // Asking for permissions directly
                     requestPermissionsLauncher.launch(CarrierPigeonPermissions.getPermissions())
             }
             else -> {
-                // Asking for permissions directly
                 requestPermissionsLauncher.launch(CarrierPigeonPermissions.getPermissions())
             }
         }
@@ -334,11 +338,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                         getString(R.string.permission_rationale_dialog_message)
                     )
                 } else
-                // Asking for permissions directly
                     requestPermissionsLauncher.launch(CarrierPigeonPermissions.getPermissions())
             }
             else -> {
-                // Asking for permissions directly
                 requestPermissionsLauncher.launch(CarrierPigeonPermissions.getPermissions())
             }
         }
@@ -417,35 +419,5 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     override fun onDenyClicked(permissions: Array<String>) {
         super.onDenyClicked(permissions)
         viewModel.havePermissionsBeenPreviouslyDenied = true
-    }
-
-    fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null) {
-        isFocusableInTouchMode = false
-        isClickable = true
-        isFocusable = false
-
-        val myCalendar = Calendar.getInstance()
-        val datePickerOnDataSetListener =
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                myCalendar.set(Calendar.YEAR, year)
-                myCalendar.set(Calendar.MONTH, monthOfYear)
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val sdf = SimpleDateFormat(format, Locale.UK)
-                setText(sdf.format(myCalendar.time))
-            }
-
-        setOnClickListener {
-            DatePickerDialog(
-                context, R.style.CustomDatePickerDialogTheme, datePickerOnDataSetListener,
-                myCalendar
-                    .get(Calendar.YEAR),
-                myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)
-            ).run {
-                datePicker.maxDate = System.currentTimeMillis()
-                maxDate?.time?.also { datePicker.maxDate = it }
-                show()
-            }
-        }
     }
 }

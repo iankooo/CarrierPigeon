@@ -1,6 +1,7 @@
 package com.example.carrier_pigeon.features.pigeonsFlights
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,15 +56,14 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
                 binding.gender.text = gender
                 binding.color.text = color
 
-//                binding.firstVaccine.visible()
-//                binding.secondVaccine.visible()
-//                binding.thirdVaccine.visible()
-//                binding.vaccineTv.gone()
+                binding.vaccineTv.gone()
+                binding.firstVaccine.visible()
+                binding.secondVaccine.visible()
+                binding.thirdVaccine.visible()
 
-//                binding.firstVaccine.isChecked = firstVaccine == 1
-//                binding.secondVaccine.isChecked = secondVaccine == 1
-//                binding.thirdVaccine.isChecked = thirdVaccine == 1
-                // binding.vaccine.text = vaccine
+                binding.firstVaccine.isChecked = firstVaccine == 1
+                binding.secondVaccine.isChecked = secondVaccine == 1
+                binding.thirdVaccine.isChecked = thirdVaccine == 1
             }
         }
         return row

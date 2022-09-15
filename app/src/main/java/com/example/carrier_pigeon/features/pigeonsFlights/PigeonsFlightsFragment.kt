@@ -25,17 +25,17 @@ class PigeonsFlightsFragment :
             findNavController().popBackStack()
         }
         val description = arrayListOf(
-            Record("001", "RO", "Sept/10/2022", "883275", "F", "GUT", 1, 0, 0)
+            Record("1", "RO", "Sept/10/2022", "883275", "F", "GUT", 1, 0, 0)
         )
         val recordAdapter = RecordAdapter(description, context?.applicationContext)
         val footer: ViewGroup =
             layoutInflater.inflate(
                 R.layout.item_footer_pigeons_flights,
-                binding.recordsView,
+                binding.recordsListView,
                 false
             ) as ViewGroup
-        binding.recordsView.addFooterView(footer)
-        binding.recordsView.adapter = recordAdapter
+        binding.recordsListView.addFooterView(footer)
+        binding.recordsListView.adapter = recordAdapter
         footer[0].setOnClickListener {
             addPigeonToListView(recordAdapter)
         }

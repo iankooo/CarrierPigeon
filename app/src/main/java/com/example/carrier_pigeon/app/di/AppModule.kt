@@ -5,11 +5,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
+import androidx.room.Room
+import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
+import com.example.carrier_pigeon.features.pigeons.PigeonDao
+import com.example.carrier_pigeon.features.pigeons.PigeonDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,4 +34,14 @@ object AppModule {
     fun providesSharedPrefsWrapper(sharedPreferences: SharedPreferences): SharedPrefsWrapper {
         return SharedPrefsWrapper(sharedPreferences)
     }
+
+    @Singleton
+    @Provides
+    fun providePigeonDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, PigeonDatabase::class.java, "pigeon_database")
+            .fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    fun providesDao(pigeonDatabase: PigeonDatabase): PigeonDao = pigeonDatabase.pigeonDao()
 }

@@ -42,7 +42,7 @@
             app:popUpTo="@id/pigeon_fragment" />
         <action
             android:id="@+id/pigeon_to_pigeon_detail"
-            app:destination="@id/pigeon_detail_fragment"
+            app:destination="@id/detail_pigeon_fragment"
             app:popUpTo="@id/pigeon_fragment" />
         <action
             android:id="@+id/pigeon_to_pigeons_flights"
@@ -62,9 +62,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/pigeon_detail_fragment"
-        android:name="com.example.carrier_pigeon.features.pigeons.pigeonDetail.PigeonDetailFragment"
-        tools:layout="@layout/fragment_pigeon_detail">
+        android:id="@+id/detail_pigeon_fragment"
+        android:name="com.example.carrier_pigeon.features.pigeons.detailPigeon.DetailPigeonFragment"
+        tools:layout="@layout/fragment_detail_pigeon">
         <argument
             android:name="pigeon_clicked"
             android:defaultValue="@null"

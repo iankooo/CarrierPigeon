@@ -15,7 +15,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="end"
+        android:paddingHorizontal="@dimen/space_3"
         android:text="@string/nr"
         android:textColor="@color/light_blue" />
 
@@ -68,9 +69,9 @@
             android:paddingHorizontal="@dimen/space_3"
             android:text="@string/vaccine"
             android:textColor="@color/light_blue"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <CheckBox
             android:id="@+id/first_vaccine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,9 +79,9 @@
             android:layout_marginEnd="-6dp"
             android:buttonTint="@color/light_blue"
             android:clickable="false"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <CheckBox
             android:id="@+id/second_vaccine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,9 +89,9 @@
             android:layout_marginEnd="-6dp"
             android:buttonTint="@color/light_blue"
             android:clickable="false"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <CheckBox
             android:id="@+id/third_vaccine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,6 +99,6 @@
             android:layout_marginEnd="-6dp"
             android:buttonTint="@color/light_blue"
             android:clickable="false"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

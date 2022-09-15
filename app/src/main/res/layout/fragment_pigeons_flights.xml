@@ -78,7 +78,7 @@
             android:background="@color/light_blue" />
 
         <ListView
-            android:id="@+id/records_view"
+            android:id="@+id/records_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_record" />

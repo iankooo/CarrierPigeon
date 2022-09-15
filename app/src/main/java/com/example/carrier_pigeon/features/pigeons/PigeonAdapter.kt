@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
-import com.example.carrier_pigeon.app.Config
+import com.example.carrier_pigeon.app.Config.MALE
 import com.example.carrier_pigeon.app.UiThreadPoster
 import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.visible
@@ -26,6 +26,9 @@ class PigeonAdapter(
     private val uiThreadPoster: UiThreadPoster
 ) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
+    companion object {
+        private const val DATE_FORMAT = "MMM/dd/yyyy"
+    }
 
     inner class ViewHolder(val binding: ItemPigeonBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -40,61 +43,70 @@ class PigeonAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.setOnClickListener { onPigeonClicked.invoke(dataSet[position]) }
-        with(dataSet[position]) {
-            viewHolder.binding.pigeonGender.isActivated = gender == Config.MALE
-            viewHolder.binding.mainRl.isActivated = gender == Config.MALE
-            viewHolder.binding.pigeonSeries.text = series
-            viewHolder.binding.pigeonCountry.text = country
-            viewHolder.binding.pigeonNickname.text = nickname
-            viewHolder.binding.pigeonColor.text = color
+        viewHolder.apply {
+            with(dataSet[position]) {
+                itemView.setOnClickListener { onPigeonClicked.invoke(this) }
+                binding.pigeonGender.isActivated = gender == MALE
+                binding.mainRl.isActivated = gender == MALE
+                binding.pigeonSeries.text = series
+                binding.pigeonCountry.text = country
+                binding.pigeonNickname.text = nickname
+                binding.pigeonColor.text = color
 
-            if (pigeonImage.isNullOrEmpty()) {
-                viewHolder.binding.pigeonImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
-            } else {
-                viewHolder.binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
-            }
-            if (pigeonEyeImage.isNullOrEmpty()) {
-                viewHolder.binding.pigeonEyeImage.invisible()
-            } else {
-                viewHolder.binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
-            }
-            val formatter = DateTimeFormatter.ofPattern("MMM/dd/yyyy")
-            val date = LocalDate.parse(dateOfBirth, formatter)
-            val p = Period.between(date, LocalDate.now())
-            viewHolder.binding.pigeonDateOfBirth.text = context?.getString(
-                R.string.pigeon_age,
-                p.years.toString(),
-                p.months.toString(),
-                p.days.toString()
-            )
-
-            if (firstVaccine == 1) {
-                viewHolder.binding.firstVaccine.visible()
-                viewHolder.binding.vaccineTv.visible()
-            }
-            if (secondVaccine == 1 && viewHolder.binding.firstVaccine.isVisible) {
-                viewHolder.binding.secondVaccine.visible()
-                viewHolder.binding.secondVaccine.visible()
-            }
-            if (thirdVaccine == 1 && viewHolder.binding.secondVaccine.isVisible) {
-                viewHolder.binding.thirdVaccine.visible()
-                viewHolder.binding.thirdVaccine.visible()
-            }
-
-            viewHolder.binding.pigeonDetails.setOnClickListener {
-                viewHolder.binding.pigeonDetails.text = details
-                Timer().schedule(
-                    timerTask {
-                        uiThreadPoster.post {
-                            viewHolder.binding.pigeonDetails.text =
-                                context?.getString(R.string.click_to_see_details)
-                        }
-                    },
-                    6000
+                if (pigeonImage.isNullOrEmpty()) {
+                    binding.pigeonImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
+                } else {
+                    binding.pigeonImage.setImageURI(Uri.parse(pigeonImage))
+                }
+                if (pigeonEyeImage.isNullOrEmpty()) {
+                    binding.pigeonEyeImage.invisible()
+                } else {
+                    binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
+                }
+                val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
+                val date = LocalDate.parse(dateOfBirth, formatter)
+                val p = Period.between(date, LocalDate.now())
+                binding.pigeonDateOfBirth.text = context?.getString(
+                    R.string.pigeon_age,
+                    p.years.toString(),
+                    p.months.toString(),
+                    p.days.toString()
                 )
+
+                binding.pigeonDetails.setOnClickListener {
+                    onDetailsClicked(this@apply, this)
+                }
+
+                if (firstVaccine == 1) {
+                    binding.firstVaccine.visible()
+                    binding.vaccineTv.visible()
+                }
+                if (secondVaccine == 1 && viewHolder.binding.firstVaccine.isVisible) {
+                    binding.secondVaccine.visible()
+                    binding.secondVaccine.visible()
+                }
+                if (thirdVaccine == 1 && viewHolder.binding.secondVaccine.isVisible) {
+                    binding.thirdVaccine.visible()
+                    binding.thirdVaccine.visible()
+                }
             }
         }
+    }
+
+    private fun onDetailsClicked(
+        viewHolder1: ViewHolder,
+        pigeon: Pigeon
+    ) {
+        viewHolder1.binding.pigeonDetails.text = pigeon.details
+        Timer().schedule(
+            timerTask {
+                uiThreadPoster.post {
+                    viewHolder1.binding.pigeonDetails.text =
+                        context?.getString(R.string.click_to_see_details)
+                }
+            },
+            6000
+        )
     }
 
     override fun getItemCount(): Int = dataSet.size
