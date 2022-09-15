@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.pigeons
+package com.example.carrier_pigeon.features.pigeons.utils
 
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.utils.convertDpToPx
+import com.example.carrier_pigeon.features.pigeons.PigeonFragment
 
-abstract class SwipeToEditCallback(private val context: PigeonFragment) :
-    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+abstract class SwipeToDeleteCallback(private val context: PigeonFragment) :
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    private val editIcon =
-        ContextCompat.getDrawable(context.requireContext(), R.drawable.ic_edit_white_24dp)
-    private val intrinsicWidth = editIcon!!.intrinsicWidth
-    private val intrinsicHeight = editIcon!!.intrinsicHeight
+    private val deleteIcon =
+        ContextCompat.getDrawable(context.requireContext(), R.drawable.ic_delete_white_24dp)
+    private val intrinsicWidth = deleteIcon!!.intrinsicWidth
+    private val intrinsicHeight = deleteIcon!!.intrinsicHeight
     private val background = ColorDrawable()
-    private val backgroundColor = ContextCompat.getColor(context.requireContext(), R.color.green)
+    private val backgroundColor = ContextCompat.getColor(context.requireContext(), R.color.red)
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
     /**
@@ -52,38 +53,40 @@ abstract class SwipeToEditCallback(private val context: PigeonFragment) :
         if (isCanceled) {
             clearCanvas(
                 c,
-                itemView.left + dX,
+                itemView.right + dX,
                 itemView.top.toFloat(),
-                itemView.left.toFloat(),
+                itemView.right.toFloat(),
                 itemView.bottom.toFloat()
             )
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
         }
 
-        // Draw the green edit background
+        // Draw the red delete background
         background.color = backgroundColor
         background.setBounds(
-            itemView.left + dX.toInt() + convertDpToPx(
-                context.requireContext(),
-                context.resources.getDimension(R.dimen.space_21)
-            ).toInt(),
+            (
+                itemView.right + dX.toInt() - convertDpToPx(
+                    context.requireContext(),
+                    context.resources.getDimension(R.dimen.space_21)
+                )
+                ).toInt(),
             itemView.top,
-            itemView.left,
+            itemView.right,
             itemView.bottom
         )
         background.draw(c)
 
-        // Calculate position of edit icon
-        val editIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
-        val editIconMargin = (itemHeight - intrinsicHeight)
-        val editIconLeft = itemView.left + editIconMargin - intrinsicWidth
-        val editIconRight = itemView.left + editIconMargin
-        val editIconBottom = editIconTop + intrinsicHeight
+        // Calculate position of delete icon
+        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
+        val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
+        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth
+        val deleteIconRight = itemView.right - deleteIconMargin
+        val deleteIconBottom = deleteIconTop + intrinsicHeight
 
-        // Draw the edit icon
-        editIcon!!.setBounds(editIconLeft, editIconTop, editIconRight, editIconBottom)
-        editIcon.draw(c)
+        // Draw the delete icon
+        deleteIcon!!.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+        deleteIcon.draw(c)
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

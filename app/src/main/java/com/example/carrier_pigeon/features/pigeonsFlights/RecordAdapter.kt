@@ -9,6 +9,7 @@ import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.utils.gone
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemRecordBinding
+import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

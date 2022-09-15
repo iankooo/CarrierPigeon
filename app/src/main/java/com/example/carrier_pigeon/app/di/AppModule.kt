@@ -7,8 +7,8 @@ import android.content.res.Resources
 import android.preference.PreferenceManager
 import androidx.room.Room
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
-import com.example.carrier_pigeon.features.pigeons.PigeonDao
-import com.example.carrier_pigeon.features.pigeons.PigeonDatabase
+import com.example.carrier_pigeon.features.pigeons.database.PigeonDao
+import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

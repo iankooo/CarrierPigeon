@@ -12,6 +12,7 @@ import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
 import com.example.carrier_pigeon.databinding.FragmentPigeonsFlightsBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import kotlinx.coroutines.launch
 

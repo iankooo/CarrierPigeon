@@ -2,7 +2,7 @@ package com.example.carrier_pigeon.features.pigeonsFlights
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.carrier_pigeon.features.pigeons.PigeonDatabase
+import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -18,6 +18,8 @@ import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.utils.SwipeToDeleteCallback
+import com.example.carrier_pigeon.features.pigeons.utils.SwipeToEditCallback
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.pigeonsFlights
+package com.example.carrier_pigeon.features.pigeonsFlights.data
 
 data class Record(
     var nr: String,

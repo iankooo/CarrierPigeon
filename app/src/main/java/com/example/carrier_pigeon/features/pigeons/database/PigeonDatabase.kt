@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.pigeons
+package com.example.carrier_pigeon.features.pigeons.database
 
 import android.content.Context
 import androidx.room.Database
