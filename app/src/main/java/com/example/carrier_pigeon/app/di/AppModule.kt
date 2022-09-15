@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
 import androidx.room.Room
+import com.example.carrier_pigeon.app.Config.DATABASE_NAME
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.features.pigeons.database.PigeonDao
 import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
@@ -38,7 +39,7 @@ object AppModule {
     @Singleton
     @Provides
     fun providePigeonDatabase(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, PigeonDatabase::class.java, "pigeon_database")
+        Room.databaseBuilder(context, PigeonDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
 

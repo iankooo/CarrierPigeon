@@ -174,15 +174,8 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             if (binding.secondVaccine.isChecked)
                 binding.thirdVaccine.visible()
             else {
-                binding.secondVaccine.invisible()
                 binding.thirdVaccine.invisible()
             }
-        }
-        binding.thirdVaccine.setOnClickListener {
-            if (binding.thirdVaccine.isChecked)
-                binding.thirdVaccine.visible()
-            else
-                binding.thirdVaccine.invisible()
         }
 
         binding.savePigeonBtn.setOnClickListener {
