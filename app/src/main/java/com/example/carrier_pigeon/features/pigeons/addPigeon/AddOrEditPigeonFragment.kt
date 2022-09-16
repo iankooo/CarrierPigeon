@@ -14,7 +14,6 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config.FEMALE
@@ -27,10 +26,10 @@ import com.example.carrier_pigeon.app.utils.transformIntoDatePicker
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
 import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
+import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.io.*
 import java.util.*
 
@@ -45,6 +44,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     }
 
     private val viewModel by viewModels<AddOrEditPigeonViewModel>()
+    private val pigeonViewModel by viewModels<PigeonViewModel>()
     private val binding by viewBinding(FragmentAddOrEditPigeonBinding::bind)
 
     private var savePigeonImageToInternalStorage: Uri? = null
@@ -164,16 +164,21 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         }
 
         binding.firstVaccine.setOnClickListener {
-            if (binding.firstVaccine.isChecked)
+            if (binding.firstVaccine.isChecked) {
+                binding.secondVaccine.isChecked = false
+                binding.thirdVaccine.isChecked = false
                 binding.secondVaccine.visible()
-            else
+            } else {
                 binding.secondVaccine.invisible()
+                binding.thirdVaccine.invisible()
+            }
         }
 
         binding.secondVaccine.setOnClickListener {
-            if (binding.secondVaccine.isChecked)
+            if (binding.secondVaccine.isChecked) {
+                binding.thirdVaccine.isChecked = false
                 binding.thirdVaccine.visible()
-            else {
+            } else {
                 binding.thirdVaccine.invisible()
             }
         }
@@ -245,13 +250,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             )
             if (this.pigeon != null) {
                 pigeon.id = this.pigeon!!.id
-                lifecycleScope.launch {
-                    viewModel.editPigeon(pigeon)
-                }
+                pigeonViewModel.update(pigeon)
             } else {
-                lifecycleScope.launch {
-                    viewModel.addPigeon(pigeon)
-                }
+                pigeonViewModel.insert(pigeon)
             }
             findNavController().popBackStack()
         }

@@ -1,30 +1,30 @@
-package com.example.carrier_pigeon.features.pigeons.database
+package com.example.carrier_pigeon.features.pigeonsFlights.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.carrier_pigeon.app.Config.PIGEON_DATABASE
-import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import com.example.carrier_pigeon.app.Config.RECORD_DATABASE
+import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 
-@Database(entities = [Pigeon::class], version = 1)
-abstract class PigeonDatabase : RoomDatabase() {
+@Database(entities = [Record::class], version = 1)
+abstract class RecordDatabase : RoomDatabase() {
 
-    abstract fun pigeonDao(): PigeonDao
+    abstract fun recordDao(): RecordDao
 
     companion object {
         @Volatile
-        private var INSTANCE: PigeonDatabase? = null
+        private var INSTANCE: RecordDatabase? = null
 
-        fun getInstance(context: Context): PigeonDatabase {
+        fun getInstance(context: Context): RecordDatabase {
             synchronized(this) {
                 var instance = INSTANCE
 
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        PigeonDatabase::class.java,
-                        PIGEON_DATABASE
+                        RecordDatabase::class.java,
+                        RECORD_DATABASE
                     ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance
                 }

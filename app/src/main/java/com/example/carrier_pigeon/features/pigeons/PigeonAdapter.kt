@@ -22,10 +22,12 @@ import kotlin.concurrent.timerTask
 class PigeonAdapter(
     private val context: Context?,
     private val onPigeonClicked: (Pigeon) -> Unit,
-    private val dataSet: ArrayList<Pigeon>,
     private val uiThreadPoster: UiThreadPoster
 ) :
     RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
+
+    private var dataSet = emptyList<Pigeon>().toMutableList()
+
     companion object {
         private const val DATE_FORMAT = "MMM/dd/yyyy"
     }
@@ -80,14 +82,21 @@ class PigeonAdapter(
                 if (firstVaccine == 1) {
                     binding.firstVaccine.visible()
                     binding.vaccineTv.visible()
+                    binding.secondVaccine.invisible()
+                } else {
+                    binding.firstVaccine.invisible()
+                    binding.vaccineTv.invisible()
                 }
                 if (secondVaccine == 1 && viewHolder.binding.firstVaccine.isVisible) {
                     binding.secondVaccine.visible()
-                    binding.secondVaccine.visible()
+                    binding.thirdVaccine.invisible()
+                } else {
+                    binding.secondVaccine.invisible()
                 }
                 if (thirdVaccine == 1 && viewHolder.binding.secondVaccine.isVisible) {
                     binding.thirdVaccine.visible()
-                    binding.thirdVaccine.visible()
+                } else {
+                    binding.thirdVaccine.invisible()
                 }
             }
         }
@@ -116,5 +125,10 @@ class PigeonAdapter(
     fun removeAt(position: Int) {
         dataSet.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    internal fun setItems(items: List<Pigeon>) {
+        this.dataSet = items.toMutableList()
+        notifyDataSetChanged()
     }
 }

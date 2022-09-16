@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +21,6 @@ import com.example.carrier_pigeon.features.pigeons.utils.SwipeToDeleteCallback
 import com.example.carrier_pigeon.features.pigeons.utils.SwipeToEditCallback
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,17 +37,39 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.welcomeLabel.text =
             getString(R.string.welcome_comma_first_name_of_user, sharedPrefsWrapper.getFirstName())
-        getPigeonsListFromLocalDB()
-        setControls()
-    }
+        val pigeonAdapter =
+            PigeonAdapter(
+                context?.applicationContext,
+                { pigeon -> onPigeonClicked(pigeon) },
+                uiThreadPoster
+            )
+        binding.pigeonsRecyclerview.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = pigeonAdapter
+            setHasFixedSize(true)
+        }
 
-    private fun getPigeonsListFromLocalDB() {
-        lifecycleScope.launch {
-            viewModel.dao.fetchAllPigeons().collect {
-                val list = ArrayList(it)
-                setupListOfPigeonsIntoRecyclerView(list)
+        viewModel.allPigeons.observe(
+            viewLifecycleOwner
+        ) { items ->
+            items?.let {
+                if (it.isNotEmpty()) {
+                    dismissLoading()
+                    binding.threeCloudsImageView.invisible()
+                    binding.pigeonImageView.invisible()
+
+                    setupEditHandler()
+                    setupDeleteHandler()
+                } else {
+                    binding.threeCloudsImageView.visible()
+                    binding.pigeonImageView.visible()
+                }
+
+                pigeonAdapter.setItems(it)
             }
         }
+
+        setControls()
     }
 
     private fun setControls() {
@@ -58,33 +78,6 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
         }
         binding.pigeonsFlightsBtn.setOnClickListener {
             findNavController().navigate(PigeonFragmentDirections.pigeonToPigeonsFlights())
-        }
-    }
-
-    private fun setupListOfPigeonsIntoRecyclerView(
-        pigeonsList: ArrayList<Pigeon>
-    ) {
-        if (pigeonsList.isNotEmpty()) {
-            val pigeonAdapter =
-                PigeonAdapter(
-                    context?.applicationContext,
-                    { pigeon -> onPigeonClicked(pigeon) },
-                    pigeonsList,
-                    uiThreadPoster
-                )
-            dismissLoading()
-            binding.threeCloudsImageView.invisible()
-            binding.pigeonImageView.invisible()
-            binding.pigeonsRecyclerview.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = pigeonAdapter
-                setHasFixedSize(true)
-            }
-            setupEditHandler()
-            setupDeleteHandler()
-        } else {
-            binding.threeCloudsImageView.visible()
-            binding.pigeonImageView.visible()
         }
     }
 
@@ -114,10 +107,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(getString(R.string.are_you_sure_you_want_to_delete_it))
                 builder.setPositiveButton(getString(R.string.yes)) { dialogInterface, _ ->
-                    lifecycleScope.launch {
-                        viewModel.deletePigeon(pigeon)
-                        adapter.removeAt(viewHolder.adapterPosition)
-                    }
+                    viewModel.delete(pigeon)
                     dialogInterface.dismiss()
                 }
                 builder.setNegativeButton(getString(R.string.no)) { dialogInterface, _ ->

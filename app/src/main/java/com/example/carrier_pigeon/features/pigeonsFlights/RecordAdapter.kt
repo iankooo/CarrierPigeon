@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.utils.gone
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemRecordBinding
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -24,7 +26,9 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         private const val DATE_FORMAT = "MMM/dd/yyyy"
     }
 
-    private val dataSet: ArrayList<Record>
+    inner class ViewHolder(val binding: ItemRecordBinding) : RecyclerView.ViewHolder(binding.root)
+
+    private var dataSet: ArrayList<Record>
     var mContext: Context
 
     init {
@@ -49,7 +53,7 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         }
         with(dataModel) {
             if (this != null) {
-                binding.nr.text = nr
+                binding.nr.text = nr.toString()
                 val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
                 val date = LocalDate.parse(dateOfBirth, formatter)
                 val shortYear: String = with(date.year.toString()) {
@@ -83,7 +87,9 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         notifyDataSetChanged()
     }
 
-    fun getAllRecords() = dataSet.map { it.series }
+    fun getAllRecords() = dataSet
+
+    fun getRecordFromPosition(position: Int) = dataSet[position]
 
     fun addRecord(record: Record) {
         dataSet.add(record)
@@ -91,5 +97,10 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
 
     fun removeRecord(record: Record) {
         dataSet.remove(record)
+    }
+
+    internal fun setItems(items: List<Record>) {
+        this.dataSet = ArrayList(items)
+        notifyDataSetChanged()
     }
 }

@@ -1,5 +1,6 @@
 package com.example.carrier_pigeon.features.pigeons.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import kotlinx.coroutines.flow.Flow
@@ -19,10 +20,10 @@ interface PigeonDao {
     fun deleteAll()
 
     @Query("SELECT * FROM `pigeon_table`")
-    fun fetchAllPigeons(): Flow<List<Pigeon>>
+    fun fetchAllPigeons(): LiveData<List<Pigeon>>
 
     @Query("SELECT * FROM `pigeon_table` WHERE id=:id")
-    fun fetchPigeonById(id: Int): Flow<Pigeon>
+    fun fetchPigeonById(id: Int): LiveData<Pigeon>
 
     @Query("SELECT COUNT(*) from pigeon_table")
     fun countPigeons(): Int
