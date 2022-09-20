@@ -21,13 +21,13 @@ class CreateProfileFragment : BaseFragment(R.layout.fragment_create_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.saveProfileBtn.setOnClickListener {
-            if (binding.phoneNumberEt.text.isEmpty()) {
+            if (binding.phoneNumberEt.text.toString().isEmpty()) {
                 shortToast(getString(R.string.phone_number_cannot_be_empty))
-            } else if (binding.firstNameEt.text.isEmpty()) {
+            } else if (binding.firstNameEt.text.toString().isEmpty()) {
                 shortToast(getString(R.string.first_name_cannot_be_empty))
-            } else if (binding.lastNameEt.text.isEmpty()) {
+            } else if (binding.lastNameEt.text.toString().isEmpty()) {
                 shortToast(getString(R.string.last_name_cannot_be_empty))
-            } else if (binding.homeAddressEt.text.isEmpty()) {
+            } else if (binding.homeAddressEt.text.toString().isEmpty()) {
                 shortToast(getString(R.string.home_address_cannot_be_empty))
             } else {
                 with(sharedPrefsWrapper) {

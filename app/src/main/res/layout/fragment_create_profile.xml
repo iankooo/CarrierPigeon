@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray">
+    android:background="@color/light_gray"
+    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
     <TextView
         android:id="@+id/welcome_label"
@@ -20,86 +21,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/phone_number_et"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til1"
+        style="@style/OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_10"
         android:layout_marginTop="@dimen/space_40"
-        android:background="@drawable/rounded_edit_text"
-        android:drawableStart="@drawable/ic_phone"
-        android:drawablePadding="@dimen/space_10"
-        android:drawableTint="@color/light_blue"
-        android:hint="@string/phone_number_required"
-        android:inputType="phone"
-        android:nextFocusDown="@id/first_name_et"
-        android:padding="@dimen/space_15"
-        android:textColor="@color/light_blue"
-        android:textColorHint="@color/gray"
+        android:theme="@style/OutlineBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_label" />
+        app:layout_constraintTop_toBottomOf="@id/welcome_label"
+        app:startIconDrawable="@drawable/ic_phone">
 
-    <EditText
-        android:id="@+id/first_name_et"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_number_required"
+            android:inputType="phone"
+            android:nextFocusDown="@id/first_name_et"
+            android:textColor="@color/light_blue" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til2"
+        style="@style/OutlineBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_10"
         android:layout_marginTop="@dimen/space_8"
         android:layout_marginEnd="@dimen/space_4"
-        android:background="@drawable/rounded_edit_text"
-        android:drawableStart="@drawable/ic_name"
-        android:drawablePadding="@dimen/space_10"
-        android:drawableTint="@color/light_blue"
-        android:hint="@string/first_name_required"
-        android:inputType="textCapSentences|textVisiblePassword"
-        android:nextFocusDown="@id/last_name_et"
-        android:padding="@dimen/space_15"
-        android:textColor="@color/light_blue"
-        android:textColorHint="@color/gray"
+        android:theme="@style/OutlineBox"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/last_name_et"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_et" />
+        app:layout_constraintRight_toLeftOf="@id/til3"
+        app:layout_constraintTop_toBottomOf="@id/til1"
+        app:startIconDrawable="@drawable/ic_name">
 
-    <EditText
-        android:id="@+id/last_name_et"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name_required"
+            android:inputType="textCapSentences|textVisiblePassword"
+            android:nextFocusDown="@id/last_name_et"
+            android:textColor="@color/light_blue" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til3"
+        style="@style/OutlineBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_4"
         android:layout_marginTop="@dimen/space_8"
         android:layout_marginEnd="@dimen/space_10"
-        android:background="@drawable/rounded_edit_text"
-        android:drawableStart="@drawable/ic_name"
-        android:drawablePadding="@dimen/space_10"
-        android:drawableTint="@color/light_blue"
-        android:hint="@string/last_name_required"
-        android:inputType="textCapSentences|textVisiblePassword"
-        android:nextFocusDown="@id/home_address_et"
-        android:padding="@dimen/space_15"
-        android:textColor="@color/light_blue"
-        android:textColorHint="@color/gray"
-        app:layout_constraintLeft_toRightOf="@id/first_name_et"
+        android:theme="@style/OutlineBox"
+        app:layout_constraintLeft_toRightOf="@id/til2"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_et" />
+        app:layout_constraintTop_toBottomOf="@id/til1"
+        app:startIconDrawable="@drawable/ic_name">
 
-    <EditText
-        android:id="@+id/home_address_et"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name_required"
+            android:inputType="textCapSentences|textVisiblePassword"
+            android:nextFocusDown="@id/home_address_et"
+            android:textColor="@color/light_blue" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til4"
+        style="@style/OutlineBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_10"
         android:layout_marginTop="@dimen/space_8"
-        android:background="@drawable/rounded_edit_text"
-        android:drawableStart="@drawable/ic_home"
-        android:drawablePadding="@dimen/space_10"
-        android:drawableTint="@color/light_blue"
-        android:hint="@string/home_address_required"
-        android:inputType="textCapSentences|textVisiblePassword"
-        android:padding="@dimen/space_15"
-        android:textColor="@color/light_blue"
-        android:textColorHint="@color/gray"
+        android:theme="@style/OutlineBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_name_et" />
+        app:layout_constraintTop_toBottomOf="@id/til2"
+        app:startIconDrawable="@drawable/ic_home">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/home_address_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/home_address_required"
+            android:inputType="textCapSentences|textVisiblePassword|text"
+            android:textColor="@color/light_blue" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/save_profile_btn"
