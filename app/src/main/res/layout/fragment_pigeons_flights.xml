@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/add_button"
+        android:id="@+id/export_to_pdf_btn"
         android:layout_width="@dimen/space_53"
         android:layout_height="@dimen/space_53"
         android:layout_marginEnd="@dimen/space_20"

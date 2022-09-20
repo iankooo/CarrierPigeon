@@ -12,7 +12,6 @@ data class Record(
     @PrimaryKey(autoGenerate = true)
     @NotNull
     var id: Int = 0,
-    var nr: Int,
     var country: String,
     var dateOfBirth: String,
     var series: String,

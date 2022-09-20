@@ -7,8 +7,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.carrier_pigeon.R
+import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
+
+private const val DATE_FORMAT = "MMM/dd/yyyy"
 
 // Long Toast functions
 fun Context.longToast(message: String) {
@@ -68,4 +73,13 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: 
             show()
         }
     }
+}
+
+fun Record.dateToShortDate(): String {
+    val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
+    val date = LocalDate.parse(dateOfBirth, formatter)
+    val shortYear: String = with(date.year.toString()) {
+        if (length > 2) substring(length - 2) else this
+    }
+    return shortYear
 }

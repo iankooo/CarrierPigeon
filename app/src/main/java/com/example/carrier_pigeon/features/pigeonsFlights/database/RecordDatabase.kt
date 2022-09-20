@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.carrier_pigeon.app.Config.RECORD_DATABASE
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 
-@Database(entities = [Record::class], version = 1)
+@Database(entities = [Record::class], version = 2)
 abstract class RecordDatabase : RoomDatabase() {
 
     abstract fun recordDao(): RecordDao

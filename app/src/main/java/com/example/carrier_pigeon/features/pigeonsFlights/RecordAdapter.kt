@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
+import com.example.carrier_pigeon.app.utils.dateToShortDate
 import com.example.carrier_pigeon.app.utils.gone
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemRecordBinding
@@ -20,10 +21,6 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         data as List<Record?>
     ),
     View.OnClickListener {
-
-    companion object {
-        private const val DATE_FORMAT = "MMM/dd/yyyy"
-    }
 
     inner class ViewHolder(val binding: ItemRecordBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -53,14 +50,9 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         with(dataModel) {
             if (this != null) {
                 binding.nr.text = context.getString(R.string.nr_of_flight_format, position + 1)
-                val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
-                val date = LocalDate.parse(dateOfBirth, formatter)
-                val shortYear: String = with(date.year.toString()) {
-                    if (length > 2) substring(length - 2) else this
-                }
 
                 binding.ringSeries.text =
-                    context.getString(R.string.ring_series_format, country, shortYear, series)
+                    context.getString(R.string.ring_series_format, country, dateToShortDate(), series)
                 binding.gender.text = gender
                 binding.color.text = color
 

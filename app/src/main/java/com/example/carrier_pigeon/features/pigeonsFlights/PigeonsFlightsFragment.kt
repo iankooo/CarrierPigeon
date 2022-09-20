@@ -1,24 +1,35 @@
 package com.example.carrier_pigeon.features.pigeonsFlights
 
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.shortToast
+import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentPigeonsFlightsBinding
 import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PigeonsFlightsFragment :
     BaseFragment(R.layout.fragment_pigeons_flights) {
+    @Inject
+    lateinit var sharedPrefsWrapper: SharedPrefsWrapper
+
     private val binding by viewBinding(FragmentPigeonsFlightsBinding::bind)
     private val viewModel by viewModels<PigeonsFlightsViewModel>()
     private val pigeonViewModel by viewModels<PigeonViewModel>()
@@ -54,6 +65,10 @@ class PigeonsFlightsFragment :
         }
         footer[1].setOnClickListener {
             deletePigeonFromListView()
+        }
+
+        binding.exportToPdfBtn.setOnClickListener {
+            createPdf()
         }
     }
 
@@ -130,8 +145,6 @@ class PigeonsFlightsFragment :
                     items, checkedItems
                 ) { dialog, which, isChecked ->
                     if (isChecked) {
-//                        availablePigeonsList[which].nr =
-//                            pigeonsRecorded.size + selectedPigeons.size + 1
                         selectedPigeons.add(availablePigeonsList[which])
                     } else {
                         selectedPigeons.remove(availablePigeonsList[which])
@@ -155,7 +168,6 @@ class PigeonsFlightsFragment :
         return pigeonsList.map {
             with(it) {
                 Record(
-                    nr = id,
                     country = country,
                     dateOfBirth = dateOfBirth.toString(),
                     series = series,
@@ -167,5 +179,52 @@ class PigeonsFlightsFragment :
                 )
             }
         }
+    }
+
+    private fun createPdf() {
+        val onError: (Exception) -> Unit = { toastErrorMessage(it.message.toString()) }
+        val onFinish: (File) -> Unit = { openFile(it) }
+        val paragraphList = listOf(
+            getString(
+                R.string.fancier,
+                sharedPrefsWrapper.getLastName(),
+                sharedPrefsWrapper.getFirstName()
+            ),
+            getString(
+                R.string.phone_number,
+                sharedPrefsWrapper.getPhoneNumber()
+            ),
+            getString(
+                R.string.home_address,
+                sharedPrefsWrapper.getHomeAddress()
+            )
+        )
+        val pdfService = PdfService(requireContext())
+        pdfService.createUserTable(
+            data = recordAdapter.getAllRecords(),
+            paragraphList = paragraphList,
+            onFinish = onFinish,
+            onError = onError
+        )
+    }
+
+    private fun openFile(file: File) {
+        val path = file.toUri().path
+        val pdfFile = File(path.toString())
+        val builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
+        builder.detectFileUriExposure()
+        val pdfIntent = Intent(Intent.ACTION_VIEW)
+        pdfIntent.setDataAndType(pdfFile.toUri(), "application/pdf")
+        pdfIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        try {
+            startActivity(pdfIntent)
+        } catch (e: ActivityNotFoundException) {
+            toastErrorMessage("Can't read pdf file")
+        }
+    }
+
+    private fun toastErrorMessage(s: String) {
+        shortToast(s)
     }
 }
