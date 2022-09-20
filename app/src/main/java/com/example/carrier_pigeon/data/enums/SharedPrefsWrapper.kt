@@ -9,6 +9,7 @@ class SharedPrefsWrapper(private val sharedPref: SharedPreferences) {
         const val FIRST_NAME = "first_name"
         const val LAST_NAME = "last_name"
         const val HOME_ADDRESS = "home_address"
+        const val EMAIL_ADDRESS = "email_address"
     }
 
     fun savePhoneNumber(phoneNumber: String) {
@@ -34,4 +35,10 @@ class SharedPrefsWrapper(private val sharedPref: SharedPreferences) {
     }
 
     fun getHomeAddress() = sharedPref.getString(HOME_ADDRESS, "") ?: ""
+
+    fun saveEmailAddress(emailAddress: String) {
+        sharedPref.edit().putString(EMAIL_ADDRESS, emailAddress).apply()
+    }
+
+    fun getEmailAddress() = sharedPref.getString(EMAIL_ADDRESS, "") ?: ""
 }

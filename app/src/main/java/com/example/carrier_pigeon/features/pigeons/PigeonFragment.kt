@@ -33,11 +33,12 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
 
     private val binding by viewBinding(FragmentPigeonBinding::bind)
     private val viewModel by viewModels<PigeonViewModel>()
+    private lateinit var pigeonAdapter: PigeonAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.welcomeLabel.text =
             getString(R.string.welcome_comma_first_name_of_user, sharedPrefsWrapper.getFirstName())
-        val pigeonAdapter =
+        pigeonAdapter =
             PigeonAdapter(
                 context?.applicationContext,
                 { pigeon -> onPigeonClicked(pigeon) },
@@ -79,15 +80,17 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
         binding.pigeonsFlightsBtn.setOnClickListener {
             findNavController().navigate(PigeonFragmentDirections.pigeonToPigeonsFlights())
         }
+        binding.profileBtn.setOnClickListener {
+            findNavController().navigate(PigeonFragmentDirections.pigeonToProfile())
+        }
     }
 
     private fun setupEditHandler() {
         val editSwipeHandler = object : SwipeToEditCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
                 findNavController().navigate(
                     PigeonFragmentDirections.pigeonToAddOrEditPigeon(
-                        adapter.getPigeonFromPosition(
+                        pigeonAdapter.getPigeonFromPosition(
                             viewHolder.adapterPosition
                         )
                     )
@@ -101,8 +104,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     private fun setupDeleteHandler() {
         val deleteSwipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = binding.pigeonsRecyclerview.adapter as PigeonAdapter
-                val pigeon = adapter.getPigeonFromPosition(viewHolder.adapterPosition)
+                val pigeon = pigeonAdapter.getPigeonFromPosition(viewHolder.adapterPosition)
 
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(getString(R.string.are_you_sure_you_want_to_delete_it))
@@ -112,7 +114,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 }
                 builder.setNegativeButton(getString(R.string.no)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
-                    adapter.notifyItemChanged(viewHolder.adapterPosition)
+                    pigeonAdapter.notifyItemChanged(viewHolder.adapterPosition)
                 }
 
                 val alertDialog = builder.create()

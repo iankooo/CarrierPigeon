@@ -30,10 +30,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_profile">Create profile</string>
     <string name="save_profile">Save profile</string>
-    <string name="phone_number">Phone number</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
-    <string name="home_address">Home address</string>
+    <string name="phone_number_required">Phone number *</string>
+    <string name="first_name_required">First name *</string>
+    <string name="last_name_required">Last name *</string>
+    <string name="home_address_required">Home address *</string>
     <string name="phone_number_cannot_be_empty">Phone number cannot be empty!</string>
     <string name="first_name_cannot_be_empty">First name cannot be empty!</string>
     <string name="last_name_cannot_be_empty">Last name cannot be empty!</string>
@@ -46,7 +46,8 @@
     <string name="date_of_birth">Date of birth</string>
     <string name="gender">Gender</string>
     <string name="vaccine">Vaccine</string>
-    <string name="select_pigeons_for_flight">Select pigeons for flight</string>
+    <string name="add_pigeons_to_flight">Add pigeons to flight</string>
+    <string name="delete_pigeons_from_flight">Delete pigeons from flight</string>
     <string name="no_pigeons_available">No pigeons available!</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -56,10 +57,13 @@
     <string name="pigeon_age">Age: %s Year %s Month %s Day</string>
     <string name="pigeon_vaccine">Vaccine:</string>
     <string name="ring_series_format">%s %s %s</string>
+    <string name="nr_of_flight_format">%d</string>
     <string name="click_to_see_details">&#x2939;Click to see details&#x2938;</string>
     <string name="empty" />
     <string name="pigeon_eye_photo">Pigeon eye photo</string>
     <string name="select_photo_from_gallery">Select photo from Gallery</string>
     <string name="capture_photo_from_camera">Capture photo from camera</string>
     <string name="pigeon_photo">Pigeon photo</string>
+    <string name="profile">Profile</string>
+    <string name="email_address_optional">Email address</string>
 </resources>

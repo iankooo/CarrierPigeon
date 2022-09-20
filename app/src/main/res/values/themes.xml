@@ -11,10 +11,12 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorControlActivated">@color/light_blue</item>
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.KidsloopAndroid.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.CarrierPigeonAndroid.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@color/light_blue</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/light_blue</item>
@@ -82,5 +84,20 @@
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
+    </style>
+
+    <style name="OutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="hintTextColor">@color/light_blue</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@drawable/selector_stroke_color</item>
+        <item name="startIconTint">@color/light_blue</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/space_15</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/space_15</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/space_15</item>
+        <item name="boxCornerRadiusTopStart">@dimen/space_15</item>
+        <item name="colorControlActivated">@color/light_blue</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

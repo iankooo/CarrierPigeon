@@ -17,4 +17,8 @@ class Repository(private val recordDao: RecordDao) {
     suspend fun delete(record: Record) {
         recordDao.delete(record)
     }
+
+    suspend fun deleteAll(records: List<Record>) {
+        recordDao.deleteAll(records)
+    }
 }

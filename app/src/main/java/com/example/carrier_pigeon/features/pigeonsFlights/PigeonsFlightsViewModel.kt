@@ -37,5 +37,9 @@ class PigeonsFlightsViewModel @Inject constructor(
         repository.delete(record)
     }
 
+    fun deleteAllRecords(records: List<Record>) = viewModelScope.launch {
+        repository.deleteAll(records)
+    }
+
     fun getRecordsList() = repository.allRecords
 }

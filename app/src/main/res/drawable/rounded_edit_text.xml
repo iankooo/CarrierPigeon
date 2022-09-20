@@ -2,9 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="@dimen/space_10"
     android:shape="rectangle">
-    <stroke
-        android:width="@dimen/space_1"
-        android:color="@color/light_blue" />
     <solid android:color="@color/white" />
     <corners
         android:bottomLeftRadius="@dimen/space_15"

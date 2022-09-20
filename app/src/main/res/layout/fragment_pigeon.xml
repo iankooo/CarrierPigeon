@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
     <ImageButton
-        android:id="@+id/back_button"
+        android:id="@+id/profile_btn"
         android:layout_width="@dimen/space_53"
         android:layout_height="@dimen/space_53"
         android:layout_marginStart="@dimen/space_20"
@@ -24,7 +23,7 @@
         android:id="@+id/welcome_label"
         style="@style/SubTitleLabel"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_108"
+        android:layout_height="@dimen/space_110"
         android:background="@drawable/bg_top_view_profiles"
         android:gravity="center"
         android:paddingTop="@dimen/space_40"
@@ -62,7 +61,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/pigeons"
-                android:textColor="@color/dark_gray" />
+                android:textColor="@color/light_blue" />
 
             <ImageView
                 android:id="@+id/pigeons_underline_imageView"
@@ -143,7 +142,7 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading_animation" />
 
-<!--    <ImageView-->
+    <!--    <ImageView-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_marginBottom="@dimen/space_10"-->
@@ -214,8 +213,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_view_profiles"
         android:gravity="center"
-        android:paddingTop="@dimen/space_25"
-        android:paddingBottom="@dimen/space_25"
+        android:paddingTop="@dimen/space_20"
+        android:paddingBottom="@dimen/space_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -9,7 +9,7 @@
         android:id="@+id/welcome_label"
         style="@style/SubTitleLabel"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_108"
+        android:layout_height="@dimen/space_110"
         android:background="@drawable/bg_top_view_profiles"
         android:gravity="center"
         android:paddingTop="@dimen/space_40"
@@ -19,17 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_10"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_progress_bar_dummy"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/phone_number_et"
@@ -41,7 +30,7 @@
         android:drawableStart="@drawable/ic_phone"
         android:drawablePadding="@dimen/space_10"
         android:drawableTint="@color/light_blue"
-        android:hint="@string/phone_number"
+        android:hint="@string/phone_number_required"
         android:inputType="phone"
         android:nextFocusDown="@id/first_name_et"
         android:padding="@dimen/space_15"
@@ -62,7 +51,7 @@
         android:drawableStart="@drawable/ic_name"
         android:drawablePadding="@dimen/space_10"
         android:drawableTint="@color/light_blue"
-        android:hint="@string/first_name"
+        android:hint="@string/first_name_required"
         android:inputType="textCapSentences|textVisiblePassword"
         android:nextFocusDown="@id/last_name_et"
         android:padding="@dimen/space_15"
@@ -83,7 +72,7 @@
         android:drawableStart="@drawable/ic_name"
         android:drawablePadding="@dimen/space_10"
         android:drawableTint="@color/light_blue"
-        android:hint="@string/last_name"
+        android:hint="@string/last_name_required"
         android:inputType="textCapSentences|textVisiblePassword"
         android:nextFocusDown="@id/home_address_et"
         android:padding="@dimen/space_15"
@@ -103,7 +92,7 @@
         android:drawableStart="@drawable/ic_home"
         android:drawablePadding="@dimen/space_10"
         android:drawableTint="@color/light_blue"
-        android:hint="@string/home_address"
+        android:hint="@string/home_address_required"
         android:inputType="textCapSentences|textVisiblePassword"
         android:padding="@dimen/space_15"
         android:textColor="@color/light_blue"
@@ -138,8 +127,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_view_profiles"
         android:gravity="center"
-        android:paddingTop="@dimen/space_25"
-        android:paddingBottom="@dimen/space_25"
+        android:paddingTop="@dimen/space_20"
+        android:paddingBottom="@dimen/space_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

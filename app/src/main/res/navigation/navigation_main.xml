@@ -48,6 +48,10 @@
             android:id="@+id/pigeon_to_pigeons_flights"
             app:destination="@id/pigeons_flights_fragment"
             app:popUpTo="@id/pigeon_fragment" />
+        <action
+            android:id="@+id/pigeon_to_profile"
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@id/pigeon_fragment" />
     </fragment>
 
     <fragment
@@ -76,4 +80,9 @@
         android:id="@+id/pigeons_flights_fragment"
         android:name="com.example.carrier_pigeon.features.pigeonsFlights.PigeonsFlightsFragment"
         tools:layout="@layout/fragment_pigeons_flights" />
+
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.example.carrier_pigeon.features.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

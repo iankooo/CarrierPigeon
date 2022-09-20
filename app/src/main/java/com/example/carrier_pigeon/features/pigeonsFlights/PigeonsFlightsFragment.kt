@@ -52,40 +52,89 @@ class PigeonsFlightsFragment :
         footer[0].setOnClickListener {
             addPigeonToListView()
         }
+        footer[1].setOnClickListener {
+            deletePigeonFromListView()
+        }
+    }
+
+    private fun deletePigeonFromListView() {
+        val builderMultiple: AlertDialog.Builder =
+            AlertDialog.Builder(requireContext())
+        builderMultiple.setIcon(R.drawable.ic_pigeons)
+        builderMultiple.setTitle(getString(R.string.delete_pigeons_from_flight))
+
+        val pigeonsRecorded = recordAdapter.getAllRecords()
+
+        if (pigeonsRecorded.isNotEmpty()) {
+            val items = arrayOfNulls<String>(pigeonsRecorded.size)
+            val checkedItems = BooleanArray(pigeonsRecorded.size)
+
+            for (i in items.indices) {
+                checkedItems[i] = true
+                items[i] =
+                    pigeonsRecorded[i].country + " " + pigeonsRecorded[i].series
+            }
+
+            val selectedPigeons = ArrayList<Record>()
+
+            builderMultiple.setMultiChoiceItems(
+                items, checkedItems
+            ) { dialog, which, isChecked ->
+                if (isChecked) {
+                    selectedPigeons.remove(pigeonsRecorded[which])
+                } else {
+                    selectedPigeons.add(pigeonsRecorded[which])
+                }
+            }
+
+            builderMultiple.setPositiveButton(
+                getString(R.string.ok)
+            ) { dialog, which ->
+                recordAdapter.notifyDataSetChanged()
+                viewModel.deleteAllRecords(selectedPigeons)
+            }
+        } else {
+            builderMultiple.setMessage(getString(R.string.no_pigeons_available))
+        }
+        builderMultiple.show()
     }
 
     private fun addPigeonToListView() {
         val builderMultiple: AlertDialog.Builder =
             AlertDialog.Builder(requireContext())
         builderMultiple.setIcon(R.drawable.ic_pigeons)
-        builderMultiple.setTitle(getString(R.string.select_pigeons_for_flight))
+        builderMultiple.setTitle(getString(R.string.add_pigeons_to_flight))
 
         pigeonViewModel.allPigeons.observe(
             viewLifecycleOwner
         ) {
             val pigeonsList = convertListOfPigeonToListOfRecord(it)
             val pigeonsRecorded = recordAdapter.getAllRecords()
-            val sum = pigeonsList + pigeonsRecorded
-            val officialList =
-                sum.groupBy { it2 -> it2.series }.filter { it2 -> it2.value.size == 1 }
+            val listsAdded = pigeonsList + pigeonsRecorded
+            val availablePigeonsList =
+                listsAdded.groupBy { it2 -> it2.series }.filter { it2 -> it2.value.size == 1 }
                     .flatMap { it2 -> it2.value }
 
-            if (officialList.isNotEmpty()) {
-                val items = arrayOfNulls<String>(officialList.size)
-                val checkedItems = BooleanArray(officialList.size)
+            if (availablePigeonsList.isNotEmpty()) {
+                val items = arrayOfNulls<String>(availablePigeonsList.size)
+                val checkedItems = BooleanArray(availablePigeonsList.size)
+
                 for (i in items.indices) {
-                    items[i] = officialList[i].country + " " + officialList[i].series
+                    items[i] =
+                        availablePigeonsList[i].country + " " + availablePigeonsList[i].series
                 }
+
                 val selectedPigeons = ArrayList<Record>()
 
                 builderMultiple.setMultiChoiceItems(
                     items, checkedItems
                 ) { dialog, which, isChecked ->
                     if (isChecked) {
-                        officialList[which].nr = pigeonsRecorded.size + selectedPigeons.size + 1
-                        selectedPigeons.add(officialList[which])
+//                        availablePigeonsList[which].nr =
+//                            pigeonsRecorded.size + selectedPigeons.size + 1
+                        selectedPigeons.add(availablePigeonsList[which])
                     } else {
-                        selectedPigeons.remove(officialList[which])
+                        selectedPigeons.remove(availablePigeonsList[which])
                     }
                 }
 
@@ -102,8 +151,8 @@ class PigeonsFlightsFragment :
         }
     }
 
-    private fun convertListOfPigeonToListOfRecord(list: List<Pigeon>): List<Record> {
-        val pigeonsList = list.map {
+    private fun convertListOfPigeonToListOfRecord(pigeonsList: List<Pigeon>): List<Record> {
+        return pigeonsList.map {
             with(it) {
                 Record(
                     nr = id,
@@ -118,6 +167,5 @@ class PigeonsFlightsFragment :
                 )
             }
         }
-        return pigeonsList
     }
 }

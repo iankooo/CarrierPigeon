@@ -10,7 +10,6 @@ import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.utils.gone
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemRecordBinding
-import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -53,7 +52,7 @@ class RecordAdapter(data: ArrayList<Record>, context: Context?) :
         }
         with(dataModel) {
             if (this != null) {
-                binding.nr.text = nr.toString()
+                binding.nr.text = context.getString(R.string.nr_of_flight_format, position + 1)
                 val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
                 val date = LocalDate.parse(dateOfBirth, formatter)
                 val shortYear: String = with(date.year.toString()) {
