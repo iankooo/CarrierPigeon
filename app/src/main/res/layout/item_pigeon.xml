@@ -171,47 +171,51 @@
                 android:translationZ="@dimen/space_5" />
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/vaccine_tv"
+            style="@style/PigeonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/image"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:layout_alignTop="@id/first_vaccine"
+            android:layout_alignBottom="@id/first_vaccine"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:text="@string/pigeon_vaccine"
+            android:visibility="visible" />
 
-            <TextView
-                android:id="@+id/vaccine_tv"
-                style="@style/PigeonColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pigeon_vaccine"
-                android:visibility="invisible" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/first_vaccine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_toEndOf="@id/vaccine_tv"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:clickable="false"
+            android:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/first_vaccine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white"
-                android:checked="true"
-                android:clickable="false"
-                android:visibility="invisible" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/second_vaccine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_toEndOf="@id/first_vaccine"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:clickable="false"
+            android:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/second_vaccine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white"
-                android:checked="true"
-                android:clickable="false"
-                android:visibility="invisible" />
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/third_vaccine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white"
-                android:checked="true"
-                android:clickable="false"
-                android:visibility="invisible" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/third_vaccine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_toEndOf="@id/second_vaccine"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:clickable="false"
+            android:visibility="visible" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

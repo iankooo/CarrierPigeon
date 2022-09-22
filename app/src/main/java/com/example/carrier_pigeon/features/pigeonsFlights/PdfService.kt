@@ -120,15 +120,18 @@ class PdfService(private val context: Context) {
         val pigeonIdWidth = 0.2f
         val ringSeriesWidth = 1f
         val genderWidth = 0.2f
-        val colorWidth = 1f
-        val columnWidth = floatArrayOf(pigeonIdWidth, ringSeriesWidth, genderWidth, colorWidth)
-        val table = createTable(4, columnWidth)
+        val colorWidth = 0.5f
+        val vaccineWidth = 0.5f
+        val columnWidth =
+            floatArrayOf(pigeonIdWidth, ringSeriesWidth, genderWidth, colorWidth, vaccineWidth)
+        val table = createTable(5, columnWidth)
         // Table header (first row)
         val tableHeaderContent = listOf(
             context.getString(R.string.nr),
             context.getString(R.string.ring_series),
             context.getString(R.string.sex),
-            context.getString(R.string.color)
+            context.getString(R.string.color),
+            context.getString(R.string.vaccine)
         )
         // write table header into table
         tableHeaderContent.forEach {
@@ -137,12 +140,12 @@ class PdfService(private val context: Context) {
             // add our cell into our table
             table.addCell(cell)
         }
-        // write user data into table
+        // write pigeon data into table
         data.forEach {
-            // Write Each User Id
+            // Write Each Pigeon Nr
             val noCell = createCell((data.indexOf(it) + 1).toString())
             table.addCell(noCell)
-            // Write Each First Name
+            // Write Each Ring Series
             val ringSeriesCell = createCell(
                 context.getString(
                     R.string.ring_series_format,
@@ -152,12 +155,16 @@ class PdfService(private val context: Context) {
                 )
             )
             table.addCell(ringSeriesCell)
-            // Write Each Middle Name
+            // Write Each Pigeon Gender
             val genderCell = createCell(it.gender)
             table.addCell(genderCell)
-            // Write Each Last Name
+            // Write Each Pigeon Color
             val colorCell = createCell(it.color)
             table.addCell(colorCell)
+            // Write Each Pigeon Vaccine
+            val vaccineCell =
+                createCell("${it.firstVaccine} ${it.secondVaccine} ${it.thirdVaccine}")
+            table.addCell(vaccineCell)
         }
         document.add(table)
         document.close()

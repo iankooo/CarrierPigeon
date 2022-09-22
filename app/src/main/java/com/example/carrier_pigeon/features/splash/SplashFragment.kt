@@ -17,7 +17,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         if (sharedPrefsWrapper.getPhoneNumber().isEmpty()) {
             findNavController().navigate(SplashFragmentDirections.splashToCreateProfile())
         } else {
-            findNavController().navigate(SplashFragmentDirections.splashToPigeon())
+            findNavController().navigate(SplashFragmentDirections.splashToMain())
         }
     }
 }

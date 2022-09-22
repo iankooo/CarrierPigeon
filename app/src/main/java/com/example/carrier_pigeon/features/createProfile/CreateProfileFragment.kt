@@ -36,7 +36,7 @@ class CreateProfileFragment : BaseFragment(R.layout.fragment_create_profile) {
                     saveLastName(binding.lastNameEt.text.toString())
                     saveHomeAddress(binding.homeAddressEt.text.toString())
                 }
-                findNavController().navigate(CreateProfileFragmentDirections.createProfileToPigeon())
+                findNavController().navigate(CreateProfileFragmentDirections.createProfileToMain())
             }
         }
     }

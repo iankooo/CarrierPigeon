@@ -15,8 +15,8 @@
             app:popUpTo="@id/splash_fragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/splash_to_pigeon"
-            app:destination="@id/pigeon_fragment"
+            android:id="@+id/splash_to_main"
+            app:destination="@id/main_fragment"
             app:popUpTo="@id/splash_fragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -27,31 +27,8 @@
         tools:layout="@layout/fragment_create_profile">
 
         <action
-            android:id="@+id/create_profile_to_pigeon"
-            app:destination="@id/pigeon_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/pigeon_fragment"
-        android:name="com.example.carrier_pigeon.features.pigeons.PigeonFragment"
-        tools:layout="@layout/fragment_pigeon">
-
-        <action
-            android:id="@+id/pigeon_to_add__or_edit_pigeon"
-            app:destination="@id/add_or_edit_pigeon_fragment"
-            app:popUpTo="@id/pigeon_fragment" />
-        <action
-            android:id="@+id/pigeon_to_pigeon_detail"
-            app:destination="@id/detail_pigeon_fragment"
-            app:popUpTo="@id/pigeon_fragment" />
-        <action
-            android:id="@+id/pigeon_to_pigeons_flights"
-            app:destination="@id/pigeons_flights_fragment"
-            app:popUpTo="@id/pigeon_fragment" />
-        <action
-            android:id="@+id/pigeon_to_profile"
-            app:destination="@id/profile_fragment"
-            app:popUpTo="@id/pigeon_fragment" />
+            android:id="@+id/create_profile_to_main"
+            app:destination="@id/main_fragment" />
     </fragment>
 
     <fragment
@@ -85,4 +62,29 @@
         android:id="@+id/profile_fragment"
         android:name="com.example.carrier_pigeon.features.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.example.carrier_pigeon.features.main.MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/main_to_add__or_edit_pigeon"
+            app:destination="@id/add_or_edit_pigeon_fragment"
+            app:popUpTo="@id/main_fragment" />
+
+        <action
+            android:id="@+id/main_to_pigeons_flights"
+            app:destination="@id/pigeons_flights_fragment"
+            app:popUpTo="@id/main_fragment" />
+        <action
+            android:id="@+id/main_to_profile"
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@id/main_fragment" />
+
+        <action
+            android:id="@+id/main_to_pigeon_detail"
+            app:destination="@id/detail_pigeon_fragment"
+            app:popUpTo="@id/main_fragment" />
+    </fragment>
 </navigation>

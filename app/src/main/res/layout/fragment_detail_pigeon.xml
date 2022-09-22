@@ -33,17 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_10"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_progress_bar_dummy"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageButton
         android:id="@+id/add_button"
         android:layout_width="@dimen/space_53"
@@ -67,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/welcome_label">
 
         <ScrollView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout

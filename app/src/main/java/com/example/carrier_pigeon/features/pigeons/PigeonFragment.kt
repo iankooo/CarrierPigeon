@@ -16,6 +16,7 @@ import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentPigeonBinding
+import com.example.carrier_pigeon.features.main.MainFragmentDirections
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeons.utils.SwipeToDeleteCallback
 import com.example.carrier_pigeon.features.pigeons.utils.SwipeToEditCallback
@@ -36,8 +37,6 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
     private lateinit var pigeonAdapter: PigeonAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.welcomeLabel.text =
-            getString(R.string.welcome_comma_first_name_of_user, sharedPrefsWrapper.getFirstName())
         pigeonAdapter =
             PigeonAdapter(
                 context?.applicationContext,
@@ -69,27 +68,13 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 pigeonAdapter.setItems(it)
             }
         }
-
-        setControls()
-    }
-
-    private fun setControls() {
-        binding.addButton.setOnClickListener {
-            findNavController().navigate(PigeonFragmentDirections.pigeonToAddOrEditPigeon(null))
-        }
-        binding.pigeonsFlightsBtn.setOnClickListener {
-            findNavController().navigate(PigeonFragmentDirections.pigeonToPigeonsFlights())
-        }
-        binding.profileBtn.setOnClickListener {
-            findNavController().navigate(PigeonFragmentDirections.pigeonToProfile())
-        }
     }
 
     private fun setupEditHandler() {
         val editSwipeHandler = object : SwipeToEditCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 findNavController().navigate(
-                    PigeonFragmentDirections.pigeonToAddOrEditPigeon(
+                    MainFragmentDirections.mainToAddOrEditPigeon(
                         pigeonAdapter.getPigeonFromPosition(
                             viewHolder.adapterPosition
                         )
@@ -133,7 +118,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
 
     private fun onPigeonClicked(pigeon: Pigeon) {
         findNavController().navigate(
-            PigeonFragmentDirections.pigeonToPigeonDetail(
+            MainFragmentDirections.mainToPigeonDetail(
                 pigeon
             )
         )
