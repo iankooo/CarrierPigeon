@@ -47,7 +47,7 @@
             android:id="@+id/item_pigeon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_blue_corners"
+            android:background="@drawable/rounded_gray_corners"
             app:cardCornerRadius="@dimen/space_21"
             app:layout_constraintCircleRadius="@dimen/space_16"
             app:layout_constraintEnd_toEndOf="parent"

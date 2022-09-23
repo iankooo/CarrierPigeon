@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/space_5"
-    android:background="@drawable/rounded_blue_corners"
+    android:background="@drawable/rounded_gray_corners"
     app:cardCornerRadius="@dimen/space_21"
     app:layout_constraintCircleRadius="@dimen/space_16">
 
@@ -114,9 +114,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_23"
         android:layout_marginTop="@dimen/space_5"
-        android:layout_marginBottom="@dimen/space_20"
+        android:layout_marginBottom="@dimen/space_8"
         android:maxEms="8"
-        android:paddingBottom="@dimen/space_20"
+        android:paddingBottom="@dimen/space_15"
         android:text="@string/click_to_see_details"
         app:layout_constraintRight_toLeftOf="@id/rl"
         app:layout_constraintStart_toStartOf="parent"
