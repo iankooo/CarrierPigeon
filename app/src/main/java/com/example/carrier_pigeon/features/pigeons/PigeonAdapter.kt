@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config.MALE
 import com.example.carrier_pigeon.app.UiThreadPoster
+import com.example.carrier_pigeon.app.utils.DATE_FORMAT
 import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.ItemPigeonBinding
@@ -23,14 +24,9 @@ class PigeonAdapter(
     private val context: Context?,
     private val onPigeonClicked: (Pigeon) -> Unit,
     private val uiThreadPoster: UiThreadPoster
-) :
-    RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PigeonAdapter.ViewHolder>() {
 
     private var dataSet = emptyList<Pigeon>().toMutableList()
-
-    companion object {
-        private const val DATE_FORMAT = "MMM/dd/yyyy"
-    }
 
     inner class ViewHolder(val binding: ItemPigeonBinding) : RecyclerView.ViewHolder(binding.root)
 

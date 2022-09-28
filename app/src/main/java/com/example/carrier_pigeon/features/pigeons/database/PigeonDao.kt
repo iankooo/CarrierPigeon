@@ -3,7 +3,6 @@ package com.example.carrier_pigeon.features.pigeons.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PigeonDao {

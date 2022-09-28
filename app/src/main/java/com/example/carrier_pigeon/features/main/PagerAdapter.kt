@@ -9,7 +9,7 @@ import com.example.carrier_pigeon.features.pigeons.PigeonFragment
 
 private const val NUM_TABS = 2
 
-class DemoCollectionPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+class PagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {

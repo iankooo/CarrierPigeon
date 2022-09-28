@@ -3,7 +3,7 @@ package com.example.carrier_pigeon.features.pigeonsFlights.database
 import androidx.lifecycle.LiveData
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 
-class Repository(private val recordDao: RecordDao) {
+class RecordRepository(private val recordDao: RecordDao) {
     val allRecords: LiveData<List<Record>> = recordDao.fetchAllRecords()
 
     suspend fun insert(record: Record) {

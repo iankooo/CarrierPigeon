@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
-import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDatabase
-import com.example.carrier_pigeon.features.pigeonsFlights.database.Repository
+import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,30 +16,30 @@ class PigeonsFlightsViewModel @Inject constructor(
     application: Application
 ) : ViewModel() {
 
-    private val repository: Repository
+    private val mRecordRepository: RecordRepository
     val allRecords: LiveData<List<Record>>
 
     init {
-        val dao = RecordDatabase.getInstance(application).recordDao()
-        repository = Repository(dao)
-        allRecords = repository.allRecords
+        val dao = PigeonDatabase.getInstance(application).recordDao()
+        mRecordRepository = RecordRepository(dao)
+        allRecords = mRecordRepository.allRecords
     }
 
     fun insertRecord(record: Record) = viewModelScope.launch {
-        repository.insert(record)
+        mRecordRepository.insert(record)
     }
 
     fun insertAllRecord(records: List<Record>) = viewModelScope.launch {
-        repository.insertAll(records)
+        mRecordRepository.insertAll(records)
     }
 
     fun deleteRecord(record: Record) = viewModelScope.launch {
-        repository.delete(record)
+        mRecordRepository.delete(record)
     }
 
     fun deleteAllRecords(records: List<Record>) = viewModelScope.launch {
-        repository.deleteAll(records)
+        mRecordRepository.deleteAll(records)
     }
 
-    fun getRecordsList() = repository.allRecords
+    fun getRecordsList() = mRecordRepository.allRecords
 }

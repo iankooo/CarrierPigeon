@@ -4,5 +4,4 @@ object Config {
     const val MALE = "M"
     const val FEMALE = "F"
     const val PIGEON_DATABASE = "pigeon_database"
-    const val RECORD_DATABASE = "record_database"
 }

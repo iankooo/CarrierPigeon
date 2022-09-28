@@ -7,12 +7,9 @@ import android.content.res.Resources
 import android.preference.PreferenceManager
 import androidx.room.Room
 import com.example.carrier_pigeon.app.Config.PIGEON_DATABASE
-import com.example.carrier_pigeon.app.Config.RECORD_DATABASE
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.features.pigeons.database.PigeonDao
 import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
-import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDao
-import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,14 +45,4 @@ object AppModule {
 
     @Provides
     fun providesPigeonDao(pigeonDatabase: PigeonDatabase): PigeonDao = pigeonDatabase.pigeonDao()
-
-    @Singleton
-    @Provides
-    fun provideRecordDatabase(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, RecordDatabase::class.java, RECORD_DATABASE)
-            .fallbackToDestructiveMigration()
-            .build()
-
-    @Provides
-    fun providesRecordDao(recordDatabase: RecordDatabase): RecordDao = recordDatabase.recordDao()
 }

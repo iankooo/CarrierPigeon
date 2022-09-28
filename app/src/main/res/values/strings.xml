@@ -72,4 +72,9 @@
     <string name="fancier">Fancier: %s %s</string>
     <string name="phone_number">Phone number: %s</string>
     <string name="home_address">Home address: %s</string>
+    <string name="add_new_family">Add new family</string>
+    <string name="save_family">Save family</string>
+    <string name="select_female">Select female</string>
+    <string name="select_male">Select male</string>
+    <string name="cannot_read_pdf_file">Can\'t read pdf file</string>
 </resources>

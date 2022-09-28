@@ -12,28 +12,34 @@ import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-val animalsArray = arrayOf(
-    "Pigeons",
-    "Families"
-)
-
 @AndroidEntryPoint
 class MainFragment : BaseFragment(R.layout.fragment_main) {
+    companion object {
+        private const val DEFAULT_PAGE = 0
+    }
+
     @Inject
     lateinit var sharedPrefsWrapper: SharedPrefsWrapper
 
     private val binding by viewBinding(FragmentMainBinding::bind)
+
+    private lateinit var adapter: PagerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.welcomeLabel.text =
             getString(R.string.welcome_comma_first_name_of_user, sharedPrefsWrapper.getFirstName())
 
-        val adapter = DemoCollectionPagerAdapter(childFragmentManager, lifecycle)
+        val pagesArray = arrayOf(
+            getString(R.string.pigeons),
+            getString(R.string.families)
+        )
+
+        adapter = PagerAdapter(childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = animalsArray[position]
+            tab.text = pagesArray[position]
         }.attach()
 
         setControls()
@@ -41,7 +47,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun setControls() {
         binding.addButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.mainToAddOrEditPigeon(null))
+            if (binding.viewPager.currentItem == DEFAULT_PAGE) {
+                findNavController().navigate(MainFragmentDirections.mainToAddOrEditPigeon(null))
+            } else {
+                findNavController().navigate(MainFragmentDirections.mainToAddOrEditFamily(null))
+            }
         }
         binding.pigeonsFlightsBtn.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.mainToPigeonsFlights())

@@ -6,11 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.carrier_pigeon.app.Config.PIGEON_DATABASE
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
+import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDao
 
-@Database(entities = [Pigeon::class], version = 1)
+@Database(entities = [Pigeon::class, Record::class], version = 2)
 abstract class PigeonDatabase : RoomDatabase() {
 
     abstract fun pigeonDao(): PigeonDao
+    abstract fun recordDao(): RecordDao
 
     companion object {
         @Volatile

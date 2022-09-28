@@ -3,7 +3,7 @@ package com.example.carrier_pigeon.features.pigeons.database
 import androidx.lifecycle.LiveData
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
-class Repository(private val pigeonDao: PigeonDao) {
+class PigeonRepository(private val pigeonDao: PigeonDao) {
     val allPigeons: LiveData<List<Pigeon>> = pigeonDao.fetchAllPigeons()
 
     suspend fun update(pigeon: Pigeon) {

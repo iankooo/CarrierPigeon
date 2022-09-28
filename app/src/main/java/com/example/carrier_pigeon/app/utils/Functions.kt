@@ -13,7 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-private const val DATE_FORMAT = "MMM/dd/yyyy"
+const val DATE_FORMAT = "MMM/dd/yyyy"
 
 // Long Toast functions
 fun Context.longToast(message: String) {

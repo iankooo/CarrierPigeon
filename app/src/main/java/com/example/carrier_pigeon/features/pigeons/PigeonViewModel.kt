@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeons.database.PigeonDatabase
-import com.example.carrier_pigeon.features.pigeons.database.Repository
+import com.example.carrier_pigeon.features.pigeons.database.PigeonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,26 +16,26 @@ class PigeonViewModel @Inject constructor(
     application: Application
 ) : ViewModel() {
 
-    private val repository: Repository
+    private val mPigeonRepository: PigeonRepository
     val allPigeons: LiveData<List<Pigeon>>
 
     init {
         val dao = PigeonDatabase.getInstance(application).pigeonDao()
-        repository = Repository(dao)
-        allPigeons = repository.allPigeons
+        mPigeonRepository = PigeonRepository(dao)
+        allPigeons = mPigeonRepository.allPigeons
     }
 
     fun insert(pigeon: Pigeon) = viewModelScope.launch {
-        repository.insert(pigeon)
+        mPigeonRepository.insert(pigeon)
     }
 
     fun update(pigeon: Pigeon) = viewModelScope.launch {
-        repository.update(pigeon)
+        mPigeonRepository.update(pigeon)
     }
 
     fun delete(pigeon: Pigeon) = viewModelScope.launch {
-        repository.delete(pigeon)
+        mPigeonRepository.delete(pigeon)
     }
 
-    fun getPigeonsList() = repository.allPigeons
+    fun getPigeonsList() = mPigeonRepository.allPigeons
 }

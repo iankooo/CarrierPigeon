@@ -19,11 +19,8 @@ import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.Config.FEMALE
 import com.example.carrier_pigeon.app.Config.MALE
 import com.example.carrier_pigeon.app.common.BaseFragment
-import com.example.carrier_pigeon.app.utils.invisible
+import com.example.carrier_pigeon.app.utils.*
 import com.example.carrier_pigeon.app.utils.permissions.isPermissionGranted
-import com.example.carrier_pigeon.app.utils.shortToast
-import com.example.carrier_pigeon.app.utils.transformIntoDatePicker
-import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
 import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
@@ -40,7 +37,6 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         private const val CAMERA = 2
         private const val IMAGE_DIRECTORY = "CarrierPigeonImages"
         private const val PIGEON_SELECTED = "pigeon_selected"
-        private const val DATE_FORMAT = "MMM/dd/yyyy"
     }
 
     private val viewModel by viewModels<AddOrEditPigeonViewModel>()
