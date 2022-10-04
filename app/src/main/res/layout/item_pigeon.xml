@@ -33,7 +33,8 @@
             android:layout_marginEnd="@dimen/space_1"
             android:contentDescription="@null"
             android:paddingVertical="@dimen/space_4"
-            android:src="@drawable/selector_sign_gender_pigeon_btn" />
+            android:src="@drawable/selector_sign_gender_pigeon_btn"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/pigeon_country"

@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</RelativeLayout>
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <RelativeLayout
+        android:id="@+id/mother_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_8"
+        android:layout_marginEnd="@dimen/space_4"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_pink_button"
+        android:paddingTop="@dimen/space_8">
+
+        <TextView
+            android:id="@+id/mother_tv"
+            style="@style/PigeonColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/image"
+            android:layout_alignEnd="@id/image"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/space_8"
+            android:background="@drawable/rounded_white_button"
+            android:gravity="center"
+            android:text="@string/select_mother"
+            android:textColor="@color/gray" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image"
+            android:layout_width="@dimen/space_150"
+            android:layout_height="@dimen/space_150"
+            android:layout_below="@id/mother_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/space_8"
+            android:backgroundTint="@color/white"
+            android:theme="@style/Theme.MaterialComponents"
+            app:cardCornerRadius="@dimen/space_25">
+
+            <ImageView
+                android:id="@+id/mother_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_class_image_placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/father_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_4"
+        android:layout_marginEnd="@dimen/space_8"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_light_blue_button"
+        android:paddingTop="@dimen/space_8">
+
+        <TextView
+            android:id="@+id/father_tv"
+            style="@style/PigeonColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/image2"
+            android:layout_alignEnd="@id/image2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/space_8"
+            android:background="@drawable/rounded_white_button"
+            android:gravity="center_horizontal"
+            android:text="@string/select_father"
+            android:textColor="@color/gray" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image2"
+            android:layout_width="@dimen/space_150"
+            android:layout_height="@dimen/space_150"
+            android:layout_below="@id/father_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/space_8"
+            android:backgroundTint="@color/white"
+            android:theme="@style/Theme.MaterialComponents"
+            app:cardCornerRadius="@dimen/space_25">
+
+            <ImageView
+                android:id="@+id/father_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_class_image_placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</LinearLayout>

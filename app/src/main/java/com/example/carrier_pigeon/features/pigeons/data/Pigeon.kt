@@ -2,7 +2,9 @@ package com.example.carrier_pigeon.features.pigeons.data
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.jetbrains.annotations.NotNull
 
@@ -23,5 +25,10 @@ data class Pigeon(
     val dateOfBirth: String?,
     val firstVaccine: Int,
     val secondVaccine: Int,
-    val thirdVaccine: Int
-) : Parcelable
+    val thirdVaccine: Int,
+    val familyTreeId: Int,
+) : Parcelable {
+    @IgnoredOnParcel
+    @Ignore
+    var children: List<Pigeon> = emptyList()
+}

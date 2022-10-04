@@ -22,7 +22,7 @@ interface PigeonDao {
     fun fetchAllPigeons(): LiveData<List<Pigeon>>
 
     @Query("SELECT * FROM `pigeon_table` WHERE id=:id")
-    fun fetchPigeonById(id: Int): LiveData<Pigeon>
+    fun fetchPigeonById(id: Int): List<Pigeon>
 
     @Query("SELECT COUNT(*) from pigeon_table")
     fun countPigeons(): Int

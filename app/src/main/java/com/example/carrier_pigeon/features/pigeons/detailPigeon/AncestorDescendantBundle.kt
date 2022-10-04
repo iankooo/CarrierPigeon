@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.pigeons.addPigeon
+package com.example.carrier_pigeon.features.pigeons.detailPigeon
 
 import android.os.Parcelable
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon

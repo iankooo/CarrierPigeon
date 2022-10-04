@@ -37,8 +37,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/space_8"
-        android:layout_marginVertical="@dimen/space_8"
-        app:layout_constraintBottom_toTopOf="@id/footer_textview"
+        android:layout_marginTop="@dimen/space_8"
+        android:layout_marginBottom="@dimen/space_8"
+        android:paddingBottom="@dimen/space_50"
+        app:layout_constraintBottom_toTopOf="@id/parents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_label">
@@ -48,7 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_gray_corners"
+            android:fitsSystemWindows="true"
             app:cardCornerRadius="@dimen/space_21"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintCircleRadius="@dimen/space_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +80,8 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
                     android:paddingVertical="@dimen/space_4"
-                    android:src="@drawable/selector_sign_gender_pigeon_btn" />
+                    android:src="@drawable/selector_sign_gender_pigeon_btn"
+                    app:tint="@color/white" />
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/pigeon_country"
@@ -275,6 +280,16 @@
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/parents"
+        layout="@layout/item_family"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/space_8"
+        app:layout_constraintBottom_toTopOf="@id/footer_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/save_pigeon_btn"

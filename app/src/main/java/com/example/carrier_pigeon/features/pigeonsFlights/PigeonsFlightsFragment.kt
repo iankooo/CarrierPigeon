@@ -168,6 +168,7 @@ class PigeonsFlightsFragment :
         return pigeonsList.map {
             with(it) {
                 Record(
+                    pigeonId = id,
                     country = country,
                     dateOfBirth = dateOfBirth.toString(),
                     series = series,
@@ -182,7 +183,7 @@ class PigeonsFlightsFragment :
     }
 
     private fun createPdf() {
-        val onError: (Exception) -> Unit = { shortToast(it.message.toString()) }
+        val onError: (Exception) -> Unit = { toastErrorMessage(it.message.toString()) }
         val onFinish: (File) -> Unit = { openFile(it) }
         val paragraphList = listOf(
             getString(
@@ -220,7 +221,11 @@ class PigeonsFlightsFragment :
         try {
             startActivity(pdfIntent)
         } catch (e: ActivityNotFoundException) {
-            shortToast(getString(R.string.cannot_read_pdf_file))
+            toastErrorMessage(getString(R.string.cannot_read_pdf_file))
         }
+    }
+
+    private fun toastErrorMessage(s: String) {
+        shortToast(s)
     }
 }

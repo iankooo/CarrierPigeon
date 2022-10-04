@@ -19,7 +19,8 @@
         <activity
             android:name=".app.CarrierPigeonActivity"
             android:exported="true"
-            android:screenOrientation="userPortrait">
+            android:screenOrientation="userPortrait"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

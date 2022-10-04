@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
@@ -25,6 +26,7 @@ import com.example.carrier_pigeon.data.enums.CarrierPigeonPermissions
 import com.example.carrier_pigeon.databinding.FragmentAddOrEditPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
+import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendantBundle
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
@@ -47,6 +49,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     private var savePigeonEyeImageToInternalStorage: Uri? = null
     private var isEyeImageViewClicked = false
     private var pigeon: Pigeon? = null
+    private var ancestorDescendantBundle: AncestorDescendantBundle? = null
 
     private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
@@ -182,6 +185,80 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         binding.savePigeonBtn.setOnClickListener {
             savePigeon()
         }
+
+        binding.parents.motherView.setOnClickListener {
+            if (pigeon != null) {
+                addParent(R.drawable.ic_female, "Choose mother", FEMALE)
+            }
+        }
+
+        binding.parents.fatherView.setOnClickListener {
+            if (pigeon != null) {
+                addParent(R.drawable.ic_male, "Choose father", MALE)
+            }
+        }
+    }
+
+    private fun addParent(
+        @DrawableRes parentDrawable: Int,
+        alertDialogTitle: CharSequence,
+        parentGender: String
+    ) {
+        val builderMultiple: AlertDialog.Builder =
+            AlertDialog.Builder(requireContext())
+        builderMultiple.setIcon(parentDrawable)
+        builderMultiple.setTitle(alertDialogTitle)
+        var ancestorPigeon: Pigeon? = null
+
+        pigeonViewModel.allPigeons.observe(
+            viewLifecycleOwner
+        ) {
+            val availablePigeonsList =
+                it.filter { it2 -> it2.gender == parentGender && it2 != pigeon }
+
+            if (availablePigeonsList.isNotEmpty()) {
+                val items = arrayOfNulls<String>(availablePigeonsList.size)
+
+                for (i in items.indices) {
+                    items[i] =
+                        availablePigeonsList[i].country + " " + availablePigeonsList[i].series
+                }
+
+                builderMultiple.setSingleChoiceItems(
+                    items, -1
+                ) { _, which ->
+                    ancestorPigeon = availablePigeonsList[which]
+                }
+
+                builderMultiple.setPositiveButton(
+                    getString(R.string.ok)
+                ) { dialog, which ->
+                    if (parentGender == FEMALE) {
+                        binding.parents.motherTv.text = resources.getString(
+                            R.string.country_series_format,
+                            ancestorPigeon?.country,
+                            ancestorPigeon?.series
+                        )
+                        if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
+                            binding.parents.motherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+                    } else {
+                        binding.parents.fatherTv.text = resources.getString(
+                            R.string.country_series_format,
+                            ancestorPigeon?.country,
+                            ancestorPigeon?.series
+                        )
+                        if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
+                            binding.parents.fatherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+                    }
+
+                    ancestorDescendantBundle =
+                        AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
+                }
+            } else {
+                builderMultiple.setMessage(getString(R.string.no_pigeons_available))
+            }
+            builderMultiple.show()
+        }
     }
 
     private fun setupPictureDialog(path: String) {
@@ -242,11 +319,15 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 dateOfBirth = dateOfBirth,
                 firstVaccine = firstVaccine,
                 secondVaccine = secondVaccine,
-                thirdVaccine = thirdVaccine
+                thirdVaccine = thirdVaccine,
+                familyTreeId = 0
             )
             if (this.pigeon != null) {
                 pigeon.id = this.pigeon!!.id
                 pigeonViewModel.update(pigeon)
+                if (ancestorDescendantBundle != null) {
+                    pigeonViewModel.insertAncestor(ancestorDescendantBundle!!)
+                }
             } else {
                 pigeonViewModel.insert(pigeon)
             }

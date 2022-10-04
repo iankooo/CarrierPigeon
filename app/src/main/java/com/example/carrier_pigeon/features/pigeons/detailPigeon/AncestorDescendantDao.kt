@@ -1,4 +1,4 @@
-package com.example.carrier_pigeon.features.pigeons.addPigeon
+package com.example.carrier_pigeon.features.pigeons.detailPigeon
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -21,6 +21,9 @@ interface AncestorDescendantDao {
 
     @Query("SELECT * FROM AncestorDescendant WHERE AncestorId = :ancestorId")
     fun getAllAncestorDescendantRecordsByAncestorIdNotLive(ancestorId: Int): List<AncestorDescendant?>?
+
+    @Query("SELECT * FROM AncestorDescendant WHERE DescendantId = :descendantId")
+    fun getAllAncestorDescendantRecordsByDescendantIdNotLive(descendantId: Int): List<AncestorDescendant?>?
 
     @Query("SELECT * FROM AncestorDescendant")
     fun getAllAncestorDescendantRecordsNotLive(): List<AncestorDescendant?>?

@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:orientation="vertical">
+    android:layout_gravity="center_vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tree_item_name"
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="@dimen/space_150"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/space_8"
+            android:background="@drawable/white_box_with_border"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_10"
+            android:paddingVertical="@dimen/space_5"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tree_item_series"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:id="@+id/tree_item_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/tree_item_owner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/tree_item_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/tree_item_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tree_item_recycler_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:width="100dp"
-            />
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/tree_item_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_double_arrow_24" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tree_item_recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:scrollbars="vertical"
-        android:visibility="gone" />
-
-</LinearLayout>
+            android:layout_toEndOf="@id/ll" />
+    </RelativeLayout>
+</HorizontalScrollView>

@@ -26,8 +26,6 @@
     <string name="are_you_sure_you_want_to_delete_it">Are you sure you want to delete it?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_profile">Create profile</string>
     <string name="save_profile">Save profile</string>
     <string name="phone_number_required">Phone number *</string>
@@ -57,6 +55,7 @@
     <string name="pigeon_age">Age: %s Year %s Month %s Day</string>
     <string name="pigeon_vaccine">Vaccine:</string>
     <string name="ring_series_format">%s %s %s</string>
+    <string name="country_series_format">%s %s</string>
     <string name="nr_of_flight_format">%d</string>
     <string name="click_to_see_details">&#x2939;Click to see details&#x2938;</string>
     <string name="empty" />
@@ -74,7 +73,7 @@
     <string name="home_address">Home address: %s</string>
     <string name="add_new_family">Add new family</string>
     <string name="save_family">Save family</string>
-    <string name="select_female">Select female</string>
-    <string name="select_male">Select male</string>
+    <string name="select_mother">Select mother</string>
+    <string name="select_father">Select father</string>
     <string name="cannot_read_pdf_file">Can\'t read pdf file</string>
 </resources>
