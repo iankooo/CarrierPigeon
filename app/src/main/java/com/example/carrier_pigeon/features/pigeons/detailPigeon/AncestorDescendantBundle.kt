@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AncestorDescendantBundle(
     val newPigeon: Pigeon?,
-    val existingPigeon: Pigeon?,
+    var existingPigeon: Pigeon?,
     val depth: Int
 ) : Parcelable

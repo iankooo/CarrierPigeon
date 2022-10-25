@@ -70,7 +70,7 @@ class PigeonViewModel @Inject constructor(
     }
 
     fun getFamilyMemberById(id: Int): Pigeon? {
-        val callable = Callable { mPigeonRepository.getFamilyMemberById(id)[0] }
+        val callable = Callable { mPigeonRepository.getFamilyMemberById(id) }
         return backgroundThreadPoster.submit(callable)
     }
 

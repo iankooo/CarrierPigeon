@@ -43,7 +43,7 @@ class PigeonRepository(private val pigeonDao: PigeonDao, application: Applicatio
         return mAncestorDescendantDao.getAllAncestorDescendantRecordsNotLive()
     }
 
-    fun getFamilyMemberById(id: Int): List<Pigeon?> {
+    fun getFamilyMemberById(id: Int): Pigeon? {
         return pigeonDao.fetchPigeonById(id)
     }
 

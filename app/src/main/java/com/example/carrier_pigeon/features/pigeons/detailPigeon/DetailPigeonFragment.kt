@@ -12,9 +12,7 @@ import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Node
 import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class DetailPigeonFragment : BaseFragment(R.layout.fragment_detail_pigeon) {
@@ -42,19 +40,11 @@ class DetailPigeonFragment : BaseFragment(R.layout.fragment_detail_pigeon) {
             findNavController().popBackStack()
         }
 
-        val rootList: MutableList<Pigeon> = ArrayList()
-        pigeonViewModel.allPigeons.observe(viewLifecycleOwner) {
-            // val roots: List<Pigeon> = pigeonViewModel.getRoots(0)
-            for (pigeon in it) {
-                pigeonViewModel.makeFamilyTreeFor(pigeon)
-                rootList.add(pigeon)
-            }
-            mAdaptor = TreeViewAdapter(rootList.filter { it.id == pigeon.id })
-
-            binding.aici.treeItemRecyclerView.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = mAdaptor
-            }
+        pigeonViewModel.makeFamilyTreeFor(pigeon)
+        mAdaptor = TreeViewAdapter(context, listOf(pigeon))
+        binding.aici.treeItemRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdaptor
         }
     }
 }

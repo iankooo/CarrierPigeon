@@ -1,17 +1,15 @@
 package com.example.carrier_pigeon.features.pigeons.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.example.carrier_pigeon.app.Config.PIGEON_DATABASE
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendant
 import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendantDao
-import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDao
 
-@Database(entities = [Pigeon::class, Record::class, AncestorDescendant::class], version = 6)
+@Database(entities = [Pigeon::class, Record::class, AncestorDescendant::class], version = 8)
 abstract class PigeonDatabase : RoomDatabase() {
 
     abstract fun pigeonDao(): PigeonDao

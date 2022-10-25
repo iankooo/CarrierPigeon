@@ -49,7 +49,8 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     private var savePigeonEyeImageToInternalStorage: Uri? = null
     private var isEyeImageViewClicked = false
     private var pigeon: Pigeon? = null
-    private var ancestorDescendantBundle: AncestorDescendantBundle? = null
+    private var ancestorDescendantMotherBundle: AncestorDescendantBundle? = null
+    private var ancestorDescendantFatherBundle: AncestorDescendantBundle? = null
 
     private var requestPermissionsLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
@@ -138,6 +139,37 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
             if (secondVaccine == 1)
                 binding.thirdVaccine.visible()
             binding.thirdVaccine.isChecked = thirdVaccine == 1
+
+            if (motherPigeon != null) {
+                val mother = pigeonViewModel.getFamilyMemberById(motherPigeon!!)
+                if (mother != null) {
+                    binding.parents.motherTv.text = resources.getString(
+                        R.string.country_series_format,
+                        mother.country,
+                        mother.series
+                    )
+                    if (mother.pigeonImage.isNullOrEmpty()) {
+                        binding.parents.motherImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
+                    } else {
+                        binding.parents.motherImage.setImageURI(Uri.parse(mother.pigeonImage))
+                    }
+                }
+            }
+            if (fatherPigeon != null) {
+                val father = pigeonViewModel.getFamilyMemberById(fatherPigeon!!)
+                if (father != null) {
+                    binding.parents.fatherTv.text = resources.getString(
+                        R.string.country_series_format,
+                        father.country,
+                        father.series
+                    )
+                    if (father.pigeonImage.isNullOrEmpty()) {
+                        binding.parents.fatherImage.setBackgroundResource(R.drawable.ic_class_image_placeholder)
+                    } else {
+                        binding.parents.fatherImage.setImageURI(Uri.parse(father.pigeonImage))
+                    }
+                }
+            }
         }
     }
 
@@ -241,6 +273,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                         )
                         if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
                             binding.parents.motherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+
+                        ancestorDescendantMotherBundle =
+                            AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
                     } else {
                         binding.parents.fatherTv.text = resources.getString(
                             R.string.country_series_format,
@@ -249,10 +284,9 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                         )
                         if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
                             binding.parents.fatherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+                        ancestorDescendantFatherBundle =
+                            AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
                     }
-
-                    ancestorDescendantBundle =
-                        AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
                 }
             } else {
                 builderMultiple.setMessage(getString(R.string.no_pigeons_available))
@@ -299,6 +333,8 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         val firstVaccine = if (binding.firstVaccine.isChecked) 1 else 0
         val secondVaccine = if (binding.secondVaccine.isChecked) 1 else 0
         val thirdVaccine = if (binding.thirdVaccine.isChecked) 1 else 0
+        val mother = pigeon?.motherPigeon
+        val father = pigeon?.fatherPigeon
 
         if (series.isEmpty())
             shortToast(getString(R.string.series_cannot_be_empty))
@@ -320,13 +356,23 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 firstVaccine = firstVaccine,
                 secondVaccine = secondVaccine,
                 thirdVaccine = thirdVaccine,
-                familyTreeId = 0
+                familyTreeId = 0,
+                motherPigeon = mother,
+                fatherPigeon = father
             )
             if (this.pigeon != null) {
                 pigeon.id = this.pigeon!!.id
+                if (ancestorDescendantFatherBundle != null)
+                    pigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
+                if (ancestorDescendantMotherBundle != null)
+                    pigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
                 pigeonViewModel.update(pigeon)
-                if (ancestorDescendantBundle != null) {
-                    pigeonViewModel.insertAncestor(ancestorDescendantBundle!!)
+
+                if (ancestorDescendantFatherBundle != null) {
+                    pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
+                }
+                if (ancestorDescendantMotherBundle != null) {
+                    pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
                 }
             } else {
                 pigeonViewModel.insert(pigeon)
