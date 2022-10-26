@@ -27,10 +27,9 @@
         android:layout_height="@dimen/space_110"
         android:background="@drawable/bg_top_view_profiles"
         android:gravity="center"
-        android:paddingTop="@dimen/space_20"
-        android:paddingBottom="@dimen/space_20"
         android:text="@string/pedigree_pigeon"
         android:translationZ="@dimen/space_10"
+        android:paddingHorizontal="@dimen/space_73"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

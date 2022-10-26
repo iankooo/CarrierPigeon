@@ -13,8 +13,6 @@
         android:layout_height="@dimen/space_110"
         android:background="@drawable/bg_top_view_profiles"
         android:gravity="center"
-        android:paddingTop="@dimen/space_40"
-        android:paddingBottom="@dimen/space_40"
         android:text="@string/create_profile"
         android:translationZ="@dimen/space_10"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,6 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/phone_number_required"
             android:inputType="phone"
+            android:maxLength="17"
             android:nextFocusDown="@id/first_name_et"
             android:textColor="@color/light_blue" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,6 +64,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/first_name_required"
             android:inputType="textCapSentences|textVisiblePassword"
+            android:maxLength="20"
             android:nextFocusDown="@id/last_name_et"
             android:textColor="@color/light_blue" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/last_name_required"
             android:inputType="textCapSentences|textVisiblePassword"
+            android:maxLength="20"
             android:nextFocusDown="@id/home_address_et"
             android:textColor="@color/light_blue" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -112,6 +113,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/home_address_required"
             android:inputType="textCapSentences|textVisiblePassword|text"
+            android:maxLength="40"
             android:textColor="@color/light_blue" />
     </com.google.android.material.textfield.TextInputLayout>
 
