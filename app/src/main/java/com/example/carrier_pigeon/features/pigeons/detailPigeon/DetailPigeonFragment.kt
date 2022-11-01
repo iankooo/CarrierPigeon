@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.invisible
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.databinding.FragmentDetailPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
@@ -33,10 +35,15 @@ class DetailPigeonFragment : BaseFragment(R.layout.fragment_detail_pigeon) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.headerTitle.addButton.invisible()
+        binding.headerTitle.profileBtn.invisible()
+        binding.headerTitle.backButton.visible()
+        binding.headerTitle.exportToPdfBtn.visible()
+
         binding.headerTitle.welcomeLabel.text =
             getString(R.string.pedigree_pigeon, pigeon.country, pigeon.series)
 
-        binding.backButton.setOnClickListener {
+        binding.headerTitle.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
 

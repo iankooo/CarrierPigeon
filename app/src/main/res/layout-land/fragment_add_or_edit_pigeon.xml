@@ -17,7 +17,6 @@
         android:layout_marginHorizontal="@dimen/space_8"
         android:layout_marginTop="@dimen/space_8"
         android:layout_marginBottom="@dimen/space_8"
-        android:paddingBottom="@dimen/space_50"
         app:layout_constraintBottom_toTopOf="@id/footer_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +25,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <RelativeLayout
                 android:id="@+id/item_pigeon"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_5"
                 android:layout_marginBottom="@dimen/space_5"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_gray_corners"
                 android:fitsSystemWindows="true"
                 android:gravity="center"
@@ -281,7 +283,8 @@
                 layout="@layout/item_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/space_8" />
+                android:layout_marginVertical="@dimen/space_8"
+                android:layout_weight="1" />
         </LinearLayout>
     </ScrollView>
 

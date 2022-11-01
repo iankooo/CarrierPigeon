@@ -6,6 +6,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.invisible
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentMainBinding
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
@@ -36,13 +38,18 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     }
 
     private fun setControls() {
-        binding.addButton.setOnClickListener {
+        binding.headerTitle.addButton.visible()
+        binding.headerTitle.profileBtn.visible()
+        binding.headerTitle.backButton.invisible()
+        binding.headerTitle.exportToPdfBtn.invisible()
+
+        binding.headerTitle.addButton.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.mainToAddOrEditPigeon(null))
         }
         binding.pigeonsFlightsBtn.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.mainToPigeonsFlights())
         }
-        binding.profileBtn.setOnClickListener {
+        binding.headerTitle.profileBtn.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.mainToProfile())
         }
     }

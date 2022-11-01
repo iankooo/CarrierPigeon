@@ -10,19 +10,6 @@
         android:id="@+id/header_title"
         layout="@layout/header" />
 
-    <ImageButton
-        android:id="@+id/back_btn"
-        android:layout_width="@dimen/space_38"
-        android:layout_height="@dimen/space_38"
-        android:layout_marginStart="@dimen/space_20"
-        android:background="@drawable/bg_round_white_ripple"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_back_button"
-        android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til1"
         style="@style/OutlineBox"

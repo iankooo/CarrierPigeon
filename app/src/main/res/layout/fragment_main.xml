@@ -1,53 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
-    <include
-        android:id="@+id/header_title"
-        layout="@layout/header" />
-
-    <ImageButton
-        android:id="@+id/profile_btn"
-        android:layout_width="@dimen/space_38"
-        android:layout_height="@dimen/space_38"
-        android:layout_marginStart="@dimen/space_20"
-        android:background="@drawable/bg_round_white_ripple"
-        android:contentDescription="@null"
-        android:paddingStart="@dimen/space_5"
-        android:src="@drawable/ic_profile"
-        android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <ImageButton
-        android:id="@+id/add_button"
-        android:layout_width="@dimen/space_38"
-        android:layout_height="@dimen/space_38"
-        android:layout_marginEnd="@dimen/space_20"
-        android:background="@drawable/bg_round_white_ripple"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_add"
-        android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/footer_textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_title" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/header_title"
+            layout="@layout/header" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <Button
         android:id="@+id/pigeons_flights_btn"

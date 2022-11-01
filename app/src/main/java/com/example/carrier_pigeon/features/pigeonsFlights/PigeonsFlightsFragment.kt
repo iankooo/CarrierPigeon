@@ -13,7 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.shortToast
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentPigeonsFlightsBinding
 import com.example.carrier_pigeon.features.pigeons.PigeonViewModel
@@ -37,9 +39,14 @@ class PigeonsFlightsFragment :
     private lateinit var recordAdapter: RecordAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.headerTitle.addButton.invisible()
+        binding.headerTitle.profileBtn.invisible()
+        binding.headerTitle.backButton.visible()
+        binding.headerTitle.exportToPdfBtn.visible()
+
         binding.headerTitle.welcomeLabel.setText(R.string.pigeons_flights)
 
-        binding.backButton.setOnClickListener {
+        binding.headerTitle.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -69,7 +76,7 @@ class PigeonsFlightsFragment :
             deletePigeonFromListView()
         }
 
-        binding.exportToPdfBtn.setOnClickListener {
+        binding.headerTitle.exportToPdfBtn.setOnClickListener {
             createPdf()
         }
     }

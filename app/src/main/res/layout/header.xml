@@ -1,17 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_gray"
     android:stateListAnimator="@null">
 
-    <TextView
-        android:id="@+id/welcome_label"
-        style="@style/SubTitleLabel"
+    <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_58"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_top_view_profiles"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/space_73"
-        android:text="@string/header_text" />
+        android:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetEnd="0dp"
+        android:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="@dimen/space_38"
+                android:layout_height="@dimen/space_38"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/space_20"
+                android:background="@drawable/bg_round_white_ripple"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_back_button"
+                android:translationZ="@dimen/space_12"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/profile_btn"
+                android:layout_width="@dimen/space_38"
+                android:layout_height="@dimen/space_38"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/space_20"
+                android:background="@drawable/bg_round_white_ripple"
+                android:contentDescription="@null"
+                android:paddingStart="@dimen/space_5"
+                android:src="@drawable/ic_profile"
+                android:visibility="invisible"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/welcome_label"
+                style="@style/SubTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/space_73"
+                android:text="@string/header_text" />
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="@dimen/space_38"
+                android:layout_height="@dimen/space_38"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/space_20"
+                android:background="@drawable/bg_round_white_ripple"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_add"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/export_to_pdf_btn"
+                android:layout_width="@dimen/space_38"
+                android:layout_height="@dimen/space_38"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/space_20"
+                android:background="@drawable/bg_round_white_ripple"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_export"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
 </com.google.android.material.appbar.AppBarLayout>

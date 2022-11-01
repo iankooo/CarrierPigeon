@@ -10,32 +10,6 @@
         android:id="@+id/header_title"
         layout="@layout/header" />
 
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="@dimen/space_38"
-        android:layout_height="@dimen/space_38"
-        android:layout_marginStart="@dimen/space_20"
-        android:background="@drawable/bg_round_white_ripple"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_back_button"
-        android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/export_to_pdf_btn"
-        android:layout_width="@dimen/space_38"
-        android:layout_height="@dimen/space_38"
-        android:layout_marginEnd="@dimen/space_20"
-        android:background="@drawable/bg_round_white_ripple"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_export"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"

@@ -5,7 +5,9 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.carrier_pigeon.R
 import com.example.carrier_pigeon.app.common.BaseFragment
+import com.example.carrier_pigeon.app.utils.invisible
 import com.example.carrier_pigeon.app.utils.shortToast
+import com.example.carrier_pigeon.app.utils.visible
 import com.example.carrier_pigeon.data.enums.SharedPrefsWrapper
 import com.example.carrier_pigeon.databinding.FragmentProfileBinding
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
@@ -21,7 +23,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.headerTitle.welcomeLabel.setText(R.string.profile)
-        binding.backBtn.setOnClickListener {
+        binding.headerTitle.addButton.invisible()
+        binding.headerTitle.profileBtn.invisible()
+        binding.headerTitle.backButton.visible()
+        binding.headerTitle.exportToPdfBtn.invisible()
+
+        binding.headerTitle.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
 

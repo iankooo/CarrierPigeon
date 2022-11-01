@@ -174,7 +174,12 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     }
 
     private fun setControls() {
-        binding.backButton.setOnClickListener {
+        binding.headerTitle.addButton.invisible()
+        binding.headerTitle.profileBtn.invisible()
+        binding.headerTitle.backButton.visible()
+        binding.headerTitle.exportToPdfBtn.invisible()
+
+        binding.headerTitle.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
 

@@ -43,11 +43,12 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 uiThreadPoster
             )
         binding.pigeonsRecyclerview.apply {
-            layoutManager = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-            } else {
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            }
+            layoutManager =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+                } else {
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                }
 
             adapter = pigeonAdapter
             setHasFixedSize(true)
@@ -105,9 +106,12 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                     dialogInterface.dismiss()
                     pigeonAdapter.notifyItemChanged(viewHolder.adapterPosition)
                 }
+                builder.setOnCancelListener { dialogInterface ->
+                    dialogInterface.dismiss()
+                    pigeonAdapter.notifyItemChanged(viewHolder.adapterPosition)
+                }
 
                 val alertDialog = builder.create()
-                alertDialog.setCancelable(false)
                 alertDialog.show()
             }
         }
