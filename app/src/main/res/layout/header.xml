@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_gray"
+    android:stateListAnimator="@null">
+
+    <TextView
+        android:id="@+id/welcome_label"
+        style="@style/SubTitleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_58"
+        android:background="@drawable/bg_top_view_profiles"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/space_73"
+        android:text="@string/header_text" />
+</com.google.android.material.appbar.AppBarLayout>

@@ -38,12 +38,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/header_title"-->
+<!--        app:tabIndicator="@drawable/rounded_light_blue_button"-->
+<!--        app:tabIndicatorAnimationMode="elastic"-->
+<!--        app:tabIndicatorColor="@color/light_blue"-->
+<!--        app:tabIndicatorFullWidth="false"-->
+<!--        app:tabIndicatorHeight="@dimen/space_3"-->
+<!--        app:tabRippleColor="@null"-->
+<!--        app:tabSelectedTextColor="@color/light_blue"-->
+<!--        app:tabTextAppearance="@style/tab_text"-->
+<!--        app:tabTextColor="@color/gray" />-->
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@id/footer_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,5 +86,3 @@
 
     <include layout="@layout/footer" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

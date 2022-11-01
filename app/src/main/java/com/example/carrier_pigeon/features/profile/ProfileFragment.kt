@@ -20,6 +20,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.headerTitle.welcomeLabel.setText(R.string.profile)
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }

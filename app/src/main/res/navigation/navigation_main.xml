@@ -86,21 +86,5 @@
             android:id="@+id/main_to_pigeon_detail"
             app:destination="@id/detail_pigeon_fragment"
             app:popUpTo="@id/main_fragment" />
-
-        <action
-            android:id="@+id/main_to_add__or_edit_family"
-            app:destination="@id/add_or_edit_family_fragment"
-            app:popUpTo="@id/main_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/add_or_edit_family_fragment"
-        android:name="com.example.carrier_pigeon.features.families.addFamily.AddOrEditFamilyFragment"
-        tools:layout="@layout/fragment_add_or_edit_family">
-        <argument
-            android:name="family_selected"
-            android:defaultValue="@null"
-            app:argType="com.example.carrier_pigeon.features.families.data.Family"
-            app:nullable="true" />
     </fragment>
 </navigation>

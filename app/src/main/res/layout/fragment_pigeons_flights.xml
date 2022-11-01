@@ -6,43 +6,33 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
+    <include
+        android:id="@+id/header_title"
+        layout="@layout/header" />
+
     <ImageButton
         android:id="@+id/back_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginStart="@dimen/space_20"
         android:background="@drawable/bg_round_white_ripple"
         android:contentDescription="@null"
         android:src="@drawable/ic_back_button"
         android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/welcome_label"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_100"
-        android:background="@drawable/bg_top_view_profiles"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/space_73"
-        android:text="@string/pigeons_flights"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/export_to_pdf_btn"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginEnd="@dimen/space_20"
         android:background="@drawable/bg_round_white_ripple"
         android:contentDescription="@null"
         android:src="@drawable/ic_export"
         android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_label">
+        app:layout_constraintTop_toBottomOf="@id/header_title">
 
         <include layout="@layout/item_record" />
 

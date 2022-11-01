@@ -105,12 +105,12 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
     }
 
     private fun setupAddView() {
-        binding.welcomeLabel.setText(R.string.add_new_pigeon)
+        binding.headerTitle.welcomeLabel.setText(R.string.add_new_pigeon)
         binding.savePigeonBtn.setText(R.string.save_pigeon)
     }
 
     private fun setupEditView() {
-        binding.welcomeLabel.setText(R.string.edit_pigeon)
+        binding.headerTitle.welcomeLabel.setText(R.string.edit_pigeon)
         binding.savePigeonBtn.setText(R.string.save_changes)
 
         with(pigeon) {

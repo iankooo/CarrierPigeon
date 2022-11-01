@@ -33,7 +33,7 @@ class DetailPigeonFragment : BaseFragment(R.layout.fragment_detail_pigeon) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.welcomeLabel.text =
+        binding.headerTitle.welcomeLabel.text =
             getString(R.string.pedigree_pigeon, pigeon.country, pigeon.series)
 
         binding.backButton.setOnClickListener {

@@ -20,6 +20,7 @@ class CreateProfileFragment : BaseFragment(R.layout.fragment_create_profile) {
     lateinit var sharedPrefsWrapper: SharedPrefsWrapper
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.headerTitle.welcomeLabel.setText(R.string.create_profile)
         binding.saveProfileBtn.setOnClickListener {
             if (binding.phoneNumberEt.text.toString().isEmpty()) {
                 shortToast(getString(R.string.phone_number_cannot_be_empty))

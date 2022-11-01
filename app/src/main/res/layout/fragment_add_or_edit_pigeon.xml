@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
+    <include
+        android:id="@+id/header_title"
+        layout="@layout/header" />
+
     <ImageButton
         android:id="@+id/back_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginStart="@dimen/space_20"
         android:background="@drawable/bg_round_white_ripple"
         android:contentDescription="@null"
         android:src="@drawable/ic_back_button"
         android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/welcome_label"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_100"
-        android:background="@drawable/bg_top_view_profiles"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/space_73"
-        android:text="@string/add_new_pigeon"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,14 +33,19 @@
         app:layout_constraintBottom_toTopOf="@id/parents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_label">
+        app:layout_constraintTop_toBottomOf="@id/header_title">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/item_pigeon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginBottom="@dimen/space_5"
             android:background="@drawable/rounded_gray_corners"
             android:fitsSystemWindows="true"
+            android:gravity="center"
+            android:paddingStart="@dimen/space_23"
+            android:paddingEnd="@dimen/space_12"
             app:cardCornerRadius="@dimen/space_21"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintCircleRadius="@dimen/space_16"
@@ -59,38 +55,41 @@
 
             <RelativeLayout
                 android:id="@+id/main_rl"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_20"
-                android:layout_marginTop="@dimen/space_20"
-                android:layout_marginEnd="@dimen/space_5"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/space_15"
                 android:background="@drawable/selector_gender_pigeon_btn"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/space_5"
-                android:paddingVertical="@dimen/space_8"
-                app:layout_constraintEnd_toStartOf="@id/rl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:paddingVertical="@dimen/space_5">
 
                 <ImageView
                     android:id="@+id/pigeon_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:paddingVertical="@dimen/space_4"
+                    android:padding="@dimen/space_4"
                     android:src="@drawable/selector_sign_gender_pigeon_btn"
                     app:tint="@color/white" />
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/pigeon_country"
-                    style="@style/PigeonColor"
+                    style="@style/PigeonSeries"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/pigeon_gender"
                     android:layout_alignBottom="@id/pigeon_gender"
+                    android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/pigeon_gender"
+                    android:adjustViewBounds="true"
                     android:gravity="center"
+                    android:padding="@dimen/space_4"
                     app:ccpDialog_showPhoneCode="false"
                     app:ccp_arrowSize="@dimen/space_15"
                     app:ccp_contentColor="@color/white"
@@ -101,183 +100,190 @@
                     app:ccp_showPhoneCode="false"
                     app:ccp_textGravity="CENTER" />
 
+
                 <EditText
                     android:id="@+id/pigeon_series"
                     style="@style/PigeonSeries"
-                    android:layout_width="@dimen/space_100"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/pigeon_gender"
-                    android:layout_alignBottom="@id/pigeon_gender"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
                     android:layout_toEndOf="@id/pigeon_country"
+                    android:adjustViewBounds="true"
                     android:background="@drawable/rounded_white_button"
                     android:hint="@string/series"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxEms="4"
                     android:maxLength="18"
-                    android:paddingHorizontal="@dimen/space_6"
+                    android:padding="@dimen/space_4"
                     android:textColor="@color/gray"
-                    android:textColorHint="@color/gray" />
+                    android:textColorHint="@color/gray"
+                    tools:text="05583-1809090909099999999999" />
             </RelativeLayout>
-
 
             <EditText
                 android:id="@+id/pigeon_nickname"
                 style="@style/PigeonNickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_23"
-                android:layout_marginTop="@dimen/space_5"
+                android:layout_below="@id/main_rl"
+                android:layout_alignTop="@id/image"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/image"
                 android:background="@color/regular_blue"
                 android:backgroundTint="@color/transparent"
                 android:hint="@string/nickname"
                 android:importantForAutofill="no"
                 android:inputType="textVisiblePassword|textCapSentences"
                 android:maxEms="7"
-                android:maxLength="17"
-                app:layout_constraintRight_toLeftOf="@id/rl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/main_rl" />
+                android:maxLength="15"
+                tools:text="HOPEEEEEEEEEEEEEE" />
 
             <EditText
                 android:id="@+id/pigeon_color"
                 style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_23"
+                android:layout_below="@id/pigeon_nickname"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/space_5"
+                android:layout_toStartOf="@id/image"
                 android:background="@color/regular_blue"
                 android:backgroundTint="@color/transparent"
+                android:gravity="center_vertical"
                 android:hint="@string/color"
                 android:importantForAutofill="no"
                 android:inputType="textVisiblePassword|textCapSentences"
                 android:maxEms="7"
-                android:maxLength="20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pigeon_nickname" />
+                android:maxLength="15"
+                tools:text="GUTTTTTTTT" />
 
-            <EditText
-                android:id="@+id/pigeon_date_of_birth"
+            <TextView
+                android:id="@+id/vaccine_tv"
                 style="@style/PigeonColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_23"
+                android:layout_below="@id/pigeon_color"
+                android:layout_alignTop="@id/first_vaccine"
+                android:layout_alignBottom="@id/first_vaccine"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:text="@string/pigeon_vaccine"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/first_vaccine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pigeon_color"
                 android:layout_marginTop="@dimen/space_5"
+                android:layout_toEndOf="@id/vaccine_tv"
+                android:buttonTint="@color/white"
+                android:checked="false"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/second_vaccine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pigeon_color"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_toEndOf="@id/first_vaccine"
+                android:buttonTint="@color/white"
+                android:checked="false"
+                android:visibility="invisible" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/third_vaccine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pigeon_color"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_toEndOf="@id/second_vaccine"
+                android:buttonTint="@color/white"
+                android:checked="false"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/pigeon_date_of_birth"
+                style="@style/TableItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/image"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_toStartOf="@id/image"
                 android:background="@color/regular_blue"
                 android:backgroundTint="@color/transparent"
+                android:gravity="center_vertical"
                 android:hint="@string/birthday"
                 android:importantForAutofill="no"
                 android:inputType="date"
                 android:maxEms="7"
                 android:maxLength="20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pigeon_color" />
-
+                tools:text="Birthday" />
 
             <EditText
                 android:id="@+id/pigeon_details"
                 style="@style/PigeonDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_23"
+                android:layout_below="@id/image"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/space_5"
+                android:layout_marginBottom="@dimen/space_8"
                 android:background="@color/regular_blue"
                 android:backgroundTint="@color/transparent"
                 android:hint="@string/details_about_the_pigeon"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine|textVisiblePassword|textCapSentences"
                 android:maxEms="8"
-                android:paddingBottom="@dimen/space_20"
-                app:layout_constraintRight_toLeftOf="@id/rl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pigeon_date_of_birth" />
+                android:paddingBottom="@dimen/space_7" />
 
-            <RelativeLayout
-                android:id="@+id/rl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_15"
-                android:paddingBottom="@dimen/space_15"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/image"
+                android:layout_width="@dimen/space_130"
+                android:layout_height="@dimen/space_130"
+                android:layout_below="@id/main_rl"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/space_5"
+                android:layout_marginTop="@dimen/space_5"
+                android:backgroundTint="@color/white"
+                android:theme="@style/Theme.MaterialComponents"
+                app:cardCornerRadius="@dimen/space_25">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/image"
-                    android:layout_width="@dimen/space_150"
-                    android:layout_height="@dimen/space_150"
-                    android:layout_alignWithParentIfMissing="true"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/white"
-                    android:theme="@style/Theme.MaterialComponents"
-                    app:cardCornerRadius="@dimen/space_25">
+                <ImageView
+                    android:id="@+id/add_pigeon_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_class_image_placeholder" />
+            </com.google.android.material.card.MaterialCardView>
 
-                    <ImageView
-                        android:id="@+id/add_pigeon_image_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@null"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_pigeon_image_placeholder" />
-                </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/space_40"
+                android:layout_height="@dimen/space_40"
+                android:layout_alignTop="@id/image"
+                android:layout_alignEnd="@id/image"
+                android:layout_marginTop="@dimen/space_15"
+                android:layout_marginEnd="@dimen/space_15"
+                android:backgroundTint="@color/regular_blue"
+                android:theme="@style/Theme.MaterialComponents"
+                app:cardCornerRadius="@dimen/space_20">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="@dimen/space_40"
-                    android:layout_height="@dimen/space_40"
-                    android:layout_alignTop="@id/image"
-                    android:layout_alignEnd="@id/image"
-                    android:layout_marginTop="@dimen/space_15"
-                    android:layout_marginEnd="@dimen/space_15"
-                    android:backgroundTint="@color/regular_blue"
-                    android:theme="@style/Theme.MaterialComponents"
-                    app:cardCornerRadius="@dimen/space_20">
-
-                    <ImageView
-                        android:id="@+id/add_pigeon_eye_image_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@null"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_pigeon_eye_placeholder"
-                        android:translationZ="@dimen/space_5" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignWithParentIfMissing="true"
-                    android:layout_below="@id/image"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/PigeonColor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pigeon_vaccine" />
-
-                    <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/first_vaccine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white" />
-
-                    <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/second_vaccine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white"
-                        android:visibility="invisible" />
-
-                    <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/third_vaccine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white"
-                        android:visibility="invisible" />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/add_pigeon_eye_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_pigeon_eye_placeholder"
+                    android:translationZ="@dimen/space_5" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
     </ScrollView>
 
     <include
@@ -309,17 +315,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/footer_textview" />
 
-    <TextView
-        android:id="@+id/footer_textview"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_view_profiles"
-        android:gravity="center"
-        android:paddingTop="@dimen/space_20"
-        android:paddingBottom="@dimen/space_20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <include layout="@layout/footer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

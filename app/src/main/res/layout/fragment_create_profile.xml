@@ -4,21 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray"
-    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
-    <TextView
-        android:id="@+id/welcome_label"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_100"
-        android:background="@drawable/bg_top_view_profiles"
-        android:gravity="center"
-        android:text="@string/create_profile"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <include
+        android:id="@+id/header_title"
+        layout="@layout/header" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til1"
@@ -30,7 +20,7 @@
         android:theme="@style/OutlineBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_label"
+        app:layout_constraintTop_toBottomOf="@id/header_title"
         app:startIconDrawable="@drawable/ic_phone">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -136,17 +126,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/footer_textview" />
 
-    <TextView
-        android:id="@+id/footer_textview"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_view_profiles"
-        android:gravity="center"
-        android:paddingTop="@dimen/space_20"
-        android:paddingBottom="@dimen/space_20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <include layout="@layout/footer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,8 @@
 
     <ImageButton
         android:id="@+id/add_to_flight_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginHorizontal="@dimen/space_8"
         android:layout_marginVertical="@dimen/space_5"
         android:background="@drawable/bg_round_white_ripple"
@@ -18,8 +18,8 @@
 
     <ImageButton
         android:id="@+id/delete_from_flight_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginHorizontal="@dimen/space_8"
         android:layout_marginVertical="@dimen/space_5"
         android:background="@drawable/bg_round_white_ripple"

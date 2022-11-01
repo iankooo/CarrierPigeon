@@ -37,6 +37,8 @@ class PigeonsFlightsFragment :
     private lateinit var recordAdapter: RecordAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.headerTitle.welcomeLabel.setText(R.string.pigeons_flights)
+
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }

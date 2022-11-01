@@ -1,49 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
+    <include
+        android:id="@+id/header_title"
+        layout="@layout/header" />
+
     <ImageButton
         android:id="@+id/back_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginStart="@dimen/space_20"
         android:background="@drawable/bg_round_white_ripple"
         android:contentDescription="@null"
         android:src="@drawable/ic_back_button"
         android:translationZ="@dimen/space_12"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/welcome_label"
-        style="@style/SubTitleLabel"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_100"
-        android:background="@drawable/bg_top_view_profiles"
-        android:gravity="center"
-        android:text="@string/pedigree_pigeon"
-        android:translationZ="@dimen/space_10"
-        android:paddingHorizontal="@dimen/space_73"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/add_button"
-        android:layout_width="@dimen/space_53"
-        android:layout_height="@dimen/space_53"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
         android:layout_marginEnd="@dimen/space_20"
         android:background="@drawable/bg_round_white_ripple"
         android:contentDescription="@null"
         android:src="@drawable/ic_export"
         android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/welcome_label"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_label">
+        app:layout_constraintTop_toBottomOf="@id/header_title">
 
         <include
             android:id="@+id/aici"
@@ -61,15 +49,4 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.otaliastudios.zoom.ZoomLayout>
-
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/tree_recycler_view"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="500dp"-->
-    <!--        android:padding="@dimen/space_8"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/welcome_label" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pigeons_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
 
     <ImageView
         android:id="@+id/three_clouds_imageView"
@@ -19,25 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/three_clouds_imageView"
         android:layout_alignStart="@id/three_clouds_imageView"
-        android:layout_marginTop="@dimen/space_20"
-        android:alpha=".1"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_pigeon" />
-
-    <ImageView
-        android:id="@+id/pigeon_imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pigeon_imageView"
         android:layout_alignEnd="@id/three_clouds_imageView"
+        android:layout_marginTop="@dimen/space_20"
         android:layout_marginBottom="@dimen/space_32"
         android:alpha=".1"
         android:contentDescription="@null"
         android:src="@drawable/ic_pigeon" />
-
-    <include
-        layout="@layout/item_family"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
 </RelativeLayout>

@@ -76,4 +76,5 @@
     <string name="select_mother">Select mother</string>
     <string name="select_father">Select father</string>
     <string name="cannot_read_pdf_file">Can\'t read pdf file</string>
+    <string name="header_text">Header text</string>
 </resources>
