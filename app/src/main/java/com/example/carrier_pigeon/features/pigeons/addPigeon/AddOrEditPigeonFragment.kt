@@ -144,7 +144,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 val mother = pigeonViewModel.getFamilyMemberById(motherPigeon!!)
                 if (mother != null) {
                     binding.parents.motherTv.text = resources.getString(
-                        R.string.country_series_format,
+                        R.string.two_strings_format,
                         mother.country,
                         mother.series
                     )
@@ -159,7 +159,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 val father = pigeonViewModel.getFamilyMemberById(fatherPigeon!!)
                 if (father != null) {
                     binding.parents.fatherTv.text = resources.getString(
-                        R.string.country_series_format,
+                        R.string.two_strings_format,
                         father.country,
                         father.series
                     )
@@ -272,7 +272,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 ) { dialog, which ->
                     if (parentGender == FEMALE) {
                         binding.parents.motherTv.text = resources.getString(
-                            R.string.country_series_format,
+                            R.string.two_strings_format,
                             ancestorPigeon?.country,
                             ancestorPigeon?.series
                         )
@@ -283,7 +283,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                             AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
                     } else {
                         binding.parents.fatherTv.text = resources.getString(
-                            R.string.country_series_format,
+                            R.string.two_strings_format,
                             ancestorPigeon?.country,
                             ancestorPigeon?.series
                         )

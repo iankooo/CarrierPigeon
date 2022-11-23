@@ -12,14 +12,14 @@ interface PigeonDao {
     @Update
     suspend fun update(pigeon: Pigeon)
 
-    @Delete
+    @Update
     suspend fun delete(pigeon: Pigeon)
 
     @Query("DELETE FROM pigeon_table")
     fun deleteAll()
 
-    @Query("SELECT * FROM `pigeon_table`")
-    fun fetchAllPigeons(): LiveData<List<Pigeon>>
+    @Query("SELECT * FROM `pigeon_table` WHERE isDeleted=:isDeleted")
+    fun fetchAllPigeons(isDeleted: Boolean = false): LiveData<List<Pigeon>>
 
     @Query("SELECT * FROM `pigeon_table` WHERE id=:id")
     fun fetchPigeonById(id: Int): Pigeon?

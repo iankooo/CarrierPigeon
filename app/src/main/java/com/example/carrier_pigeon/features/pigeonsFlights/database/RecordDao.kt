@@ -18,6 +18,6 @@ interface RecordDao {
     @Delete
     suspend fun deleteAll(records: List<Record>)
 
-    @Query("SELECT * FROM `record_table`")
+    @Query("SELECT * FROM `record_table` r JOIN `pigeon_table` p ON r.pigeonId = p.id WHERE p.isDeleted = 0 ")
     fun fetchAllRecords(): LiveData<List<Record>>
 }

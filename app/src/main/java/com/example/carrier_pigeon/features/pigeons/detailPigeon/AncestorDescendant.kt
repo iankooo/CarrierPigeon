@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull
             entity = Pigeon::class,
             parentColumns = ["id"],
             childColumns = ["ancestorId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.NO_ACTION
         ), ForeignKey(
             entity = Pigeon::class,
             parentColumns = ["id"],
             childColumns = ["descendantId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.NO_ACTION
         )
     ]
 )

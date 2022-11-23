@@ -21,28 +21,38 @@
             android:layout_height="match_parent"
             android:overScrollMode="never"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/footer_textview"
+            style="@style/SubTitleLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/light_blue"
+            android:gravity="center"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
+
+            <Button
+                android:id="@+id/pigeons_flights_btn"
+                style="@style/SubTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_white_button"
+                android:drawableStart="@drawable/ic_pigeons"
+                android:drawablePadding="@dimen/space_10"
+                android:gravity="center"
+                android:padding="@dimen/space_10"
+                android:text="@string/pigeons_flights"
+                android:textAllCaps="false"
+                android:textColor="@color/light_blue"
+                android:translationZ="@dimen/space_10"
+                app:layout_constraintBottom_toBottomOf="@id/footer_textview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/footer_textview" />
+        </com.google.android.material.bottomappbar.BottomAppBar>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <Button
-        android:id="@+id/pigeons_flights_btn"
-        style="@style/SubTitleLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_white_button"
-        android:drawableStart="@drawable/ic_pigeons"
-        android:drawablePadding="@dimen/space_10"
-        android:gravity="center"
-        android:padding="@dimen/space_10"
-        android:text="@string/pigeons_flights"
-        android:textAllCaps="false"
-        android:textColor="@color/light_blue"
-        android:translationZ="@dimen/space_10"
-        app:layout_constraintBottom_toBottomOf="@id/footer_textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/footer_textview" />
-
-    <include layout="@layout/footer" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

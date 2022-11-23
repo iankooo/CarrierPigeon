@@ -9,7 +9,7 @@ import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescenda
 import com.example.carrier_pigeon.features.pigeonsFlights.data.Record
 import com.example.carrier_pigeon.features.pigeonsFlights.database.RecordDao
 
-@Database(entities = [Pigeon::class, Record::class, AncestorDescendant::class], version = 8)
+@Database(entities = [Pigeon::class, Record::class, AncestorDescendant::class], version = 9)
 abstract class PigeonDatabase : RoomDatabase() {
 
     abstract fun pigeonDao(): PigeonDao

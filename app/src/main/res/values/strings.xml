@@ -55,7 +55,7 @@
     <string name="pigeon_age">Age: %s Year %s Month %s Day</string>
     <string name="pigeon_vaccine">Vaccine:</string>
     <string name="ring_series_format">%s %s %s</string>
-    <string name="country_series_format">%s %s</string>
+    <string name="two_strings_format">%s %s</string>
     <string name="nr_of_flight_format">%d</string>
     <string name="click_to_see_details">&#x2939;Click to see details&#x2938;</string>
     <string name="empty" />

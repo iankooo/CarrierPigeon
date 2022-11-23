@@ -26,7 +26,8 @@ data class Pigeon(
     val thirdVaccine: Int,
     val familyTreeId: Int,
     var motherPigeon: Int?,
-    var fatherPigeon: Int?
+    var fatherPigeon: Int?,
+    var isDeleted: Boolean = false
 ) : Parcelable {
     @IgnoredOnParcel
     @Ignore

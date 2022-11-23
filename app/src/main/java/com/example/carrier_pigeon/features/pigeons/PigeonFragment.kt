@@ -99,6 +99,7 @@ class PigeonFragment : BaseFragment(R.layout.fragment_pigeon) {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(getString(R.string.are_you_sure_you_want_to_delete_it))
                 builder.setPositiveButton(getString(R.string.yes)) { dialogInterface, _ ->
+                    pigeon.isDeleted = true
                     viewModel.delete(pigeon)
                     dialogInterface.dismiss()
                 }
