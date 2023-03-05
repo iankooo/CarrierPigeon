@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">CarrierPigeon</string>
+    <string name="add_new_pigeon">Adăugați porumbel</string>
+    <string name="series">Serie</string>
+    <string name="nickname">Nume</string>
+    <string name="color">Culoare</string>
+    <string name="details_about_the_pigeon">Detalii despre porumbel</string>
+    <string name="save_pigeon">Salvați porumbel</string>
+    <string name="welcome_comma_first_name_of_user">Salut, %s</string>
+    <string name="pigeons">Porumbei</string>
+    <string name="families">Familii</string>
+    <string name="pigeons_flights">Zboruri porumbei</string>
+
+    <!-- Permissions dialogs -->
+    <string name="permission_rationale_dialog_title">Permisiuni necesare</string>
+    <string name="permission_rationale_dialog_message">Avem nevoie de permisiuni pentru cameră și microfon pentru a folosi aplicația.</string>
+    <string name="permission_rationale_dialog_positive_button_text">Permiteți</string>
+    <string name="permission_rationale_dialog_negative_button_text">Nu mulțumesc</string>
+    <string name="settings_dialog_title">Permisiuni necesare</string>
+    <string name="settings_dialog_message">Acordați manual permisiunea din setări</string>
+    <string name="settings_dialog_positive_button_text">Mergi la setări</string>
+    <string name="settings_dialog_negative_button_text">Nu mulțumesc</string>
+    <string name="series_cannot_be_empty">Seria nu poate fi goală!</string>
+    <string name="nickname_cannot_be_empty">Numele nu poate fi gol!</string>
+    <string name="color_cannot_be_empty">Culoarea nu poate fi goală!</string>
+    <string name="are_you_sure_you_want_to_delete_it">Sigur vrei să-l ștergi?</string>
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+    <string name="create_profile">Creează profil</string>
+    <string name="save_profile">Salvează profil</string>
+    <string name="phone_number_required"><font color='#DB392E'>*</font>Număr de telefon</string>
+    <string name="first_name_required"><font color='#DB392E'>*</font>Prenume</string>
+    <string name="last_name_required"><font color='#DB392E'>*</font>Nume</string>
+    <string name="home_address_required"><font color='#DB392E'>*</font>Adresa</string>
+    <string name="phone_number_cannot_be_empty">Numărul de telefon nu poate fi gol!</string>
+    <string name="first_name_cannot_be_empty">Prenumele nu poate fi gol!</string>
+    <string name="last_name_cannot_be_empty">Numele nu poate fi gol!</string>
+    <string name="home_address_cannot_be_empty">Adresa nu poate fi goală!</string>
+    <string name="edit_pigeon">Editează porumbel</string>
+    <string name="save_changes">Salvează modificările</string>
+    <string name="pedigree_pigeon">Porumbel Pédigree:\n%s %s</string>
+    <string name="nr">Nu.</string>
+    <string name="country">Țara</string>
+    <string name="date_of_birth">Data nașterii</string>
+    <string name="gender">Gen</string>
+    <string name="vaccine">Vaccin</string>
+    <string name="no_of_vaccines">Nr.vaccinuri</string>
+    <string name="add_pigeons_to_flight">Adăugați porumbei la zbor</string>
+    <string name="delete_pigeons_from_flight">Ștergeți porumbeii din zbor</string>
+    <string name="no_pigeons_available">Nu există porumbei disponibili!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Anulare</string>
+    <string name="sex">Sex</string>
+    <string name="ring_series">Seria de inel</string>
+    <string name="birthday">Zi de naștere</string>
+    <string name="pigeon_age">Vârstă: %s An %s Luna %s Ziua</string>
+    <string name="pigeon_vaccine">Vaccin:</string>
+    <string name="ring_series_format">%s %s %s</string>
+    <string name="two_strings_format">%s %s</string>
+    <string name="nr_of_flight_format">%d</string>
+    <string name="click_to_see_details">&#x2939;Click pentru detalii&#x2938;</string>
+    <string name="empty" />
+    <string name="pigeon_eye_photo">Fotografie ochi porumbel</string>
+    <string name="select_photo_from_gallery">Selectați poza din Galerie</string>
+    <string name="capture_photo_from_camera">Faceți o poză</string>
+    <string name="pigeon_photo">Fotografie cu porumbel</string>
+    <string name="profile">Profil</string>
+    <string name="email_address_optional">Adresa de email</string>
+    <string name="pdf_title">Zborul porumbeilor PDF.pdf</string>
+    <string name="the_list_of_boarded_pigeons">Lista porumbeilor îmbarcați</string>
+    <string name="pigeon_data">Datele porumbeilor</string>
+    <string name="fancier">Crescător: %s %s</string>
+    <string name="phone_number">Nr. de telefon: %s</string>
+    <string name="home_address">Adresa: %s</string>
+    <string name="add_new_family">Adăugați o familie nouă</string>
+    <string name="save_family">Salvați familia</string>
+    <string name="select_mother">Alege mama</string>
+    <string name="select_father">Alege tatăl</string>
+    <string name="cannot_read_pdf_file">Nu se poate citi fișierul pdf</string>
+    <string name="header_text">Antet</string>
+</resources>

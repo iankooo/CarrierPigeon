@@ -74,7 +74,7 @@ class PdfService(private val context: Context) {
 
     private fun createCell(content: String): PdfPCell {
         val cell = PdfPCell(Phrase(content))
-        cell.horizontalAlignment = Element.ALIGN_LEFT
+        cell.horizontalAlignment = Element.ALIGN_CENTER
         cell.verticalAlignment = Element.ALIGN_MIDDLE
         // setup padding
         cell.setPadding(CELL_PADDING)
@@ -131,14 +131,14 @@ class PdfService(private val context: Context) {
             context.getString(R.string.ring_series),
             context.getString(R.string.sex),
             context.getString(R.string.color),
-            context.getString(R.string.vaccine)
+            context.getString(R.string.no_of_vaccines)
         )
         // write table header into table
         tableHeaderContent.forEach {
             // define a cell
             val cell = createCell(it)
             // add our cell into our table
-            table.addCell(cell)
+            table.addCell(cell).horizontalAlignment
         }
         // write pigeon data into table
         data.forEach {
@@ -163,7 +163,7 @@ class PdfService(private val context: Context) {
             table.addCell(colorCell)
             // Write Each Pigeon Vaccine
             val vaccineCell =
-                createCell("${it.firstVaccine} ${it.secondVaccine} ${it.thirdVaccine}")
+                createCell("${it.firstVaccine + it.secondVaccine + it.thirdVaccine}")
             table.addCell(vaccineCell)
         }
         document.add(table)

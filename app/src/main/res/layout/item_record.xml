@@ -31,7 +31,6 @@
         android:text="@string/ring_series"
         android:textColor="@color/light_blue" />
 
-
     <TextView
         android:id="@+id/gender"
         style="@style/TableItem"

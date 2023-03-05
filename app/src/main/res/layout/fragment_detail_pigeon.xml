@@ -9,18 +9,42 @@
         android:id="@+id/header_title"
         layout="@layout/header" />
 
-    <com.otaliastudios.zoom.ZoomLayout
+    <!--    <com.otaliastudios.zoom.ZoomLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/header_title">-->
+
+    <!--        <include-->
+    <!--            android:id="@+id/tree_view"-->
+    <!--            layout="@layout/adapter_tree_view"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content" />-->
+    <!--    </com.otaliastudios.zoom.ZoomLayout>-->
+
+    <com.gyso.treeview.GysoTreeView
+        android:id="@+id/base_tree_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_title">
+        app:layout_constraintTop_toBottomOf="@id/header_title" />
 
-        <include
-            android:id="@+id/tree_view"
-            layout="@layout/adapter_tree_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.otaliastudios.zoom.ZoomLayout>
+    <ImageButton
+        android:id="@+id/refresh"
+        android:layout_width="@dimen/space_38"
+        android:layout_height="@dimen/space_38"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginBottom="@dimen/space_20"
+        android:background="@drawable/bg_round_white_ripple"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_refresh"
+        android:translationZ="@dimen/space_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@ import com.example.carrier_pigeon.databinding.ItemPigeonBinding
 import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import java.time.LocalDate
 import java.time.Period
-import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -61,7 +61,7 @@ class PigeonAdapter(
                 } else {
                     binding.pigeonEyeImage.setImageURI(Uri.parse(pigeonEyeImage))
                 }
-                val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
+                val formatter = DateTimeFormatterBuilder().appendPattern(DATE_FORMAT).toFormatter(Locale.ENGLISH)
                 val date = LocalDate.parse(dateOfBirth, formatter)
                 val p = Period.between(date, LocalDate.now())
                 binding.pigeonDateOfBirth.text = context?.getString(

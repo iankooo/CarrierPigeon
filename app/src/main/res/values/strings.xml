@@ -44,6 +44,7 @@
     <string name="date_of_birth">Date of birth</string>
     <string name="gender">Gender</string>
     <string name="vaccine">Vaccine</string>
+    <string name="no_of_vaccines">No. of vaccines</string>
     <string name="add_pigeons_to_flight">Add pigeons to flight</string>
     <string name="delete_pigeons_from_flight">Delete pigeons from flight</string>
     <string name="no_pigeons_available">No pigeons available!</string>
