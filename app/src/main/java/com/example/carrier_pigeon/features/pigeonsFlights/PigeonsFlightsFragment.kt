@@ -115,7 +115,8 @@ class PigeonsFlightsFragment :
                 getString(R.string.ok)
             ) { dialog, which ->
                 recordAdapter.notifyDataSetChanged()
-                viewModel.deleteAllRecords(selectedPigeons)
+                for (selectedPigeon in selectedPigeons)
+                    viewModel.deleteRecord(selectedPigeon)
             }
         } else {
             builderMultiple.setMessage(getString(R.string.no_pigeons_available))

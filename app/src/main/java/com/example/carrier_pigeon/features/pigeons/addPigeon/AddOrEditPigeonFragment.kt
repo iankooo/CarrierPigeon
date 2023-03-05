@@ -224,15 +224,11 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         }
 
         binding.parents.motherView.setOnClickListener {
-            if (pigeon != null) {
-                addParent(R.drawable.ic_female, "Choose mother", FEMALE)
-            }
+            addParent(R.drawable.ic_female, "Choose mother", FEMALE)
         }
 
         binding.parents.fatherView.setOnClickListener {
-            if (pigeon != null) {
-                addParent(R.drawable.ic_male, "Choose father", MALE)
-            }
+            addParent(R.drawable.ic_male, "Choose father", MALE)
         }
     }
 
@@ -269,7 +265,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
 
                 builderMultiple.setPositiveButton(
                     getString(R.string.ok)
-                ) { dialog, which ->
+                ) { _, _ ->
                     if (parentGender == FEMALE) {
                         binding.parents.motherTv.text = resources.getString(
                             R.string.two_strings_format,
@@ -381,6 +377,23 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 }
             } else {
                 pigeonViewModel.insert(pigeon)
+                val foundPigeon: Pigeon =
+                    pigeonViewModel.getPigeonBySeriesAndGender(pigeon.series, pigeon.gender)
+                this.pigeon
+                if (ancestorDescendantFatherBundle != null)
+                    foundPigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
+                if (ancestorDescendantMotherBundle != null)
+                    foundPigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
+                pigeonViewModel.update(foundPigeon)
+
+                if (ancestorDescendantFatherBundle != null) {
+                    ancestorDescendantFatherBundle!!.existingPigeon = foundPigeon
+                    pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
+                }
+                if (ancestorDescendantMotherBundle != null) {
+                    ancestorDescendantMotherBundle!!.existingPigeon = foundPigeon
+                    pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
+                }
             }
             findNavController().popBackStack()
         }
@@ -468,6 +481,7 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
