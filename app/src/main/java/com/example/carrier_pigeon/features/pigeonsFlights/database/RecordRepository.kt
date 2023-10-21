@@ -15,7 +15,7 @@ class RecordRepository(private val recordDao: RecordDao) {
     }
 
     suspend fun delete(record: Record) {
-        recordDao.delete(record)
+        recordDao.deleteByPigeonId(record.pigeonId)
     }
 
     suspend fun deleteAll(records: List<Record>) {

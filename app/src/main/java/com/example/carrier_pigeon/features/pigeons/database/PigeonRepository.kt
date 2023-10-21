@@ -2,10 +2,10 @@ package com.example.carrier_pigeon.features.pigeons.database
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendant
 import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendantBundle
 import com.example.carrier_pigeon.features.pigeons.detailPigeon.AncestorDescendantDao
-import com.example.carrier_pigeon.features.pigeons.data.Pigeon
 
 class PigeonRepository(private val pigeonDao: PigeonDao, application: Application) {
     val allPigeons: LiveData<List<Pigeon>> = pigeonDao.fetchAllPigeons()
@@ -18,6 +18,10 @@ class PigeonRepository(private val pigeonDao: PigeonDao, application: Applicatio
 
     suspend fun insert(pigeon: Pigeon) {
         pigeonDao.insert(pigeon)
+    }
+
+    fun findPigeon(series: String, gender: String): Pigeon {
+        return pigeonDao.findPigeon(series, gender)
     }
 
     suspend fun delete(pigeon: Pigeon) {
@@ -50,7 +54,10 @@ class PigeonRepository(private val pigeonDao: PigeonDao, application: Applicatio
     fun getAncestorDescendantsByAncestorId(ancestorId: Int): List<AncestorDescendant?>? {
         return mAncestorDescendantDao.getAllAncestorDescendantRecordsByAncestorIdNotLive(ancestorId)
     }
+
     fun getAncestorDescendantsByDescendantId(descendantId: Int): List<AncestorDescendant?>? {
-        return mAncestorDescendantDao.getAllAncestorDescendantRecordsByDescendantIdNotLive(descendantId)
+        return mAncestorDescendantDao.getAllAncestorDescendantRecordsByDescendantIdNotLive(
+            descendantId
+        )
     }
 }

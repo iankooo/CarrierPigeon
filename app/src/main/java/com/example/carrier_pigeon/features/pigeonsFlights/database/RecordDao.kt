@@ -12,8 +12,8 @@ interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(records: List<Record>)
 
-    @Delete
-    suspend fun delete(record: Record)
+    @Query("DELETE FROM `record_table` WHERE  pigeonId=:pigeonId")
+    suspend fun deleteByPigeonId(pigeonId: Int)
 
     @Delete
     suspend fun deleteAll(records: List<Record>)

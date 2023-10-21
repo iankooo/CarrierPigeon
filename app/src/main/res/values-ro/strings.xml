@@ -38,7 +38,7 @@
     <string name="home_address_cannot_be_empty">Adresa nu poate fi goală!</string>
     <string name="edit_pigeon">Editează porumbel</string>
     <string name="save_changes">Salvează modificările</string>
-    <string name="pedigree_pigeon">Porumbel Pédigree:\n%s %s</string>
+    <string name="pedigree_pigeon">Porumbel Pédigree:\n%s %s %s</string>
     <string name="nr">Nu.</string>
     <string name="country">Țara</string>
     <string name="date_of_birth">Data nașterii</string>
@@ -66,7 +66,7 @@
     <string name="pigeon_photo">Fotografie cu porumbel</string>
     <string name="profile">Profil</string>
     <string name="email_address_optional">Adresa de email</string>
-    <string name="pdf_title">Zborul porumbeilor PDF.pdf</string>
+    <string name="pdf_title">zborul_porumbeilor</string>
     <string name="the_list_of_boarded_pigeons">Lista porumbeilor îmbarcați</string>
     <string name="pigeon_data">Datele porumbeilor</string>
     <string name="fancier">Crescător: %s %s</string>

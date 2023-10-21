@@ -69,6 +69,12 @@ class PigeonViewModel @Inject constructor(
         return null
     }
 
+    fun getPigeonBySeriesAndGender(series: String, gender: String): Pigeon {
+        val callable = Callable { mPigeonRepository.findPigeon(series, gender) }
+        backgroundThreadPoster = BackgroundThreadPoster()
+        return backgroundThreadPoster.submit(callable)
+    }
+
     fun getFamilyMemberById(id: Int): Pigeon? {
         val callable = Callable { mPigeonRepository.getFamilyMemberById(id) }
         return backgroundThreadPoster.submit(callable)
@@ -160,12 +166,16 @@ class PigeonViewModel @Inject constructor(
         } else {
             val parents: MutableList<Pigeon> = ArrayList()
             for (ancestorDescendant in ancestorDescendants) {
-                val parent: Pigeon? = getFamilyMemberById(ancestorDescendant?.ancestorId!!)
+                val parent: Pigeon? = ancestorDescendant?.ancestorId?.let { getFamilyMemberById(it) }
 
                 // recurse
-                val grandparents: List<Pigeon> = makeFamilyTree(parent!!)
-                parent.children = grandparents
-                parents.add(parent)
+                val grandparents: List<Pigeon>? = parent?.let { makeFamilyTree(it) }
+                if (grandparents != null) {
+                    parent.children = grandparents
+                }
+                if (parent != null) {
+                    parents.add(parent)
+                }
             }
             parents
         }

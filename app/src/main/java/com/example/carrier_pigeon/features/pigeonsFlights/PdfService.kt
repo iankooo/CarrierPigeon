@@ -11,6 +11,7 @@ import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 class PdfService(private val context: Context) {
     companion object {
@@ -27,11 +28,16 @@ class PdfService(private val context: Context) {
     private lateinit var pdf: PdfWriter
 
     private fun createFile(): File {
-        // Prepare file
-        val title = context.getString(R.string.pdf_title)
+        val title = context.getString(R.string.pdf_title) + ".pdf"
         val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val file = File(path, title)
-        if (!file.exists()) file.createNewFile()
+
+        if (file.exists()) {
+            if (file.delete())
+                file.createNewFile()
+        } else {
+            file.createNewFile()
+        }
         return file
     }
 

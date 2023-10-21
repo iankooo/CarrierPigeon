@@ -15,6 +15,9 @@ interface PigeonDao {
     @Update
     suspend fun delete(pigeon: Pigeon)
 
+    @Query("SELECT * FROM `pigeon_table` WHERE series==:series AND gender==:gender LIMIT 1")
+    fun findPigeon(series: String, gender: String): Pigeon
+
     @Query("DELETE FROM pigeon_table")
     fun deleteAll()
 
