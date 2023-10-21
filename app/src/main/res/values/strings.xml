@@ -38,7 +38,7 @@
     <string name="home_address_cannot_be_empty">Home address cannot be empty!</string>
     <string name="edit_pigeon">Edit pigeon</string>
     <string name="save_changes">Save changes</string>
-    <string name="pedigree_pigeon">Pédigree Pigeon:\n%s %s</string>
+    <string name="pedigree_pigeon">Pédigree Pigeon:\n%s %s %s</string>
     <string name="nr">No.</string>
     <string name="country">Country</string>
     <string name="date_of_birth">Date of birth</string>
@@ -66,7 +66,7 @@
     <string name="pigeon_photo">Pigeon photo</string>
     <string name="profile">Profile</string>
     <string name="email_address_optional">Email address</string>
-    <string name="pdf_title">Pigeons flight PDF.pdf</string>
+    <string name="pdf_title">pigeons_flight</string>
     <string name="the_list_of_boarded_pigeons">The list of boarded pigeons</string>
     <string name="pigeon_data">Pigeon data</string>
     <string name="fancier">Fancier: %s %s</string>

@@ -182,10 +182,11 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
         binding.headerTitle.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        binding.pigeonGender.setOnClickListener {
-            binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
-            binding.mainRl.isActivated = !binding.mainRl.isActivated
+        if (pigeon == null) {
+            binding.pigeonGender.setOnClickListener {
+                binding.pigeonGender.isActivated = !binding.pigeonGender.isActivated
+                binding.mainRl.isActivated = !binding.mainRl.isActivated
+            }
         }
 
         binding.pigeonDateOfBirth.transformIntoDatePicker(requireContext(), DATE_FORMAT)
@@ -266,27 +267,29 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 builderMultiple.setPositiveButton(
                     getString(R.string.ok)
                 ) { _, _ ->
-                    if (parentGender == FEMALE) {
-                        binding.parents.motherTv.text = resources.getString(
-                            R.string.two_strings_format,
-                            ancestorPigeon?.country,
-                            ancestorPigeon?.series
-                        )
-                        if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
-                            binding.parents.motherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+                    if (ancestorPigeon != null) {
+                        if (parentGender == FEMALE) {
+                            binding.parents.motherTv.text = resources.getString(
+                                R.string.two_strings_format,
+                                ancestorPigeon?.country,
+                                ancestorPigeon?.series
+                            )
+                            if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
+                                binding.parents.motherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
 
-                        ancestorDescendantMotherBundle =
-                            AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
-                    } else {
-                        binding.parents.fatherTv.text = resources.getString(
-                            R.string.two_strings_format,
-                            ancestorPigeon?.country,
-                            ancestorPigeon?.series
-                        )
-                        if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
-                            binding.parents.fatherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
-                        ancestorDescendantFatherBundle =
-                            AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
+                            ancestorDescendantMotherBundle =
+                                AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
+                        } else {
+                            binding.parents.fatherTv.text = resources.getString(
+                                R.string.two_strings_format,
+                                ancestorPigeon?.country,
+                                ancestorPigeon?.series
+                            )
+                            if (!ancestorPigeon?.pigeonImage.isNullOrEmpty())
+                                binding.parents.fatherImage.setImageURI(Uri.parse(ancestorPigeon?.pigeonImage))
+                            ancestorDescendantFatherBundle =
+                                AncestorDescendantBundle(ancestorPigeon, pigeon, 1)
+                        }
                     }
                 }
             } else {
@@ -362,40 +365,51 @@ class AddOrEditPigeonFragment : BaseFragment(R.layout.fragment_add_or_edit_pigeo
                 fatherPigeon = father
             )
             if (this.pigeon != null) {
-                pigeon.id = this.pigeon!!.id
-                if (ancestorDescendantFatherBundle != null)
-                    pigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
-                if (ancestorDescendantMotherBundle != null)
-                    pigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
-                pigeonViewModel.update(pigeon)
-
-                if (ancestorDescendantFatherBundle != null) {
-                    pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
-                }
-                if (ancestorDescendantMotherBundle != null) {
-                    pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
-                }
+                updatePigeon(pigeon)
             } else {
-                pigeonViewModel.insert(pigeon)
-                val foundPigeon: Pigeon =
-                    pigeonViewModel.getPigeonBySeriesAndGender(pigeon.series, pigeon.gender)
-                this.pigeon
-                if (ancestorDescendantFatherBundle != null)
-                    foundPigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
-                if (ancestorDescendantMotherBundle != null)
-                    foundPigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
-                pigeonViewModel.update(foundPigeon)
-
-                if (ancestorDescendantFatherBundle != null) {
-                    ancestorDescendantFatherBundle!!.existingPigeon = foundPigeon
-                    pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
-                }
-                if (ancestorDescendantMotherBundle != null) {
-                    ancestorDescendantMotherBundle!!.existingPigeon = foundPigeon
-                    pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
-                }
+                insertPigeon(pigeon)
             }
             findNavController().popBackStack()
+        }
+    }
+
+    private fun insertPigeon(pigeon: Pigeon) {
+        val job = pigeonViewModel.insert(pigeon)
+
+        if (job.isCompleted) {
+            val foundPigeon =
+                pigeonViewModel.getPigeonBySeriesAndGender(pigeon.series, pigeon.gender)
+
+            if (ancestorDescendantFatherBundle != null)
+                foundPigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
+            if (ancestorDescendantMotherBundle != null)
+                foundPigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
+            pigeonViewModel.update(foundPigeon)
+
+            if (ancestorDescendantFatherBundle != null) {
+                ancestorDescendantFatherBundle!!.existingPigeon = foundPigeon
+                pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
+            }
+            if (ancestorDescendantMotherBundle != null) {
+                ancestorDescendantMotherBundle!!.existingPigeon = foundPigeon
+                pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
+            }
+        }
+    }
+
+    private fun updatePigeon(pigeon: Pigeon) {
+        pigeon.id = this.pigeon!!.id
+        if (ancestorDescendantFatherBundle != null)
+            pigeon.fatherPigeon = ancestorDescendantFatherBundle?.newPigeon?.id
+        if (ancestorDescendantMotherBundle != null)
+            pigeon.motherPigeon = ancestorDescendantMotherBundle?.newPigeon?.id
+        pigeonViewModel.update(pigeon)
+
+        if (ancestorDescendantFatherBundle != null) {
+            pigeonViewModel.insertAncestor(ancestorDescendantFatherBundle!!)
+        }
+        if (ancestorDescendantMotherBundle != null) {
+            pigeonViewModel.insertAncestor(ancestorDescendantMotherBundle!!)
         }
     }
 

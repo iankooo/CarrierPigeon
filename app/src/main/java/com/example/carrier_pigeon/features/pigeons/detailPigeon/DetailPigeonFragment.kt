@@ -90,7 +90,7 @@ class DetailPigeonFragment : BaseFragment(R.layout.fragment_detail_pigeon) {
             exportToPdfBtn.visible()
 
             welcomeLabel.text =
-                getString(R.string.pedigree_pigeon, pigeon.country, pigeon.series)
+                getString(R.string.pedigree_pigeon, pigeon.country, pigeon.series, pigeon.gender)
 
             backButton.setOnClickListener {
                 findNavController().popBackStack()

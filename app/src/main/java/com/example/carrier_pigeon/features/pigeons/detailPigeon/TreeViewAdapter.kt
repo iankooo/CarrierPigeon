@@ -28,7 +28,8 @@ class TreeViewAdapter(val sharedPrefsWrapper: SharedPrefsWrapper) :
         val itemView = holder.view
         val node: NodeModel<Pigeon> = holder.node
         itemView.apply {
-            findViewById<TextView>(R.id.tree_item_series).text = node.value.series
+            val s: String = node.value.series + " " + node.value.gender
+            findViewById<TextView>(R.id.tree_item_series).text = s
             findViewById<TextView>(R.id.tree_item_nickname).text = node.value.nickname
             findViewById<TextView>(R.id.tree_item_owner).text = context?.getString(
                 R.string.two_strings_format,
